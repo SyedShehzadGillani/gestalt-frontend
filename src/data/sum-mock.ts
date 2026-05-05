@@ -15,8 +15,11 @@ export const NOTE_COLORS: Array<{ id: NoteColorId; color: string; colorDark: str
 export const TABS = [
   { id: "chat", label: "CHANNELS", icon: "hash" },
   { id: "slideshow", label: "DAILY SLIDESHOW", icon: "play" },
-  { id: "notes", label: "NOTES", icon: "sticky" },
+  { id: "journal", label: "PERSONAL JOURNAL", icon: "book" },
+  { id: "stories", label: "STORY ENGINE", icon: "bulb" },
+  { id: "polls", label: "POLLS", icon: "poll" },
   { id: "metrics", label: "METRICS", icon: "chart" },
+  { id: "notes", label: "NOTES", icon: "sticky" },
 ] as const;
 export type SumTabId = (typeof TABS)[number]["id"];
 
