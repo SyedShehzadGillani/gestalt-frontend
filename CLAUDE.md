@@ -24,6 +24,18 @@
 - Feature-specific components → `src/components/<feature>/`
 - If a component exceeds ~150 lines, consider splitting it
 
+## UI Verification (Required After Every Visual Change)
+
+After any UI change, verify in browser using Playwright:
+1. `npx playwright test --headed` — or write a quick inline script if no test exists
+2. Take a screenshot of the changed route and visually confirm it looks correct
+3. Navigate to 3 other existing routes and screenshot — confirm nothing broke
+4. Check browser console for errors (`page.on('console')`) — zero errors allowed
+
+**Non-regression rule:** Any UI change must leave all other components, pages, and styles untouched. If a change accidentally breaks another page's layout or styling — fix it before committing, even if the breakage was pre-existing. You touched it, you own it.
+
+Playwright is the tool — not Puppeteer. It's already installed in this project.
+
 ## Shell (NEVER TOUCH)
 - `src/components/layout/Sidebar.tsx`
 - `src/components/layout/TopNav.tsx`
