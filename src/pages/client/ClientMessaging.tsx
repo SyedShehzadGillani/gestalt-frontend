@@ -3,6 +3,9 @@ import { SumShell } from "@/components/sum/SumShell";
 import { Icon } from "@/components/sum/icons";
 import { Channels } from "@/components/sum/tabs/Channels";
 import { Slideshow } from "@/components/sum/tabs/Slideshow";
+import { Journal } from "@/components/sum/tabs/Journal";
+import { Stories } from "@/components/sum/tabs/Stories";
+import { Polls } from "@/components/sum/tabs/Polls";
 import { Notes } from "@/components/sum/tabs/Notes";
 import { Metrics } from "@/components/sum/tabs/Metrics";
 import { TABS, SumTabId } from "@/data/sum-mock";
@@ -23,6 +26,9 @@ export default function ClientMessaging() {
         <div style={{ flex: 1, overflow: "auto", display: "flex" }}>
           {tab === "chat" && <Channels />}
           {tab === "slideshow" && <Slideshow />}
+          {tab === "journal" && <Journal />}
+          {tab === "stories" && <Stories />}
+          {tab === "polls" && <Polls />}
           {tab === "notes" && <Notes />}
           {tab === "metrics" && <Metrics />}
         </div>
