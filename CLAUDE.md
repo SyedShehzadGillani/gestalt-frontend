@@ -8,8 +8,7 @@
 ## Styling
 - Tailwind classes only — no inline styles
 - New feature CSS: one scoped `.css` file with a wrapper class (e.g. `.analytics-scope`)
-- Never modify `src/index.css` `:root` or `.light` token blocks
-- Never modify `tailwind.config.ts` theme tokens without asking
+- `src/index.css` `:root` / `.light` token blocks and `tailwind.config.ts` theme tokens — **ask before touching**. If user confirms, proceed. If no answer or user says no, don't touch.
 
 ## Components & Architecture
 
@@ -38,9 +37,16 @@ Skip Playwright for: isolated single-page changes with no shared dependencies.
 
 **Non-regression rule:** If your change accidentally breaks another page's layout or styling — fix it before committing. You touched it, you own it.
 
-## Shell (NEVER TOUCH)
+## Shell (ASK BEFORE TOUCHING)
+
+Shell files are load-bearing — every page depends on them. Don't touch without explicit user confirmation in the current conversation. If user says no or doesn't answer, leave alone.
+
 - `src/components/layout/Sidebar.tsx`
 - `src/components/layout/TopNav.tsx`
 - `src/components/layout/MainLayout.tsx`
+- `src/components/layout/AppSidebar.tsx`
+- `src/components/layout/RoleSidebar.tsx`
 - `src/components/layout/nav-data.ts`
-- `src/App.tsx` routes — only add, never reorder or remove existing routes
+- `src/App.tsx` routes — adding new routes is fine; reorder/remove needs confirmation
+
+When user confirms a shell change: run Playwright regression on changed route + 3 unrelated routes before reporting done.

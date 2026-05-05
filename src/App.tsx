@@ -40,6 +40,10 @@ import ClientTimeline from "@/pages/client/ClientTimeline";
 import ClientProjects from "@/pages/client/ClientProjects";
 import ClientProjectDetail from "@/pages/client/ClientProjectDetail";
 import ClientAnalytics from "@/pages/client/ClientAnalytics";
+import ClientProfile from "@/pages/client/ClientProfile";
+import CreateAccount from "@/pages/auth/CreateAccount";
+import Funnel from "@/pages/auth/Funnel";
+import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
@@ -107,6 +111,7 @@ function AppLayout() {
           <Route path="/client/:id/messaging" element={<ClientMessaging />} />
           <Route path="/client/:id/vault" element={<ClientVault />} />
           <Route path="/client/:id/timeline" element={<ClientTimeline />} />
+          <Route path="/client/:id/personal-timeline" element={<ComingSoonPlaceholder title="Personal Timeline" subtitle="Your Journey" />} />
           <Route path="/client/:id/projects" element={<ClientProjects />} />
           <Route path="/client/:id/projects/:projectId" element={<ClientProjectDetail />} />
           <Route path="/client/:id/analytics" element={<ClientAnalytics />} />
@@ -127,7 +132,7 @@ function AppLayout() {
           <Route path="/client/:id/mgmt-invoicing" element={<ComingSoonPlaceholder title="Invoicing" subtitle="Billing + Billable Hours" />} />
           <Route path="/client/:id/mgmt-permissions" element={<ComingSoonPlaceholder title="Permissions" subtitle="Client Access Controls" />} />
           <Route path="/client/:id/mgmt-announcements" element={<ComingSoonPlaceholder title="Announcements" subtitle="Platform-Wide Broadcasts" />} />
-          <Route path="/client/:id/profile" element={<ComingSoonPlaceholder title="My Profile" subtitle="" />} />
+          <Route path="/client/:id/profile" element={<ClientProfile />} />
           <Route path="/client/:id/my-score" element={<ComingSoonPlaceholder title="My Score" subtitle="H.I.V.E. Dashboard" />} />
           <Route path="/client/:id/my-trajectory" element={<ComingSoonPlaceholder title="My Trajectory" subtitle="Score Over Time" />} />
           
@@ -138,7 +143,7 @@ function AppLayout() {
           <Route path="/agency/financials" element={<AgencyFinancials />} />
           <Route path="/agency/focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
           <Route path="/agency/formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
-          <Route path="/agency/hive" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Insight Valuation Engine" />} />
+          <Route path="/agency/hive" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/agency/messaging" element={<ClientMessaging />} />
           <Route path="/agency/journal" element={<ClientJournal />} />
           <Route path="/agency/calendar" element={<ComingSoonPlaceholder title="Calendar" subtitle="Deadlines + Events" />} />
@@ -179,7 +184,7 @@ function AppLayout() {
           <Route path="/hq/base-framework" element={<ComingSoonPlaceholder title="Framework" subtitle="21-Point Assessment" />} />
           <Route path="/hq/base-focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
           <Route path="/hq/base-formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
-          <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Insight Valuation Engine" />} />
+          <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/hq/sum-messaging" element={<ClientMessaging />} />
           <Route path="/hq/sum-vault" element={<ComingSoonPlaceholder title="Vault" subtitle="Brand Assets" />} />
           <Route path="/hq/vendors" element={<ComingSoonPlaceholder title="Vendors" subtitle="Access" />} />
@@ -218,6 +223,9 @@ const App = () => (
               <NavigationProvider>
                 <TourProvider>
                   <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/create-account" element={<CreateAccount />} />
+                    <Route path="/framework-audit" element={<Funnel />} />
                     <Route path="/*" element={<AppLayout />} />
                   </Routes>
                   <TourOverlay />
