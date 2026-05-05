@@ -194,15 +194,11 @@ const sumSectionClient: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
-    { id: "journal", label: "MY JOURNAL", subLabel: "Private - Depth Scored" },
-    { id: "calendar", label: "CALENDAR", subLabel: "Deadlines + Events" },
-    { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
-    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
-    { id: "story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
     { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "vendors", label: "VENDORS", subLabel: "Access" },
-    { id: "polls", label: "POLLS", subLabel: "Company Polls" },
+    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
+    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
   ],
 };
 
@@ -211,14 +207,11 @@ const sumSectionEmployee: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
-    { id: "journal", label: "MY JOURNAL", subLabel: "Private - Depth Scored" },
-    { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
-    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
-    { id: "story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas (Anonymous)" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
     { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "vendors", label: "VENDORS", subLabel: "Access" },
-    { id: "polls", label: "POLLS", subLabel: "Company Polls" },
+    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
+    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
   ],
 };
 
@@ -227,14 +220,11 @@ const sumSectionHQ: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "hq-messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
+    { id: "hq-messaging", label: "MESSAGING", subLabel: "Team Communication" },
     { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "hq-vendors", label: "VENDORS", subLabel: "Access" },
-    { id: "hq-timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "hq-timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
+    { id: "hq-personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
     { id: "hq-projects", label: "PROJECTS", subLabel: "Active Initiatives" },
-    { id: "hq-journal", label: "MY JOURNAL", subLabel: "Private - Depth Scored" },
-    { id: "hq-story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
-    { id: "hq-polls", label: "POLLS", subLabel: "Company Polls" },
   ],
 };
 

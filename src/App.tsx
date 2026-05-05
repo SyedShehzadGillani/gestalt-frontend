@@ -111,6 +111,7 @@ function AppLayout() {
           <Route path="/client/:id/messaging" element={<ClientMessaging />} />
           <Route path="/client/:id/vault" element={<ClientVault />} />
           <Route path="/client/:id/timeline" element={<ClientTimeline />} />
+          <Route path="/client/:id/personal-timeline" element={<ComingSoonPlaceholder title="Personal Timeline" subtitle="Your Journey" />} />
           <Route path="/client/:id/projects" element={<ClientProjects />} />
           <Route path="/client/:id/projects/:projectId" element={<ClientProjectDetail />} />
           <Route path="/client/:id/analytics" element={<ClientAnalytics />} />
