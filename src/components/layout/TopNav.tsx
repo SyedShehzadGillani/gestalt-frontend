@@ -340,11 +340,18 @@ export function TopNav() {
                 </div>
               </div>
               {/* Menu items */}
-              {[
-                { icon: "user", label: "MY PROFILE", route: "/profile" },
-                { icon: "settings", label: "ACCOUNT SETTINGS", route: "/settings" },
-                ...(role !== "employee" ? [{ icon: "billing", label: "BILLING", route: "/billing" }] : []),
-              ].map((item) => (
+              {(() => {
+                const profileRoute =
+                  role === "client" || role === "solopreneur" ? "/client/1/profile" :
+                  role === "agency" ? "/agency/profile" :
+                  role === "hq" ? "/hq/profile" :
+                  "/profile";
+                return [
+                  { icon: "user", label: "MY PROFILE", route: profileRoute },
+                  { icon: "settings", label: "ACCOUNT SETTINGS", route: "/settings" },
+                  ...(role !== "employee" ? [{ icon: "billing", label: "BILLING", route: "/billing" }] : []),
+                ];
+              })().map((item) => (
                 <button
                   key={item.label}
                   onClick={() => { setProfileOpen(false); navigate(item.route); }}

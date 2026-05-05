@@ -40,6 +40,10 @@ import ClientTimeline from "@/pages/client/ClientTimeline";
 import ClientProjects from "@/pages/client/ClientProjects";
 import ClientProjectDetail from "@/pages/client/ClientProjectDetail";
 import ClientAnalytics from "@/pages/client/ClientAnalytics";
+import ClientProfile from "@/pages/client/ClientProfile";
+import CreateAccount from "@/pages/auth/CreateAccount";
+import Funnel from "@/pages/auth/Funnel";
+import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
@@ -127,7 +131,7 @@ function AppLayout() {
           <Route path="/client/:id/mgmt-invoicing" element={<ComingSoonPlaceholder title="Invoicing" subtitle="Billing + Billable Hours" />} />
           <Route path="/client/:id/mgmt-permissions" element={<ComingSoonPlaceholder title="Permissions" subtitle="Client Access Controls" />} />
           <Route path="/client/:id/mgmt-announcements" element={<ComingSoonPlaceholder title="Announcements" subtitle="Platform-Wide Broadcasts" />} />
-          <Route path="/client/:id/profile" element={<ComingSoonPlaceholder title="My Profile" subtitle="" />} />
+          <Route path="/client/:id/profile" element={<ClientProfile />} />
           <Route path="/client/:id/my-score" element={<ComingSoonPlaceholder title="My Score" subtitle="H.I.V.E. Dashboard" />} />
           <Route path="/client/:id/my-trajectory" element={<ComingSoonPlaceholder title="My Trajectory" subtitle="Score Over Time" />} />
           
@@ -218,6 +222,9 @@ const App = () => (
               <NavigationProvider>
                 <TourProvider>
                   <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/create-account" element={<CreateAccount />} />
+                    <Route path="/framework-audit" element={<Funnel />} />
                     <Route path="/*" element={<AppLayout />} />
                   </Routes>
                   <TourOverlay />
