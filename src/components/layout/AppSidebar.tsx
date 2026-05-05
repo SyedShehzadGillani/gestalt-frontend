@@ -70,7 +70,7 @@ const agencySections: NavSection[] = [
   {
     label: "H.I.V.E.",
     items: [
-      { id: "performance", label: "PERFORMANCE", subLabel: "Human Insight Valuation Engine", icon: Cog },
+      { id: "performance", label: "PERFORMANCE", subLabel: "Human Capital Performance System", icon: Cog },
     ],
   },
   {
@@ -114,7 +114,7 @@ const clientSections: NavSection[] = [
   {
     label: "H.I.V.E.",
     items: [
-      { id: "performance", label: "PERFORMANCE", subLabel: "Human Insight Valuation Engine", icon: Cog },
+      { id: "performance", label: "PERFORMANCE", subLabel: "Human Capital Performance System", icon: Cog },
     ],
   },
   {
@@ -223,7 +223,7 @@ function SectionHeader({ label, accentColor, dataTour }: { label: string; accent
       {label}
       {label === "H.I.V.E." && (
         <span className="block text-[6px] font-normal tracking-[1px] mt-0.5 opacity-60">
-          Human Insight Valuation Engine
+          Human Capital Performance System
         </span>
       )}
     </div>

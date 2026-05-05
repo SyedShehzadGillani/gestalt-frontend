@@ -76,7 +76,7 @@ const hqBaseSections: NavSection[] = [
   {
     title: "H.I.V.E.",
     items: [
-      { id: "hq-performance", label: "PERFORMANCE", subLabel: "Human Insight Valuation Engine", path: "/hq/hive-performance" },
+      { id: "hq-performance", label: "PERFORMANCE", subLabel: "Human Capital Performance System", path: "/hq/hive-performance" },
     ],
   },
   {
@@ -123,7 +123,7 @@ function NavIcon({ itemId, active }: { itemId: string; active: boolean }) {
 
 const SECTION_FULL_NAMES: Record<string, string> = {
   "B.A.S.E.": "Brand and Strategy Engine",
-  "H.I.V.E.": "Human Insight Valuation Engine",
+  "H.I.V.E.": "Human Capital Performance System",
   "S.U.M.": "Strategic Unified Messaging",
 };
 

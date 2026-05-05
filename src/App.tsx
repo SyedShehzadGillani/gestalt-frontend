@@ -143,7 +143,7 @@ function AppLayout() {
           <Route path="/agency/financials" element={<AgencyFinancials />} />
           <Route path="/agency/focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
           <Route path="/agency/formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
-          <Route path="/agency/hive" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Insight Valuation Engine" />} />
+          <Route path="/agency/hive" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/agency/messaging" element={<ClientMessaging />} />
           <Route path="/agency/journal" element={<ClientJournal />} />
           <Route path="/agency/calendar" element={<ComingSoonPlaceholder title="Calendar" subtitle="Deadlines + Events" />} />
@@ -184,7 +184,7 @@ function AppLayout() {
           <Route path="/hq/base-framework" element={<ComingSoonPlaceholder title="Framework" subtitle="21-Point Assessment" />} />
           <Route path="/hq/base-focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
           <Route path="/hq/base-formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
-          <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Insight Valuation Engine" />} />
+          <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/hq/sum-messaging" element={<ClientMessaging />} />
           <Route path="/hq/sum-vault" element={<ComingSoonPlaceholder title="Vault" subtitle="Brand Assets" />} />
           <Route path="/hq/vendors" element={<ComingSoonPlaceholder title="Vendors" subtitle="Access" />} />

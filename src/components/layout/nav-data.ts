@@ -173,19 +173,19 @@ const baseSectionHQ: NavSection = {
 
 const hiveSectionDefault: NavSection = {
   label: "H.I.V.E.",
-  fullName: "Human Insight Valuation Engine",
+  fullName: "Human Capital Performance System",
   helpId: "hive-performance",
   items: [
-    { id: "performance", label: "PERFORMANCE", subLabel: "Human Insight Valuation Engine" },
+    { id: "performance", label: "PERFORMANCE", subLabel: "Human Capital Performance System" },
   ],
 };
 
 const hiveSectionHQ: NavSection = {
   label: "H.I.V.E.",
-  fullName: "Human Insight Valuation Engine",
+  fullName: "Human Capital Performance System",
   helpId: "hive-performance",
   items: [
-    { id: "hq-performance", label: "PERFORMANCE", subLabel: "Human Insight Valuation Engine" },
+    { id: "hq-performance", label: "PERFORMANCE", subLabel: "Human Capital Performance System" },
   ],
 };
 
