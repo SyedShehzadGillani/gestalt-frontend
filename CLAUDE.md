@@ -24,17 +24,19 @@
 - Feature-specific components → `src/components/<feature>/`
 - If a component exceeds ~150 lines, consider splitting it
 
-## UI Verification (Required After Every Visual Change)
+## UI Verification (Playwright — When Required)
 
-After any UI change, verify in browser using Playwright:
-1. `npx playwright test --headed` — or write a quick inline script if no test exists
-2. Take a screenshot of the changed route and visually confirm it looks correct
-3. Navigate to 3 other existing routes and screenshot — confirm nothing broke
-4. Check browser console for errors (`page.on('console')`) — zero errors allowed
+Run Playwright verification only when the change could affect other components:
+- Modified a shared component (`src/components/ui/`, `src/components/layout/`)
+- Changed global CSS, tokens, or Tailwind config
+- Edited `App.tsx`, routing, or a context/hook used across pages
+- Unsure if change is truly isolated
 
-**Non-regression rule:** Any UI change must leave all other components, pages, and styles untouched. If a change accidentally breaks another page's layout or styling — fix it before committing, even if the breakage was pre-existing. You touched it, you own it.
+When running: take screenshot of changed route + 3 other routes, check browser console for errors (zero allowed). Use `npx playwright test --headed` or write a quick inline script.
 
-Playwright is the tool — not Puppeteer. It's already installed in this project.
+Skip Playwright for: isolated single-page changes with no shared dependencies.
+
+**Non-regression rule:** If your change accidentally breaks another page's layout or styling — fix it before committing. You touched it, you own it.
 
 ## Shell (NEVER TOUCH)
 - `src/components/layout/Sidebar.tsx`
