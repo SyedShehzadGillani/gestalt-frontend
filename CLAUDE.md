@@ -11,11 +11,18 @@
 - Never modify `src/index.css` `:root` or `.light` token blocks
 - Never modify `tailwind.config.ts` theme tokens without asking
 
-## Components
+## Components & Architecture
+
+**DRY + KISS always.** If two places render the same UI — extract a component. No exceptions.
+
+- If identical JSX appears twice → extract to a shared component before finishing
+- Prefer small, single-purpose components over large monoliths
+- Props over duplication — parameterize differences, share the base
 - Use existing shadcn from `src/components/ui/` — don't add new primitives without asking
-- New page components go in `src/pages/`
-- New shared components go in `src/components/`
-- Feature-specific components go in `src/components/<feature>/`
+- New page components → `src/pages/`
+- New shared components → `src/components/`
+- Feature-specific components → `src/components/<feature>/`
+- If a component exceeds ~150 lines, consider splitting it
 
 ## Shell (NEVER TOUCH)
 - `src/components/layout/Sidebar.tsx`
