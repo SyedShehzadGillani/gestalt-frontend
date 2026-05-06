@@ -5,6 +5,7 @@ import {
 } from "@/components/formula/formula-data";
 import type { AuditPlacement } from "@/components/formula/SpectrumCanvas";
 import { CompetitiveStepCategorize } from "@/components/formula/pages/CompetitiveStepCategorize";
+import { CompetitiveStepContextMap } from "@/components/formula/pages/CompetitiveStepContextMap";
 import { CompetitiveStepPrioritize } from "@/components/formula/pages/CompetitiveStepPrioritize";
 import { CompetitiveStepCompetitors } from "@/components/formula/pages/CompetitiveStepCompetitors";
 import { CompetitiveStepSpectrum } from "@/components/formula/pages/CompetitiveStepSpectrum";
@@ -24,6 +25,10 @@ interface Props {
   selectedWords: string[];
   /** Whether Step 1 (A→D) has reached completion (manifesto signed off in source). */
   step1Complete: boolean;
+  /** Phase A description — used by Step 3 to extract company name. */
+  descText: string;
+  /** Phase D brand narrative — referenced inline in Step 3 when present. */
+  brandNarrative: string;
   onAi: TriggerAi;
   onSignOff: SignOffSection;
 }
@@ -48,6 +53,8 @@ export function CompetitiveSevenStep({
   step1Slot,
   selectedWords,
   step1Complete,
+  descText,
+  brandNarrative,
   onAi,
   onSignOff,
 }: Props) {
@@ -245,32 +252,13 @@ export function CompetitiveSevenStep({
       )}
 
       {step === 3 && (
-        <div className="bg-card border border-border p-6 mb-5">
-          <div className="text-gold text-[10px] tracking-[3px] font-extrabold mb-1.5">
-            STEP 3 — CONTEXT MAP
-          </div>
-          <div className="text-muted-foreground text-[12px] leading-[1.7] mb-4 italic">
-            Five dimensions, five stories — objective, culture, customer experience, vision, and
-            personality. The deep narrative editor for this step is reserved for a follow-up
-            iteration; for now, advance to PRIORITIZE to lock your top 6.
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setStep(2)}
-              className="bg-transparent border border-border text-muted-foreground px-5 py-2.5 text-[10px] cursor-pointer hover:border-gold hover:text-gold"
-            >
-              ← BACK
-            </button>
-            <button
-              type="button"
-              onClick={() => setStep(4)}
-              className="flex-1 bg-gold border-none text-black px-5 py-2.5 text-[10px] font-extrabold tracking-[2px] cursor-pointer hover:bg-gold/90"
-            >
-              NEXT — PRIORITIZE →
-            </button>
-          </div>
-        </div>
+        <CompetitiveStepContextMap
+          selected={selectedWords}
+          brandNarrative={brandNarrative}
+          descText={descText}
+          onBack={() => setStep(2)}
+          onNext={() => setStep(4)}
+        />
       )}
 
       {step === 4 && (
