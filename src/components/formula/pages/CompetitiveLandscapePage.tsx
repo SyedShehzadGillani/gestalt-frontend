@@ -163,6 +163,8 @@ export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) 
         step1Slot={step1}
         selectedWords={selectedWords}
         step1Complete={selectedWords.length === 10}
+        descText={descText}
+        brandNarrative={manifesto}
         onAi={onAi}
         onSignOff={onSignOff}
       />

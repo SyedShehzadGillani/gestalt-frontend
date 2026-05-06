@@ -902,3 +902,179 @@ export function generateCompetitorNarrative(
   return nar.replace(/\s+/g, " ").trim();
 }
 
+// ── CONTEXT MAP (01.10 Step 3) ────────────────────────────────
+// Five brand-identity dimensions, each with a primary word-bucket map and
+// three rotating narrative templates. Direct port of source v80 lines 3837–3888.
+
+export type CtxKey = "objective" | "culture" | "customer" | "vision" | "persona";
+
+export interface CtxDimDef {
+  key: CtxKey;
+  label: string;
+  color: string;
+  /** Word-board categories whose primary words anchor this dimension. */
+  wordDims: Array<keyof typeof CTX_DIM_MAP>;
+  starter: string;
+  prompt: string;
+  templates: Array<(companyName: string, words: string[]) => string>;
+}
+
+/** Word-to-category map used to pull primary words per dimension. */
+export const CTX_DIM_MAP = {
+  PRODUCT: ["INNOVATIVE","CREATIVE","UNIQUE OFFERING","PREMIUM","DISRUPTIVE","PIONEERING","GAME-CHANGER","1ST TO MARKET","INGENUITY","IMPROVEMENT","PROBLEM SOLVING","BOLD"],
+  SERVICE: ["COLLABORATIVE","HUMAN","EMPOWERED","ACCOUNTABLE","INCLUSIVE","DRIVEN","EXPERT","AUTHENTIC","PASSIONATE","APPROACHABLE","INSPIRING","EXCELLENCE","RELIABLE","RESOURCEFUL","FOCUSED","THOUGHTFUL","NIMBLE","ADAPTABLE","FLEXIBLE","EFFICIENT"],
+  CULTURE: ["PURPOSEFUL","INTEGRITY","TRANSPARENT","CONSISTENT","BRAVE","COMMUNITY","SUSTAINABLE","ADMIRED","TRUSTWORTHY"],
+  VALUE: ["ADDING VALUE","ACCESSIBLE","AFFORDABLE","RELEVANT","TIMELY","GET IT DONE","OPPORTUNISTIC","AGGRESSIVE","RESPONSIVE","SUCCESSFUL"],
+  CUSTOMER: ["CUSTOMER CENTRIC","CONNECTED","EDUCATION","RESPONSIVE"],
+  INTELLIGENCE: ["SMART","VISIONARY","FORWARD-THINKING","THOUGHT LEADER","ANTICIPATION","RISK TAKING"],
+} as const;
+
+export const CTX_DIMS: CtxDimDef[] = [
+  {
+    key: "objective",
+    label: "BUSINESS OBJECTIVE",
+    color: "#e2b53f",
+    wordDims: ["VALUE", "INTELLIGENCE"],
+    starter: "The competitor we fear most would achieve this by",
+    prompt:
+      "Imagine the company that would beat you — steal your staff, your clients, your market. What would they be relentless about that you haven't been? Now become that company. Your objective isn't where you are — it's the standard that makes you the market leader nobody dares copy.",
+    templates: [
+      (cn, ws) => `[${cn}] was built to achieve something the market hasn't seen yet. ${ws[0] ? `[${ws[0]}] is the non-negotiable — the standard every decision is held against.` : ""} ${ws[1] ? `[${ws[1]}] isn't a department initiative — it's the proof the mission is real.` : ""} ${ws[2] ? `[${ws[2]}] is what surprises the market, inspires the team, and creates desire that no competitor can replicate.` : ""} ${ws[3] ? `[${ws[3]}] is the measuring stick.` : ""} ${ws[4] ? `And [${ws[4]}] is what compounds into exit value, one day at a time.` : ""}`.trim(),
+      (cn, ws) => `The company that would take everything from [${cn}] would be relentless about one thing: ${ws[0] ? `[${ws[0]}]` : "execution"}. ${ws[1] ? `So [${ws[1]}] becomes the standard — not the aspiration, the documented operating minimum.` : ""} ${ws[2] ? `[${ws[2]}] keeps the team honest when comfort creeps in.` : ""} ${ws[3] ? `[${ws[3]}] is the filter: if an initiative doesn't serve it, the initiative doesn't ship.` : ""} ${ws[4] ? `[${ws[4]}] is the compounding force — the reason this company is worth more every quarter than it was the last.` : ""}`.trim(),
+      (cn, ws) => `Ask what the feared competitor does differently, and the answer is ${ws[0] ? `[${ws[0]}]` : "discipline"}. ${ws[1] ? `They never let [${ws[1]}] become optional. Neither does [${cn}].` : ""} ${ws[2] ? `[${ws[2]}] is where the company's energy goes when nobody is measuring it.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} — these aren't on the roadmap. They're in the DNA.` : ""}`.trim(),
+    ],
+  },
+  {
+    key: "culture",
+    label: "CULTURE",
+    color: "#9aca3e",
+    wordDims: ["CULTURE", "SERVICE"],
+    starter: "The competitor that would steal our best people would offer",
+    prompt:
+      "Imagine the company that would hire away your best people. What would it give them that you don't? Now become that company. Culture that SURPRISES employees, INSPIRES them daily, and makes them DESIRE to stay — and tell their friends — isn't accidental. It's designed, defended, and documented.",
+    templates: [
+      (cn, ws) => `The company that would steal [${cn}]'s best people knows exactly what it would offer: ${ws[0] ? `[${ws[0]}]` : "something irreplaceable"}. ${ws[1] ? `[${ws[1]}] is the culture's operating standard — not a value on a wall, a behavior that gets rewarded and repeated.` : ""} ${ws[2] ? `[${ws[2]}] is what surprises a new hire in week one. It's also what they tell their friends.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} don't appear in the job description. They're the reason people don't look for a new one.` : ""}`.trim(),
+      (cn, ws) => `Attrition is expensive. Replacing one employee costs 33–200% of their annual salary. The answer isn't higher pay — it's ${ws[0] ? `[${ws[0]}]` : "belonging"}. ${ws[1] ? `[${ws[1]}] makes the difference between a job and a place someone invests in.` : ""} ${ws[2] ? `[${ws[2]}] is the immune system — it rejects misalignment before it becomes a culture problem.` : ""} Gallup found employees with one close friend at work are 5× less likely to leave.${ws[3] ? ` [${cn}] builds that through [${ws[3]}].` : " Build it deliberately."}`.trim(),
+      (cn, ws) => `The culture at [${cn}] is defined by ${ws[0] ? `[${ws[0]}]` : "what happens when nobody is watching"} — and that's exactly what the feared competitor can't replicate overnight. ${ws[1] ? `[${ws[1]}] is safe to do great work here.` : ""} ${ws[2] ? `[${ws[2]}] is what leadership models — and what the team reflects back.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} are the reasons this place is more than a job. They're why people stay, perform, and tell their network.` : ""}`.trim(),
+    ],
+  },
+  {
+    key: "customer",
+    label: "CUSTOMER",
+    color: "#803ee4",
+    wordDims: ["CUSTOMER"],
+    starter: "The competitor that would steal our customers would make them feel",
+    prompt:
+      "Imagine the competitor that would take your customers. What experience would they deliver that you haven't? Now exceed it. SURPRISE them with what they didn't expect. INSPIRE them to trust you completely. Create DESIRE so strong they return, refer, and never look for an alternative. Name the emotion — not the feature.",
+    templates: [
+      (cn, ws) => `The competitor that would take [${cn}]'s customers knows one thing: it isn't the product that wins — it's how the customer feels when the transaction is over. ${ws[0] ? `[${ws[0]}] is the target — the emotion every touchpoint is engineered to produce.` : ""} ${ws[1] ? `[${ws[1]}] converts a first interaction into a referral. Not a loyalty program — a feeling.` : ""} ${ws[2] ? `[${ws[2]}] is the surprise. The thing nobody had to do, but this company does anyway.` : ""} ${ws[3] || ws[4] ? `PwC found 86% of buyers pay more for superior experience. ${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} are how this company earns that premium.` : ""}`.trim(),
+      (cn, ws) => `${ws[0] ? `[${ws[0]}]` : "Desire"} is the emotion [${cn}] designs for — not satisfaction. There's a difference, and customers feel it immediately. ${ws[1] ? `[${ws[1]}] is the residue left after every interaction. It's what drives the referral before the customer even reaches for their phone.` : ""} ${ws[2] ? `[${ws[2]}] is the architecture — invisible when it's working, catastrophic when it's not.` : ""} ${ws[3] ? `A 5% increase in retention lifts profit 25–95% (Bain). [${ws[3]}] is how that retention is earned.` : ""}`.trim(),
+      (cn, ws) => `Every customer builds an emotional memory. The goal is that the last thing they feel is ${ws[0] ? `[${ws[0]}]` : "certainty they made the right choice"}. ${ws[1] ? `[${ws[1]}] is what they experience before they even notice they're experiencing it.` : ""} ${ws[2] ? `[${ws[2]}] is the detail — the thing that turns a customer into an evangelist.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} are what make a customer irreversible — not retained, converted.` : ""}`.trim(),
+    ],
+  },
+  {
+    key: "vision",
+    label: "BRAND VISION",
+    color: "#58d3ff",
+    wordDims: ["INTELLIGENCE", "PRODUCT"],
+    starter: "The company that would dominate our market and take our position would be known for",
+    prompt:
+      "Name the companies you genuinely fear as competitors — the ones that would take your staff, your clients, your media coverage, your billboard space. Now build a vision that makes you that company. Simple, honest, directional. Where is this brand headed — and why would someone stake a decade of their career on it?",
+    templates: [
+      (cn, ws) => `In 10 years, [${cn}] will be the brand the competition fears. ${ws[0] ? `[${ws[0]}] won't be a positioning statement — it'll be a documented market fact.` : ""} ${ws[1] ? `[${ws[1]}] will be the standard new entrants are measured against.` : ""} ${ws[2] ? `[${ws[2]}] will be the moat — the thing that took years to build and can't be copied in a quarter.` : ""} ${ws[3] || ws[4] ? `Companies that optimize for next quarter exit at 3–4×. ${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} is the vision that earns 8–12×.` : ""}`.trim(),
+      (cn, ws) => `The 10-year version of [${cn}] is already defined — it just hasn't been built yet. ${ws[0] ? `[${ws[0]}] is the north star: the thing that makes every short-term decision easy, because the long-term direction is clear.` : ""} ${ws[1] ? `[${ws[1]}] is the proof — not projected, documented.` : ""} ${ws[2] ? `[${ws[2]}] is the culture that makes the vision inevitable, not aspirational.` : ""} Collins & Porras documented visionary companies outperform the market 15× over 20 years. The difference isn't talent. It's${ws[3] ? ` [${ws[3]}]` : " commitment to a direction that compounds"}.`.trim(),
+      (cn, ws) => `A new employee joining [${cn}] in a decade will learn the company chose ${ws[0] ? `[${ws[0]}]` : "a direction"} when most of its competitors chose comfort. ${ws[1] ? `[${ws[1]}] will be referenced in the acquisition brief.` : ""} ${ws[2] ? `[${ws[2]}] will be the story told in the press release.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} aren't features of the future product — they're features of the future company.` : ""}`.trim(),
+    ],
+  },
+  {
+    key: "persona",
+    label: "BRAND PERSONA",
+    color: "#e3398c",
+    wordDims: ["PRODUCT", "SERVICE"],
+    starter: "If our brand walked into a room, before saying a word, people would notice",
+    prompt:
+      "Name 3 brands you genuinely admire and fear — Apple, Tesla, Patagonia, whoever. What makes them magnetic? What's the first thing you'd notice about them in a room? The persona isn't your logo — it's the personality that SURPRISES people, makes them want to know more, and creates DESIRE without a single word of marketing. If a customer describes you in one word, what is it?",
+    templates: [
+      (cn, ws) => `If [${cn}] walked into a room, you'd notice ${ws[0] ? `[${ws[0]}]` : "something distinct"} before they said a word. ${ws[1] ? `[${ws[1]}] is the earned confidence — not performed, but impossible to miss.` : ""} ${ws[2] ? `[${ws[2]}] is how they engage — not delivering warmth procedurally, but actually having it.` : ""} ${ws[3] ? `[${ws[3]}] is what lingers after they've left.` : ""} ${ws[4] ? `Brands with a distinct personality command a 13% price premium (Kantar BrandZ). That premium is [${ws[4]}].` : ""}`.trim(),
+      (cn, ws) => `The brands people love aren't products — they're personalities. ${ws[0] ? `[${ws[0]}]` : "Distinction"} is the quality [${cn}] owns. ${ws[1] ? `[${ws[1]}] is why customers return — not for the price point, for the feeling.` : ""} ${ws[2] ? `[${ws[2]}] makes every interaction feel intentional, never procedural.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} — when a customer can describe the brand in one word, the positioning game is already won.` : ""}`.trim(),
+      (cn, ws) => `The personality of [${cn}] was never accidental — it was chosen. ${ws[0] ? `[${ws[0]}] is what was chosen: a quality that every hire, every campaign, every product decision either reinforces or erodes.` : ""} ${ws[1] ? `[${ws[1]}] is the quality the team guards, because it's the quality customers remember.` : ""} ${ws[2] ? `[${ws[2]}] isn't a brand attribute. It's a cultural commitment that shows up in the product, the conversation, and the invoice.` : ""} ${ws[3] || ws[4] ? `${[ws[3], ws[4]].filter(Boolean).map((w) => `[${w}]`).join(" and ")} — these are the words that should appear in every exit story.` : ""}`.trim(),
+    ],
+  },
+];
+
+export const CTX_KEYS: CtxKey[] = CTX_DIMS.map((d) => d.key);
+
+/** Rotating secondary word pools — three rotations per dimension. */
+export const CTX_POOLS: Record<CtxKey, string[][]> = {
+  objective: [
+    ["ADVANCE","ACCELERATE","BUILD","LEAD","DEFINE","TRANSFORM","ELEVATE","PIONEER","PROTECT","SCALE"],
+    ["EMPOWER","LAUNCH","DISRUPT","OWN","FUEL","CHAMPION","DEFEND","EXPAND","PROVE","WIN"],
+    ["DELIVER","INNOVATE","UNIFY","INSPIRE","EARN","MEASURE","ACTIVATE","COMMIT","DOCUMENT","EXECUTE"],
+  ],
+  culture: [
+    ["BELONGING","FRIENDSHIP","TRUST","SAFETY","RECOGNITION","PURPOSE","AUTONOMY","GROWTH","PRIDE","CARE"],
+    ["LOYALTY","CONNECTION","MEANING","INCLUSION","ACCOUNTABILITY","CELEBRATION","RESILIENCE","TRANSPARENCY","MENTORSHIP","FUN"],
+    ["COMMUNITY","OWNERSHIP","VOICE","WELLBEING","CRAFT","IMPACT","CHALLENGE","MASTERY","CAMARADERIE","JOY"],
+  ],
+  customer: [
+    ["DELIGHT","SURPRISE","CERTAINTY","SPEED","CLARITY","EASE","CONFIDENCE","TRUST","BELONGING","WARMTH"],
+    ["DISCOVERY","RELIEF","EMPOWERMENT","STATUS","SAFETY","EXCITEMENT","GRATITUDE","LOYALTY","DELIGHT","PRIDE"],
+    ["CONNECTION","VALUE","TRANSFORMATION","RECOGNITION","ANTICIPATION","MOMENTUM","APPRECIATION","SECURITY","AWE","JOY"],
+  ],
+  vision: [
+    ["CATEGORY-DEFINING","INDISPENSABLE","IRREPLACEABLE","TRUSTED","GLOBAL","SCALABLE","MEASURABLE","PROVEN","ENDURING","ADMIRED"],
+    ["TRANSFORMATIVE","ESSENTIAL","ICONIC","BENCHMARKED","COMPOUNDING","DEFENSIBLE","PORTABLE","CERTIFIED","DOCUMENTED","REFERENCED"],
+    ["AUTONOMOUS","SYSTEMATIC","PREDICTABLE","REPEATABLE","EXPORTABLE","FRANCHISEABLE","ACQUIRABLE","INVESTABLE","LEGACY","LANDMARK"],
+  ],
+  persona: [
+    ["CONFIDENT","WARM","SHARP","HONEST","UNEXPECTED","GENEROUS","PRECISE","MAGNETIC","GROUNDED","PLAYFUL"],
+    ["AUTHORITATIVE","APPROACHABLE","CURATED","EFFORTLESS","PRINCIPLED","BOLD","REFINED","DIRECT","SPIRITED","DEPENDABLE"],
+    ["SOPHISTICATED","SCRAPPY","VISIONARY","STEADY","PROVOCATIVE","GENUINE","AMBITIOUS","THOUGHTFUL","INVENTIVE","MEMORABLE"],
+  ],
+};
+
+/** Citation stat shown on each context card. */
+export const CTX_DATA: Record<CtxKey, { stat: string; source: string }> = {
+  objective: { stat: "Companies with a documented purpose grow 3× faster and retain top talent 40% longer.", source: "Deloitte Human Capital Report, 2023" },
+  culture: { stat: "Employees with one close friend at work are 5× less likely to leave. Attrition costs 33–200% of annual salary per departure.", source: "Gallup State of the American Workplace; SHRM Workforce Turnover Study" },
+  customer: { stat: "86% of buyers will pay more for a superior customer experience. A 5% increase in retention lifts profit by 25–95%.", source: "PwC Future of CX Report; Bain & Company" },
+  vision: { stat: "Companies with a 10-year vision are 2.1× more likely to outperform their market than those optimizing for the next 12 months.", source: "Collins & Porras, Built to Last; McKinsey Long-Term Capitalism Study" },
+  persona: { stat: "Brands with a distinct personality command a 13% price premium and convert at 2.3× the rate of commodity competitors.", source: "Kantar BrandZ Global Study, 2024" },
+};
+
+export interface CtxDimState {
+  words: string[];
+  narrative: string;
+  versions: string[];
+  verIdx: number;
+  savedAt: Record<number, string>;
+  deleteConfirm: boolean;
+  narSaved: boolean;
+}
+
+export const makeCtxDimState = (): CtxDimState => ({
+  words: [],
+  narrative: "",
+  versions: [],
+  verIdx: -1,
+  savedAt: {},
+  deleteConfirm: false,
+  narSaved: false,
+});
+
+export const makeCtxNarState = (): Record<CtxKey, CtxDimState> => ({
+  objective: makeCtxDimState(),
+  culture: makeCtxDimState(),
+  customer: makeCtxDimState(),
+  vision: makeCtxDimState(),
+  persona: makeCtxDimState(),
+});
+
+/** Pull primary words for a dimension from the user's selected stack. */
+export function getPrimaryCtxWords(
+  selected: string[],
+  dims: Array<keyof typeof CTX_DIM_MAP>,
+): string[] {
+  return selected.filter((w) => dims.some((d) => (CTX_DIM_MAP[d] as readonly string[]).includes(w)));
+}
+
