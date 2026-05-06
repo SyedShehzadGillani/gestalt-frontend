@@ -822,3 +822,83 @@ export function generateCoachingPlaceholder(
 
   return templates[perspectiveKey];
 }
+
+// ── COMPETITOR WORD BOARD — suggested word sets + narrative engine ──
+// Each competitor card pulls from one of these "AI suggested" sets first
+// before exposing the full COMP_WORDS pool. SHUFFLE rotates through the sets.
+export const COMPETITOR_SUGGESTED_SETS: string[][] = [
+  ["TRUSTED", "PREMIUM", "TECHNOLOGY", "BRAND RECOGNITION", "COMMUNITY"],
+  ["ESTABLISHED", "QUALITY", "DESIGN", "SPECIALIZATION", "CUSTOMER SERVICE"],
+  ["WELL-FUNDED", "NATIONAL REACH", "RESOURCES", "MARKETING SPEND", "PARTNERSHIPS"],
+  ["AFFORDABLE", "FAST", "CONVENIENT", "PRICE LEADER", "DISTRIBUTION"],
+  ["VISIONARY FOUNDER", "INDUSTRY EXPERIENCE", "LOYALTY PROGRAMS", "SALES FORCE", "TRUSTED"],
+];
+
+/** Default mock competitor dataset for the Competitive Analysis step. */
+export interface CompetitorMock {
+  id: string;
+  name: string;
+  /** Hex color used for borders, badges, and narrative highlights. */
+  color: string;
+  top5: string[];
+  aiNarrative: string;
+  locked: boolean;
+}
+
+export const DEFAULT_COMPETITORS: CompetitorMock[] = [
+  { id: "a", name: "COMPETITOR A", color: "#7c3aed", top5: [], aiNarrative: "", locked: false },
+  { id: "b", name: "COMPETITOR B", color: "#0ea5e9", top5: [], aiNarrative: "", locked: false },
+  { id: "c", name: "COMPETITOR C", color: "#f97316", top5: [], aiNarrative: "", locked: false },
+];
+
+/**
+ * Generate a narrative for a competitor word board. Cycles 4 narrative voice
+ * variants based on `version`; flags PRICE LEADER + PREMIUM as a brand
+ * conflict. Wraps the highlighted words in `[BRACKETS]` so NarrativeDisplay
+ * can render them in the competitor color.
+ */
+export function generateCompetitorNarrative(
+  competitorName: string,
+  ranked: string[],
+  version: number,
+): string {
+  if (ranked.length < 3) return "";
+  const name = competitorName.trim() || "This competitor";
+  const r = ranked;
+  const br = (w: string) => `[${w}]`;
+  const conflicts =
+    r.includes("PRICE LEADER") && r.includes("PREMIUM")
+      ? ` ⚠ CONFLICT: [PRICE LEADER] and [PREMIUM] contradict — this signals brand confusion in the market.`
+      : "";
+  const techSignal =
+    r.includes("TECHNOLOGY") || r.includes("WELL-FUNDED")
+      ? `Their technology investment signals a move toward the Bleeding Edge.`
+      : `Their positioning has not staked out Innovation leadership — that is your opening.`;
+  const cn = `[${name}]`;
+  const v = version % 4;
+
+  let nar = "";
+  if (v === 0) {
+    nar = `${cn} competes primarily on ${br(r[0])}${r[1] ? ` and ${br(r[1])}` : ""}. ${
+      r[2]
+        ? `Their approach to ${br(r[2])}${r[3] ? ` and ${br(r[3])}` : ""} creates a defensible position in their current market.`
+        : ""
+    } ${techSignal}${conflicts}`;
+  } else if (v === 1) {
+    nar = `The market knows ${cn} for ${br(r[0])}${r[1] ? ` — and increasingly for ${br(r[1])}` : ""}. ${
+      r[2] ? `${br(r[2])}${r[3] ? ` and ${br(r[3])}` : ""} are the pillars they've built their reputation on.` : ""
+    } ${r[4] ? `${br(r[4])} is the differentiator they lead with when the sale gets competitive.` : ""} ${techSignal}${conflicts}`;
+  } else if (v === 2) {
+    nar = `${cn}'s brand narrative is built around ${br(r[0])}. ${
+      r[1] ? `${br(r[1])} amplifies that position — it's the reason their customers stay.` : ""
+    } ${r[2] && r[3] ? `The combination of ${br(r[2])} and ${br(r[3])} is their competitive moat: difficult to replicate quickly.` : ""} ${techSignal}${conflicts}`;
+  } else {
+    nar = `If you were a buyer evaluating ${cn}, you'd see ${br(r[0])} as their headline.${
+      r[1] ? ` ${br(r[1])} is the proof point — what customers report when asked to describe the experience.` : ""
+    } ${r[2] ? `${br(r[2])}${r[3] ? ` and ${br(r[3])}` : ""} are their operational advantages.` : ""} ${
+      r[4] ? `${br(r[4])} is the story they tell in competitive situations.` : ""
+    } ${techSignal}${conflicts}`;
+  }
+  return nar.replace(/\s+/g, " ").trim();
+}
+

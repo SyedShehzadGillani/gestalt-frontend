@@ -4,6 +4,7 @@ import { CompetitivePhaseA } from "@/components/formula/pages/CompetitivePhaseA"
 import { CompetitivePhaseB } from "@/components/formula/pages/CompetitivePhaseB";
 import { CompetitivePhaseC } from "@/components/formula/pages/CompetitivePhaseC";
 import { CompetitivePhaseD } from "@/components/formula/pages/CompetitivePhaseD";
+import { CompetitiveSevenStep } from "@/components/formula/pages/CompetitiveSevenStep";
 import type { SignOffSection, TriggerAi } from "@/components/formula/page-types";
 
 interface Props {
@@ -22,9 +23,9 @@ const PHASES: Array<{ key: Phase; label: string; sub: string }> = [
 ];
 
 /**
- * 01.10 — Competitive Landscape. Orchestrates the 4 internal phases (A→D)
- * that lock the brand vocabulary. Each phase is its own sub-component to
- * keep this orchestrator under 150 lines.
+ * 01.10 — Competitive Landscape. Outer 7-step flow (CompetitiveSevenStep)
+ * wraps the 4 internal phases (A→D) as Step 1, then exposes Steps 2–7
+ * (Categorize, Context Map, Prioritize, Competition, Spectrum, Audit).
  */
 export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) {
   const [phase, setPhase] = useState<Phase>("A");
@@ -62,15 +63,13 @@ export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) 
     setPhase("C");
   };
 
-  return (
+  const step1 = (
     <div>
-      <FormulaPageHeader pageId="01.10" />
-
       <div className="grid grid-cols-4 gap-1 mb-5">
         {PHASES.map((p) => {
           const isActive = phase === p.key;
           const reached =
-            (p.key === "A") ||
+            p.key === "A" ||
             (p.key === "B" && descSaved) ||
             (p.key === "C" && selectedWords.length === 10) ||
             (p.key === "D" && orderedWords.length === 10);
@@ -118,7 +117,13 @@ export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) 
               context: "01.10 PHASE A — DESCRIPTION LOCKED",
               text: `Description saved to the Knowledge Bank. Every coaching answer, audit, and AI prompt that follows is now calibrated against this baseline.\n\n"${descText}"`,
               needsConfirm: true,
-              metrics: [{ label: "WORDS", value: String(descText.trim().split(/\s+/).length), color: "hsl(var(--gold))" }],
+              metrics: [
+                {
+                  label: "WORDS",
+                  value: String(descText.trim().split(/\s+/).length),
+                  color: "hsl(var(--gold))",
+                },
+              ],
             });
           }}
           onAdvance={() => setPhase("B")}
@@ -130,7 +135,12 @@ export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) 
       )}
 
       {phase === "C" && (
-        <CompetitivePhaseC ordered={orderedWords} moveUp={moveUp} moveDown={moveDown} onAdvance={() => setPhase("D")} />
+        <CompetitivePhaseC
+          ordered={orderedWords}
+          moveUp={moveUp}
+          moveDown={moveDown}
+          onAdvance={() => setPhase("D")}
+        />
       )}
 
       {phase === "D" && (
@@ -143,6 +153,19 @@ export function CompetitiveLandscapePage({ onAi, onSignOff, signedOff }: Props) 
           signedOff={signedOff}
         />
       )}
+    </div>
+  );
+
+  return (
+    <div>
+      <FormulaPageHeader pageId="01.10" />
+      <CompetitiveSevenStep
+        step1Slot={step1}
+        selectedWords={selectedWords}
+        step1Complete={selectedWords.length === 10}
+        onAi={onAi}
+        onSignOff={onSignOff}
+      />
     </div>
   );
 }
