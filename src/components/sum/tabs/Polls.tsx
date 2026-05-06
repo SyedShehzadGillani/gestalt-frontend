@@ -1,6 +1,11 @@
-import { POLL } from "@/data/sum-mock";
+// Polls — POLLS tab (v15 spec §4.5).
+// Pure render. AI poll-intelligence reliability disclaimer included.
+
+import { POLL } from "@/data/sum-data";
 
 export function Polls() {
+  const participation = Math.round((POLL.responses / POLL.total) * 100);
+  const reliable = participation >= 50;
   return (
     <div style={{ padding: "28px 32px", maxWidth: 660, margin: "0 auto", width: "100%" }}>
       <div style={{ marginBottom: 18 }}>
@@ -25,9 +30,17 @@ export function Polls() {
           </div>
         ))}
         <div style={{ fontSize: 12, color: "var(--sum-tx4)", marginTop: 18 }}>
-          {POLL.responses}/{POLL.total} responses ({Math.round((POLL.responses / POLL.total) * 100)}%)
+          {POLL.responses}/{POLL.total} responses ({participation}%)
         </div>
       </div>
+      {!reliable && (
+        <div style={{ marginTop: 14, padding: "14px 22px", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.2)" }}>
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: "var(--sum-red)", marginBottom: 4 }}>RELIABILITY WARNING</div>
+          <div style={{ fontSize: 12, color: "var(--sum-tx3)", lineHeight: 1.55 }}>
+            Participation is below 50%. Treat results as directional rather than conclusive — the silent majority hasn't been heard yet.
+          </div>
+        </div>
+      )}
       <div style={{ marginTop: 14, padding: "18px 22px", background: "rgba(226,181,63,0.06)", border: "1px solid rgba(226,181,63,0.2)" }}>
         <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: "var(--sum-gold)", marginBottom: 6 }}>POLL INTELLIGENCE</div>
         <div style={{ fontSize: 13, color: "var(--sum-tx2)", lineHeight: 1.7 }}>{POLL.intelligence}</div>

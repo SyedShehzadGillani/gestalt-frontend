@@ -1,32 +1,39 @@
-import { useMemo, useState } from "react";
-import { Icon } from "../icons";
-import { DESIRE_FIELDS, ENTRY_TYPES, FOLDERS, JOURNAL_ENTRIES, JournalEntry, NOTE_COLORS } from "@/data/sum-mock";
+// Journal — PERSONAL JOURNAL tab (v15 spec §4.3).
+// Pure render. State (search, type filter, favorites, draft, folder) lifted to ClientMessaging.
+// Privacy banner is mandatory on every render.
 
-const DESIRE_HINTS: Record<string, string> = {
-  Delight: "What will initiate a DELIGHT in experience?",
-  Experience: "What is the DELIGHT in the EXPERIENCE?",
-  Surprise: "What SURPRISE in the EXPERIENCE we are creating?",
-  Inspire: "How does the SURPRISE INSPIRE?",
-  Resonate: "What will INSPIRE RESONATE?",
-  Evangelize: "Why will the RESONATE create EVANGELISTS?",
-};
+import { useState } from "react";
+import { Icon } from "@/components/sum/icons";
+import {
+  DESIRE_FIELDS,
+  DESIRE_HINTS,
+  ENTRY_TYPES,
+  FOLDERS,
+  JOURNAL_ENTRIES,
+  type JournalEntry,
+} from "@/data/sum-data";
+import { filterJournalEntries, noteColorMeta } from "@/lib/sum-utils";
 
-export function Journal() {
-  const [favOnly, setFavOnly] = useState(false);
-  const [type, setType] = useState<string | null>(null);
-  const [search, setSearch] = useState("");
-  const [draftOpen, setDraftOpen] = useState(false);
+interface Props {
+  search: string;
+  onSearch: (q: string) => void;
+  filterType: string | null;
+  onFilterType: (t: string | null) => void;
+  favoritesOnly: boolean;
+  onFavoritesOnly: (v: boolean) => void;
+  folderFilter: string | null;
+  draftOpen: boolean;
+  onDraftOpen: (v: boolean) => void;
+  onShareEntry: (entryId: number) => void;
+}
 
-  const entries = useMemo(() => {
-    let out = JOURNAL_ENTRIES.slice();
-    if (favOnly) out = out.filter((e) => e.favorite);
-    if (type) out = out.filter((e) => e.types.includes(type));
-    if (search.trim()) {
-      const q = search.toLowerCase().trim();
-      out = out.filter((e) => e.title.toLowerCase().includes(q) || e.text.toLowerCase().includes(q) || e.tags.some((t) => t.toLowerCase().includes(q)));
-    }
-    return out;
-  }, [favOnly, type, search]);
+export function Journal({ search, onSearch, filterType, onFilterType, favoritesOnly, onFavoritesOnly, folderFilter, draftOpen, onDraftOpen, onShareEntry }: Props) {
+  const entries = filterJournalEntries(JOURNAL_ENTRIES, {
+    type: filterType,
+    favoritesOnly,
+    search,
+    folderId: folderFilter,
+  });
 
   return (
     <div style={{ padding: "28px 32px", maxWidth: 840, margin: "0 auto", width: "100%" }}>
@@ -37,7 +44,7 @@ export function Journal() {
             <div style={{ fontSize: 28, fontWeight: 900 }}>PERSONAL JOURNAL</div>
             <div style={{ fontSize: 14, color: "var(--sum-tx3)", marginTop: 4 }}>Your structured ideas, frictions, and resolutions. Drag any entry into a folder.</div>
           </div>
-          <button onClick={() => setDraftOpen(true)} className="smooth" style={{ padding: "10px 16px", background: "var(--sum-gold)", color: "#000", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", gap: 6 }}>
+          <button onClick={() => onDraftOpen(true)} className="smooth" style={{ padding: "10px 16px", background: "var(--sum-gold)", color: "#000", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", gap: 6 }}>
             <Icon name="plus" size={14} /><span>NEW ENTRY</span>
           </button>
         </div>
@@ -45,22 +52,22 @@ export function Journal() {
       <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap", alignItems: "stretch" }}>
         <div style={{ flex: 1, minWidth: 200, display: "flex", alignItems: "center", background: "var(--sum-inp)", border: "1px solid var(--sum-bdr)", padding: "0 12px" }}>
           <Icon name="search" size={14} color="var(--sum-tx4)" />
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search entries, tags, content..." style={{ flex: 1, padding: "8px 8px", background: "transparent", border: "none", outline: "none", fontSize: 14, color: "inherit" }} />
+          <input value={search} onChange={(e) => onSearch(e.target.value)} placeholder="Search entries, tags, content..." className="sum-input-pulse" style={{ flex: 1, padding: "8px 8px", background: "transparent", border: "none", outline: "none", fontSize: 14, color: "inherit" }} />
         </div>
-        <button onClick={() => setFavOnly((v) => !v)} className="smooth"
-          style={{ padding: "8px 14px", background: favOnly ? "var(--sum-gold)" : "transparent", color: favOnly ? "#000" : "var(--sum-tx3)", border: `1px solid ${favOnly ? "var(--sum-gold)" : "var(--sum-bdr)"}`, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", gap: 6 }}>
-          <Icon name={favOnly ? "starFill" : "star"} size={14} /><span>FAVORITES</span>
+        <button onClick={() => onFavoritesOnly(!favoritesOnly)} className="smooth"
+          style={{ padding: "8px 14px", background: favoritesOnly ? "var(--sum-gold)" : "transparent", color: favoritesOnly ? "#000" : "var(--sum-tx3)", border: `1px solid ${favoritesOnly ? "var(--sum-gold)" : "var(--sum-bdr)"}`, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", gap: 6 }}>
+          <Icon name={favoritesOnly ? "starFill" : "star"} size={14} /><span>FAVORITES</span>
         </button>
       </div>
       <div style={{ display: "flex", gap: 6, marginBottom: 18, flexWrap: "wrap" }}>
-        <button onClick={() => setType(null)} className="smooth"
-          style={{ padding: "5px 12px", border: `1px solid ${!type ? "var(--sum-gold)" : "var(--sum-bdr)"}`, background: !type ? "rgba(226,181,63,0.1)" : "transparent", color: !type ? "var(--sum-gold)" : "var(--sum-tx3)", fontSize: 12, fontWeight: 700, letterSpacing: 0.5 }}>
+        <button onClick={() => onFilterType(null)} className="smooth"
+          style={{ padding: "5px 12px", border: `1px solid ${!filterType ? "var(--sum-gold)" : "var(--sum-bdr)"}`, background: !filterType ? "rgba(226,181,63,0.1)" : "transparent", color: !filterType ? "var(--sum-gold)" : "var(--sum-tx3)", fontSize: 12, fontWeight: 700, letterSpacing: 0.5 }}>
           ALL
         </button>
         {ENTRY_TYPES.map((t) => {
-          const active = type === t.id;
+          const active = filterType === t.id;
           return (
-            <button key={t.id} onClick={() => setType(t.id)} className="smooth"
+            <button key={t.id} onClick={() => onFilterType(t.id)} className="smooth"
               style={{ padding: "5px 12px", border: `1px solid ${active ? t.color : "var(--sum-bdr)"}`, background: active ? `color-mix(in srgb, ${t.color} 12%, transparent)` : "transparent", color: active ? t.color : "var(--sum-tx3)", fontSize: 12, fontWeight: 700, letterSpacing: 0.5 }}>
               {t.id}
             </button>
@@ -72,9 +79,9 @@ export function Journal() {
           <div style={{ fontSize: 14 }}>No entries match your search.</div>
         </div>
       ) : (
-        entries.map((e) => <JournalEntryCard key={e.id} entry={e} />)
+        entries.map((e) => <JournalEntryCard key={e.id} entry={e} onShare={() => onShareEntry(e.id)} />)
       )}
-      {draftOpen && <JournalDraftModal onClose={() => setDraftOpen(false)} />}
+      {draftOpen && <JournalDraftModal onClose={() => onDraftOpen(false)} />}
     </div>
   );
 }
@@ -139,7 +146,7 @@ function JournalDraftModal({ onClose }: { onClose: () => void }) {
             <div style={{ padding: 18, background: "var(--sum-bg3)", border: "1px solid var(--sum-bdr)", marginBottom: 14 }}>
               <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 2, color: "var(--sum-gold)", marginBottom: 6 }}>D.E.S.I.R.E. STRUCTURE</div>
               <div style={{ fontSize: 11, color: "var(--sum-tx3)", lineHeight: 1.65, marginBottom: 14 }}>
-                Leave any field blank, and your team can RIFF to complete it. The more you complete, the more it is campaign-ready for execution.
+                Leave any field blank — your team can RIFF to complete it. The more you complete, the more it is campaign-ready.
               </div>
               {DESIRE_FIELDS.map((f) => (
                 <div key={f} style={{ marginBottom: 12 }}>
@@ -179,13 +186,12 @@ function JournalDraftModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function JournalEntryCard({ entry: e }: { entry: JournalEntry }) {
-  const colorMeta = NOTE_COLORS.find((c) => c.id === e.color) ?? NOTE_COLORS[0];
+function JournalEntryCard({ entry: e, onShare }: { entry: JournalEntry; onShare: () => void }) {
+  const colorMeta = noteColorMeta(e.color);
   const filled = e.solve ? Object.values(e.solve).filter(Boolean).length : 0;
   return (
     <div className="smooth" style={{ padding: "22px 24px", background: "var(--sum-bg2)", border: "1px solid var(--sum-bdr)", borderLeft: `3px solid ${colorMeta.color}`, marginBottom: 12, cursor: "pointer" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 6 }}>
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: colorMeta.color, flexShrink: 0 }} />
         {e.types.map((tid) => {
           const t = ENTRY_TYPES.find((x) => x.id === tid);
           if (!t) return null;
@@ -202,6 +208,9 @@ function JournalEntryCard({ entry: e }: { entry: JournalEntry }) {
           <span style={{ display: "inline-flex", alignItems: "center", gap: 3, fontSize: 12, color: "var(--sum-gold)", fontWeight: 700 }}>
             <Icon name="clock" size={11} />{e.reminders.length}
           </span>
+        )}
+        {e.sharedToStoryEngine && (
+          <span style={{ padding: "2px 7px", background: "rgba(95,204,0,0.15)", color: "var(--sum-green)", fontSize: 10, fontWeight: 800, letterSpacing: 1 }}>SHARED</span>
         )}
         <div style={{ flex: 1 }} />
         <button className="smooth" style={{ color: e.favorite ? "var(--sum-gold)" : "var(--sum-tx5)" }}>
@@ -223,7 +232,13 @@ function JournalEntryCard({ entry: e }: { entry: JournalEntry }) {
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: `${(filled / 6) * 100}%`, background: filled === 6 ? "var(--sum-green)" : "var(--sum-gold)" }} />
           </div>
           <span style={{ fontSize: 11, fontWeight: 700, color: filled === 6 ? "var(--sum-green)" : "var(--sum-gold)" }}>D.E.S.I.R.E. {filled}/6</span>
-          {filled === 6 && <span style={{ padding: "2px 8px", background: "var(--sum-green)", color: "#000", fontSize: 11, fontWeight: 800, letterSpacing: 1 }}>LOVED</span>}
+        </div>
+      )}
+      {!e.sharedToStoryEngine && (
+        <div style={{ marginTop: 12, display: "flex", justifyContent: "flex-end" }}>
+          <button onClick={(ev) => { ev.stopPropagation(); onShare(); }} className="smooth" style={{ padding: "5px 10px", border: "1px solid var(--sum-bdr2)", color: "var(--sum-tx3)", fontSize: 11, fontWeight: 700, letterSpacing: 1 }}>
+            SHARE TO STORY ENGINE →
+          </button>
         </div>
       )}
     </div>
