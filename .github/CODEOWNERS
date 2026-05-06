@@ -1,0 +1,41 @@
+# GestaltAI CODEOWNERS — backend paths require developer approval.
+# Frontend paths are open for the bolt.diy editor agent + admin to modify directly.
+
+# Default owner — all files require dev review unless overridden below
+*                           @SyedShehzadGillani
+
+# Backend / integrations / hooks / contexts — STRICT: dev only
+/src/lib/                   @SyedShehzadGillani
+/src/hooks/                 @SyedShehzadGillani
+/src/integrations/          @SyedShehzadGillani
+/src/contexts/              @SyedShehzadGillani
+/supabase/                  @SyedShehzadGillani
+
+# Build & config — STRICT: dev only
+/package.json               @SyedShehzadGillani
+/package-lock.json          @SyedShehzadGillani
+/bun.lock                   @SyedShehzadGillani
+/vite.config.ts             @SyedShehzadGillani
+/vitest.config.ts           @SyedShehzadGillani
+/tsconfig*.json             @SyedShehzadGillani
+/tailwind.config.ts         @SyedShehzadGillani
+/postcss.config.js          @SyedShehzadGillani
+/eslint.config.js           @SyedShehzadGillani
+/components.json            @SyedShehzadGillani
+/vercel.json                @SyedShehzadGillani
+/.env*                      @SyedShehzadGillani
+
+# Repo meta
+/.github/                   @SyedShehzadGillani
+/.bolt/                     @SyedShehzadGillani
+
+# Tests — dev only
+/src/test/                  @SyedShehzadGillani
+
+# Frontend (no owner = no required review) — open for bolt.diy + admin
+# /src/components/
+# /src/pages/
+# /src/assets/
+# /src/App.css
+# /src/index.css
+# /src/icons.tsx

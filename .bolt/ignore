@@ -1,0 +1,45 @@
+# Backend & integrations — strictly off-limits to bolt.diy agent
+src/lib/**
+src/hooks/**
+src/integrations/**
+src/contexts/**
+supabase/**
+
+# Env, secrets, package management
+.env
+.env.*
+.npmrc
+package.json
+package-lock.json
+bun.lock
+node_modules/**
+
+# Build output
+dist/**
+build/**
+
+# Config files (only tailwind.config.ts is editable)
+vite.config.ts
+vitest.config.ts
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+postcss.config.js
+eslint.config.js
+components.json
+vercel.json
+
+# CI / repo meta
+.github/**
+.bolt/**
+
+# Vault & references (docs, not app code)
+vault/**
+references/**
+
+# Tests (backend covers them)
+src/test/**
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
