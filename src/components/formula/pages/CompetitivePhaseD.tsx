@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   PERSPECTIVES,
   generateCoachingPlaceholder,
@@ -7,6 +7,7 @@ import {
   type Perspective,
 } from "@/components/formula/formula-data";
 import { AutoTextarea } from "@/components/formula/AutoTextarea";
+import { AIThinking } from "@/components/formula/AIThinking";
 import type { SignOffSection, TriggerAi } from "@/components/formula/page-types";
 
 interface Props {
@@ -34,6 +35,14 @@ export function CompetitivePhaseD({
   const [coachingAnswers, setCoachingAnswers] = useState<string[]>([]);
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [round, setRound] = useState(0);
+  const [thinking, setThinking] = useState(false);
+
+  // Auto-clear thinking state after the simulated AI delay
+  useEffect(() => {
+    if (!thinking) return;
+    const t = setTimeout(() => setThinking(false), 1800);
+    return () => clearTimeout(t);
+  }, [thinking]);
 
   const scores = useMemo(
     () => scoreManifesto(manifesto, descText, coachingAnswers),
@@ -50,9 +59,14 @@ export function CompetitivePhaseD({
 
   const submitAnswer = () => {
     if (currentAnswer.trim().length < 10) return;
-    setCoachingAnswers((prev) => [...prev, currentAnswer]);
+    const answer = currentAnswer;
+    setThinking(true);
     setCurrentAnswer("");
-    setRound((r) => r + 1);
+    // Apply the answer after the thinking animation completes
+    setTimeout(() => {
+      setCoachingAnswers((prev) => [...prev, answer]);
+      setRound((r) => r + 1);
+    }, 1800);
   };
 
   const ready = scores.total >= 60;
@@ -114,7 +128,21 @@ export function CompetitivePhaseD({
         </span>
       </div>
 
-      {coaching && lowestPerspective && (
+      {thinking && (
+        <div className="mt-4">
+          <AIThinking
+            subLabel="REFINING YOUR MANIFESTO"
+            phases={[
+              "Reading your answer…",
+              "Cross-referencing the manifesto…",
+              "Re-scoring perspectives…",
+              "Surfacing the next coaching question…",
+            ]}
+          />
+        </div>
+      )}
+
+      {!thinking && coaching && lowestPerspective && (
         <div
           className="mt-4 px-4 py-3.5 border-l-[3px]"
           style={{
