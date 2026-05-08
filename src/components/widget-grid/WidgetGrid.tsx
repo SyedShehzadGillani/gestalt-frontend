@@ -26,7 +26,7 @@ function PlaceholderWidget({ type }: { type: string }) {
 }
 
 const WIDGET_LIBRARY = [
-  { type: "daily-routine", label: "DAILY ROUTINE", desc: "AI-prioritized task list", size: "medium" },
+  { type: "daily-routine", label: "DAILY ROUTINES", desc: "AI-prioritized task list", size: "medium" },
   { type: "exit-equation", label: "EXIT EQUATION™", desc: "Valuation calculator", size: "medium" },
   { type: "hive-flight-risk", label: "H.I.V.E. FLIGHT RISK", desc: "Employee risk signals", size: "small" },
   { type: "certified-progress", label: "CERTIFIED PROGRESS", desc: "Badge requirements", size: "small" },
