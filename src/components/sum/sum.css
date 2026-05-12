@@ -1,0 +1,451 @@
+/* SUM scoped styles. All rules nested under .sum-scope so they cannot leak.
+   Tokens mirror moved_docs/gestalt-sum-mockup-04-30-v15.html. */
+
+.sum-scope {
+  --sum-bg: #0a0a0a;
+  --sum-bg2: #111;
+  --sum-bg3: #161616;
+  --sum-bg4: #1c1c1c;
+  --sum-bdr: #2a2a2a;
+  --sum-bdr2: #3a3a3a;
+  --sum-tx: #fff;
+  --sum-tx2: #d8d8d8;
+  --sum-tx3: #a0a0a0;
+  --sum-tx4: #777;
+  --sum-tx5: #444;
+  --sum-inp: #0d0d0d;
+  --sum-gold: #e2b53f;
+  --sum-gold2: #c18d30;
+  --sum-green: #5fcc00;
+  --sum-red: #ef4444;
+  --sum-blue: #3b82f6;
+  --sum-purple: #a855f7;
+  --sum-hover: #1a1a1a;
+
+  font-family: "Montserrat", system-ui, sans-serif;
+  background: var(--sum-bg);
+  color: var(--sum-tx);
+  line-height: 1.55;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.light .sum-scope,
+body.light .sum-scope {
+  --sum-bg: #f5f5f0;
+  --sum-bg2: #fff;
+  --sum-bg3: #fafaf8;
+  --sum-bg4: #f0f0eb;
+  --sum-bdr: #d8d8d0;
+  --sum-bdr2: #bbb;
+  --sum-tx: #1a1a1a;
+  --sum-tx2: #2a2a2a;
+  --sum-tx3: #555;
+  --sum-tx4: #777;
+  --sum-tx5: #aaa;
+  --sum-inp: #fff;
+  --sum-gold: #c9a227;
+  --sum-gold2: #a37d18;
+  --sum-hover: #ebebe6;
+}
+
+.sum-scope * {
+  box-sizing: border-box;
+}
+.sum-scope button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+.sum-scope input,
+.sum-scope textarea {
+  background: var(--sum-inp);
+  color: var(--sum-tx);
+  border: 1px solid var(--sum-bdr);
+  font: inherit;
+  outline: none;
+}
+.sum-scope input::placeholder,
+.sum-scope textarea::placeholder {
+  color: var(--sum-tx4);
+}
+
+.sum-scope .smooth {
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.sum-scope .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 8px;
+  background: rgba(226, 181, 63, 0.2);
+  color: var(--sum-gold);
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 9px;
+  letter-spacing: 0.3px;
+}
+.light .sum-scope .badge,
+body.light .sum-scope .badge {
+  background: rgba(201, 162, 39, 0.22);
+  color: var(--sum-gold2);
+}
+
+.sum-scope .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1px solid var(--sum-bdr2);
+  border-radius: 2px;
+  font-size: 12px;
+  color: var(--sum-tx3);
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+.sum-scope .tag.active {
+  background: var(--sum-gold);
+  color: #000;
+  border-color: var(--sum-gold);
+  font-weight: 700;
+}
+
+.sum-scope .msg {
+  position: relative;
+  padding: 12px 24px;
+}
+.sum-scope .msg:hover {
+  background: var(--sum-bg3);
+}
+.sum-scope .msg .rxbar {
+  display: none;
+}
+.sum-scope .msg:hover .rxbar {
+  display: flex;
+}
+
+.sum-scope .sticky-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.sum-scope .sticky-card {
+  position: relative;
+  border: 1px solid var(--sum-bdr);
+  padding: 18px;
+  cursor: pointer;
+  min-height: 140px;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+.sum-scope .sticky-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--sum-gold);
+}
+
+.sum-scope .note-card {
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.sum-scope .note-card:hover {
+  border-color: var(--note-color) !important;
+  box-shadow: 0 0 0 1px var(--note-color);
+  transform: translateY(-2px);
+}
+.sum-scope .note-card .note-body {
+  color: var(--note-color);
+}
+
+.sum-scope .sum-tabbar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--sum-bdr);
+  padding: 0 24px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.sum-scope .sum-tabbar button {
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  color: var(--sum-tx4);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.sum-scope .sum-tabbar button.active {
+  border-bottom-color: var(--sum-gold);
+  color: var(--sum-gold);
+  font-weight: 800;
+}
+
+.sum-scope .sum-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.sum-scope .sum-main {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+}
+
+.sum-scope .sum-channels-side {
+  width: 240px;
+  border-right: 1px solid var(--sum-bdr);
+  overflow: auto;
+  padding: 16px 0;
+  flex-shrink: 0;
+}
+
+.sum-scope .sum-right-panel {
+  width: 320px;
+  border-left: 1px solid var(--sum-bdr);
+  background: var(--sum-bg2);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* footer + bubble rules consolidated below */
+
+@keyframes sumGoldPulse {
+  0%,
+  100% {
+    border-color: rgba(226, 181, 63, 0.15);
+  }
+  50% {
+    border-color: rgba(226, 181, 63, 1);
+  }
+}
+.sum-scope .sum-input-pulse {
+  border: 1px solid rgba(226, 181, 63, 0.15);
+  animation: sumGoldPulse 2.5s ease-in-out infinite;
+}
+.sum-scope .sum-input-pulse:focus {
+  outline: none;
+  background: rgba(226, 181, 63, 0.08) !important;
+  animation: none;
+  border-color: rgba(226, 181, 63, 0.5);
+}
+
+.sum-scope .sum-progress {
+  height: 6px;
+  background: var(--sum-bg4);
+  position: relative;
+  overflow: hidden;
+}
+.sum-scope .sum-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--sum-gold);
+}
+
+.sum-scope .sum-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: var(--sum-bg4);
+  color: var(--sum-tx);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.sum-scope .sum-avatar.ai {
+  background: var(--sum-gold);
+  color: #000;
+}
+
+.sum-scope .sum-channel-row {
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  font-size: 12px;
+  color: var(--sum-tx2);
+}
+.sum-scope .sum-channel-row.active {
+  background: var(--sum-hover);
+  border-left-color: var(--sum-gold);
+  color: var(--sum-tx);
+  font-weight: 700;
+}
+.sum-scope .sum-channel-row.active svg {
+  color: var(--sum-gold);
+}
+.sum-scope .sum-channel-row .label {
+  flex: 1;
+}
+
+.sum-scope .sum-section-header {
+  padding: 8px 18px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--sum-tx4);
+}
+
+.sum-scope .sum-page-pad {
+  padding: 32px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sum-scope h1.sum-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0 0 8px;
+  color: var(--sum-tx);
+}
+.sum-scope p.sum-sub {
+  font-size: 14px;
+  color: var(--sum-tx3);
+  margin: 0 0 24px;
+  max-width: 640px;
+}
+
+.sum-scope .sum-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--sum-gold);
+  color: #000;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  border: none;
+  cursor: pointer;
+}
+.sum-scope .sum-btn.ghost {
+  background: transparent;
+  color: var(--sum-tx2);
+  border: 1px solid var(--sum-bdr2);
+}
+.sum-scope .sum-btn.ghost.active {
+  background: var(--sum-gold);
+  color: #000;
+  border-color: var(--sum-gold);
+}
+
+.sum-scope .sum-card {
+  border: 1px solid var(--sum-bdr);
+  background: var(--sum-bg2);
+  padding: 20px;
+}
+
+.sum-scope .sum-search {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  background: var(--sum-inp);
+  border: 1px solid var(--sum-bdr);
+  font-size: 13px;
+  color: var(--sum-tx);
+}
+
+@keyframes sumGiDot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes sumGiBubblePulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(226, 181, 63, 0.55),
+      0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow:
+      0 0 0 18px rgba(226, 181, 63, 0),
+      0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+}
+.sum-scope .sum-gi-bubble {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #c9a227 0%, #e2b53f 100%);
+  border: 1.5px solid rgba(226, 181, 63, 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+  color: #000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  animation: sumGiBubblePulse 2.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.sum-scope .sum-gi-bubble:hover {
+  transform: scale(1.05);
+}
+.sum-scope .sum-gi-bubble::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50% !important;
+  background: var(--sum-green);
+  border: 2px solid var(--sum-bg);
+}
+
+.sum-scope::-webkit-scrollbar,
+.sum-scope *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.sum-scope::-webkit-scrollbar-thumb,
+.sum-scope *::-webkit-scrollbar-thumb {
+  background: var(--sum-bdr2);
+  border-radius: 3px;
+}
+.sum-scope::-webkit-scrollbar-thumb:hover,
+.sum-scope *::-webkit-scrollbar-thumb:hover {
+  background: var(--sum-gold);
+}
