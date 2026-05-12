@@ -274,8 +274,8 @@ function IntelligenceMapTab({ isDark, theme }: { isDark: boolean; theme: Record<
         <GestaltWheelEmbed
           dark={isDark}
           viewMode={viewMode}
-          wheelActive={activeId}
-          outerActive={outerActive}
+          wheelActive={activeId as any}
+          outerActive={outerActive as any}
           onWheelClick={handleWheelClick}
           onOuterClick={handleOuterClick}
           gestaltScore={COMPANY_SCORES.gestaltScore}

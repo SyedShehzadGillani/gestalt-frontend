@@ -307,9 +307,9 @@ const empReady = Boolean(empForm.first && empForm.last && empForm.email && empFo
       let sel = node.nodeName.toLowerCase();
       const classList = Array.from((node as HTMLElement).classList || []);
       if (classList.length) sel += '.' + classList.slice(0, 2).join('.');
-      const parent = node.parentElement;
+      const parent: Element | null = node.parentElement;
       if (parent) {
-        const sibs = Array.from(parent.children).filter((c) => c.nodeName === node!.nodeName);
+        const sibs = Array.from(parent.children).filter((c: Element) => c.nodeName === node!.nodeName);
         if (sibs.length > 1) {
           const idx = sibs.indexOf(node as Element) + 1;
           sel += `:nth-of-type(${idx})`;

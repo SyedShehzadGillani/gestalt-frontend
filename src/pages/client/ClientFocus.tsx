@@ -127,7 +127,7 @@ const generateFocusQuestions = () => {
   let id = 1;
   for (const category of categories) {
     for (const text of questionTemplates[category as keyof typeof questionTemplates]) {
-      questions.push({
+      (questions as { id: number; category: string; text: string }[]).push({
         id: id++,
         category,
         text,
