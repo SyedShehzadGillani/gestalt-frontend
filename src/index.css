@@ -1,0 +1,1125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gotham Font Family */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-ThinItalic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-BookItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-MediumItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Black.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-BlackItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Ultra.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-UltraItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GESTALT Design System */
+@layer base {
+  :root {
+    /* Core palette - always available */
+    --black: 0 0% 0%;
+    --white: 0 0% 100%;
+    
+    /* Gold accent variants */
+    --gold: 45 71% 47%;
+    --gold-highlight: 43 74% 56%;
+    --gold-dimlight: 38 61% 47%;
+    --gold-dim: 45 71% 47% / 0.15;
+    
+    /* Gray Blue for citations/sources */
+    --gray-blue: 220 10% 34%;
+    
+    /* HQ Blue accent (#4882ff) */
+    --hq-purple: 220 100% 64%;
+    --hq-purple-dim: 220 100% 64% / 0.15;
+    --hq-accent: 220 100% 64%;
+    --red: 6 78% 57%;
+    --red-dim: 6 78% 57% / 0.15;
+    --green: 145 63% 42%;
+    --green-dim: 145 63% 42% / 0.15;
+    --orange: 45 93% 52%;
+    --orange-dim: 45 93% 52% / 0.15;
+    --blue: 204 70% 53%;
+    --blue-dim: 204 70% 53% / 0.15;
+    --purple: 270 50% 53%;
+    
+    /* H.I.V.E. Color Palette */
+    --hive-magenta: 330 85% 55%;
+    --hive-magenta-dim: 330 85% 55% / 0.15;
+    --hive-yellow: 51 100% 49%;
+    --hive-yellow-dim: 51 100% 49% / 0.15;
+    --hive-orange: 30 100% 50%;
+    --hive-orange-dim: 30 100% 50% / 0.15;
+    --hive-blue: 218 100% 46%;
+    --hive-blue-dim: 218 100% 46% / 0.15;
+    --hive-white: 0 0% 100%;
+    --hive-white-dim: 0 0% 100% / 0.1;
+    --purple-dim: 270 50% 53% / 0.15;
+    
+    /* Spectrum colors for Brand Health */
+    --spectrum-liquidation: 0 64% 22%;
+    --spectrum-exit-unlikely: 0 63% 34%;
+    --spectrum-disruption: 24 100% 39%;
+    --spectrum-vulnerable: 45 71% 47%;
+    --spectrum-exit-possible: 98 41% 38%;
+    --spectrum-exit-ready: 100 44% 53%;
+
+    /* Layout */
+    --nav-height: 60px;
+    --sidebar-width: 290px;
+    --radius: 2px;
+
+    /* Performance (perf-only) tokens — dark defaults */
+    --dashboard-bg: transparent;
+    --dashboard-card: 225 14% 11%;
+    --dashboard-accent: 45 76% 47%;
+    --dashboard-text: 210 40% 96%;
+    --dashboard-text-muted: 215 15% 55%;
+    --dashboard-border: 225 10% 20%;
+
+    --chart-primary: 45 76% 47%;
+    --chart-secondary: 195 100% 65%;
+    --chart-success: 142 71% 50%;
+    --chart-warning: 38 92% 55%;
+    --chart-error: 0 84% 60%;
+    --chart-accent: 280 100% 70%;
+    --chart-muted: 215 10% 45%;
+
+    --employee-declining: 0 100% 5%;
+    --employee-declining-dark: 0 100% 5%;
+
+    --shadow-card: 0 2px 8px hsl(225 15% 4% / 0.6);
+    --shadow-elevated: 0 8px 24px hsl(225 15% 4% / 0.8);
+
+    --q-personal: 0 0% 100%;
+    --q-staff: 48 100% 50%;
+    --q-patient: 24 95% 55%;
+    --q-knowledge: 217 91% 60%;
+
+    --frame-bg: 225 14% 11%;
+    --frame-border: 225 10% 18%;
+    --frame-header-bg: 225 12% 14%;
+
+    /* Theme transition */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Dark theme (default) */
+  :root:not(.light) {
+    /* Background colors - updated palette */
+    --bg-primary: 0 0% 4%;
+    --bg-secondary: 0 0% 8%;
+    --bg-card: 0 0% 8%;
+    --bg-elevated: 0 0% 10%;
+    
+    /* Text colors */
+    --text-primary: 0 0% 100%;
+    --text-secondary: 0 0% 63%;
+    --text-muted: 0 0% 40%;
+    
+    /* Border */
+    --border-color: 0 0% 15%;
+    
+    /* Dark theme grays */
+    --dark: 0 0% 4%;
+    --dark-gray: 0 0% 8%;
+    --mid-gray: 0 0% 10%;
+    --border-gray: 0 0% 15%;
+    --text-gray: 0 0% 40%;
+    --text-light: 0 0% 63%;
+
+    /* Semantic tokens */
+    --background: var(--bg-primary);
+    --background-secondary: var(--bg-secondary);
+    --foreground: var(--text-primary);
+    --foreground-secondary: var(--text-secondary);
+    --foreground-muted: var(--text-muted);
+
+    --card: var(--bg-card);
+    --card-hover: var(--bg-elevated);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--bg-card);
+    --popover-foreground: var(--text-primary);
+
+    --primary: 45 71% 47%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: var(--bg-secondary);
+    --secondary-foreground: var(--text-primary);
+
+    --muted: var(--bg-elevated);
+    --muted-foreground: var(--text-muted);
+
+    --accent: 45 71% 47%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 6 78% 57%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 52%;
+    --warning-foreground: 0 0% 0%;
+    --info: 204 70% 53%;
+
+    --border: var(--border-color);
+    --input: var(--bg-secondary);
+    --ring: 45 71% 47%;
+
+    /* Sidebar */
+    --sidebar-background: var(--bg-secondary);
+    --sidebar-foreground: var(--text-primary);
+    --sidebar-primary: 45 71% 47%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: var(--bg-elevated);
+    --sidebar-accent-foreground: var(--text-primary);
+    --sidebar-border: var(--border-color);
+    --sidebar-ring: 45 71% 47%;
+  }
+
+  /* Light theme */
+  .light {
+    /* Background colors */
+    --bg-primary: 0 0% 100%;
+    --bg-secondary: 210 20% 98%;
+    --bg-card: 0 0% 100%;
+    --bg-elevated: 210 20% 98%;
+    
+    /* Text colors */
+    --text-primary: 215 25% 15%;
+    --text-secondary: 215 10% 40%;
+    --text-muted: 215 8% 55%;
+    
+    /* Border */
+    --border-color: 214 18% 83%;
+    
+    /* Light theme grays (mapped for components using dark theme vars) */
+    --dark: 210 20% 98%;
+    --dark-gray: 210 15% 96%;
+    --mid-gray: 210 12% 93%;
+    --border-gray: 214 18% 83%;
+    --text-gray: 215 10% 40%;
+    --text-light: 215 8% 55%;
+
+    /* Gold adjusted for light mode */
+    --gold: 43 74% 42%;
+    --gold-dim: 43 74% 42% / 0.12;
+
+    /* Semantic tokens */
+    --background: var(--bg-primary);
+    --background-secondary: var(--bg-secondary);
+    --foreground: var(--text-primary);
+    --foreground-secondary: var(--text-secondary);
+    --foreground-muted: var(--text-muted);
+
+    --card: var(--bg-card);
+    --card-hover: var(--bg-elevated);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--bg-card);
+    --popover-foreground: var(--text-primary);
+
+    --primary: 43 74% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--bg-secondary);
+    --secondary-foreground: var(--text-primary);
+
+    --muted: var(--bg-elevated);
+    --muted-foreground: var(--text-muted);
+
+    --accent: 43 74% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 6 78% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 63% 35%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 45%;
+    --warning-foreground: 0 0% 0%;
+    --info: 204 70% 45%;
+
+    --border: var(--border-color);
+    --input: var(--bg-secondary);
+    --ring: 43 74% 42%;
+
+    /* Sidebar - light theme */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 15%;
+    --sidebar-primary: 43 74% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 15% 96%;
+    --sidebar-accent-foreground: 215 25% 15%;
+    --sidebar-border: 214 18% 83%;
+    --sidebar-ring: 43 74% 42%;
+
+    /* Performance (perf-only) tokens — light overrides */
+    --dashboard-bg: 220 14% 96%;
+    --dashboard-card: 0 0% 100%;
+    --dashboard-accent: 45 76% 44%;
+    --dashboard-text: 224 30% 15%;
+    --dashboard-text-muted: 220 10% 45%;
+    --dashboard-border: 220 13% 85%;
+
+    --chart-primary: 45 76% 44%;
+    --chart-secondary: 195 100% 40%;
+    --chart-success: 142 71% 45%;
+    --chart-warning: 38 92% 50%;
+    --chart-error: 0 84% 60%;
+    --chart-accent: 280 100% 60%;
+    --chart-muted: 220 10% 60%;
+
+    --employee-declining: 0 100% 97%;
+    --employee-declining-dark: 0 100% 5%;
+
+    --shadow-card: 0 1px 3px hsl(220 13% 15% / 0.08), 0 1px 2px hsl(220 13% 15% / 0.06);
+    --shadow-elevated: 0 10px 25px hsl(220 13% 15% / 0.1), 0 6px 10px hsl(220 13% 15% / 0.08);
+
+    --q-personal: 0 0% 30%;
+    --q-staff: 48 100% 35%;
+    --q-patient: 24 95% 45%;
+    --q-knowledge: 217 91% 50%;
+
+    --frame-bg: 0 0% 100%;
+    --frame-border: 220 13% 88%;
+    --frame-header-bg: 220 14% 97%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 14px;
+  }
+
+  /* Default sharp corners — overridden to 2px where Copyground Rules specify */
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
+  /* 2px radius on cards, buttons, modals, inputs, containers */
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select,
+  .card,
+  [class*="Card"],
+  [role="dialog"],
+  [role="alertdialog"] {
+    border-radius: 2px !important;
+  }
+
+  /* Untouched circles: avatars, spectrum bars */
+
+  /* Global transition */
+  button,
+  a,
+  input,
+  [role="button"] {
+    transition: all 0.15s ease;
+  }
+}
+
+@layer components {
+  /* Unified role sidebar */
+  .role-sidebar {
+    @apply fixed left-0 top-0 flex flex-col z-50;
+    width: 240px;
+    height: calc(100vh - 36px);
+    border-right: 1px solid var(--sidebar-border-color);
+  }
+
+  .main-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    background-color: var(--content-bg);
+    transition: background-color 0.3s ease;
+  }
+
+  .main-content.header-offset {
+    padding-top: 52px;
+  }
+
+  /* Legacy sidebar compat */
+  .sidebar { display: none; }
+  .hq-sidebar { display: none; }
+
+  .hq-main-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    background-color: var(--content-bg);
+  }
+
+  /* Thin scrollbar for sidebar */
+  .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  .sidebar-scroll:hover {
+    scrollbar-color: var(--sidebar-border-color) transparent;
+  }
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+  }
+  .sidebar-scroll:hover::-webkit-scrollbar-thumb {
+    background: var(--sidebar-border-color);
+  }
+  /* HQ sidebar custom scrollbar — overlay, blue handle */
+  .hq-sidebar .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(72,130,255,0.35) transparent;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .hq-sidebar .sidebar-scroll::-webkit-scrollbar {
+    width: 3px;
+  }
+  .hq-sidebar .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .hq-sidebar .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: rgba(72,130,255,0.35);
+    border-radius: 0px;
+  }
+  .hq-sidebar .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(72,130,255,0.65);
+  }
+
+  /* HQ nav link active/hover states */
+  .hq-sidebar .hq-nav-link {
+    transition: background 150ms ease;
+  }
+  .hq-sidebar .hq-nav-link:hover:not(.hq-nav-active) {
+    background: rgba(72,130,255,0.12);
+  }
+  .hq-sidebar .hq-nav-active {
+    background: rgba(72,130,255,0.22) !important;
+  }
+
+  /* Light mode overrides for HQ sidebar */
+  html:not(.dark) .hq-sidebar .hq-nav-link:hover:not(.hq-nav-active) {
+    background: rgba(72,130,255,0.11);
+  }
+  html:not(.dark) .hq-sidebar .hq-nav-active {
+    background: rgba(72,130,255,0.24) !important;
+  }
+
+
+  /* Typography utilities */
+  .text-section-header {
+    @apply text-[9px] font-bold tracking-[2px] uppercase text-foreground-muted;
+  }
+
+  .text-nav-label {
+    @apply text-[11px] font-medium tracking-[1px] uppercase;
+  }
+
+  .text-nav-sub {
+    @apply text-[10px] font-normal text-foreground-secondary;
+  }
+
+  /* Gotham font weight utilities */
+  .font-gotham-medium {
+    font-family: 'Gotham', 'Montserrat', system-ui, sans-serif;
+    font-weight: 500;
+  }
+
+  .font-gotham-book {
+    font-family: 'Gotham', 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  /* Gold pulse input class */
+  .gold-input {
+    animation: goldPulse 2.5s ease-in-out infinite;
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    border-radius: 2px !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gold-input:focus,
+  .gold-input:focus-within {
+    animation: none;
+    border-color: #c9a227;
+    box-shadow: 0 0 8px 2px rgba(201, 162, 39, 0.2);
+  }
+
+  /* HQ theme-aware text utilities */
+  .hq-text {
+    color: white;
+  }
+  .light .hq-text {
+    color: hsl(215 25% 15%);
+  }
+  .hq-text-muted {
+    color: rgba(255,255,255,0.4);
+  }
+  .light .hq-text-muted {
+    color: hsl(215 10% 50%);
+  }
+  .hq-text-dim {
+    color: rgba(255,255,255,0.55);
+  }
+  .light .hq-text-dim {
+    color: hsl(215 10% 40%);
+  }
+  .hq-text-sub {
+    color: rgba(255,255,255,0.3);
+  }
+  .light .hq-text-sub {
+    color: hsl(215 10% 55%);
+  }
+}
+
+/* Gold pulse keyframe — subtle halo glow, not expanding border */
+@keyframes goldPulse {
+  0%, 100% {
+    border-color: rgba(201, 162, 39, 0.15);
+    box-shadow: 0 0 4px 0 rgba(201, 162, 39, 0);
+  }
+  50% {
+    border-color: rgba(201, 162, 39, 0.55);
+    box-shadow: 0 0 8px 2px rgba(201, 162, 39, 0.15);
+  }
+}
+
+.light {
+  @keyframes goldPulse {
+    0%, 100% {
+      border-color: rgba(201, 162, 39, 0.2);
+      box-shadow: 0 0 4px 0 rgba(201, 162, 39, 0);
+    }
+    50% {
+      border-color: rgba(201, 162, 39, 0.6);
+      box-shadow: 0 0 10px 2px rgba(201, 162, 39, 0.12);
+    }
+  }
+}
+
+/* GESTALT Custom Scrollbar — Dark mode (default) */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #252525;
+  border-radius: 0px !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 39, 0.4);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #252525 transparent;
+}
+
+/* GESTALT Custom Scrollbar — Light mode */
+.light ::-webkit-scrollbar-thumb {
+  background: #c8c7c2;
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 39, 0.4);
+}
+.light * {
+  scrollbar-color: #c8c7c2 transparent;
+}
+
+/* Sidebar CSS custom properties — outside @layer for proper specificity */
+:root {
+  --sidebar-border-color: rgba(255,255,255,0.08);
+  --sidebar-text-primary: #ffffff;
+  --sidebar-text-secondary: rgba(255,255,255,0.6);
+  --sidebar-text-muted: rgba(255,255,255,0.35);
+  --sidebar-text-dim: rgba(255,255,255,0.5);
+  --sidebar-hover-bg: rgba(255,255,255,0.04);
+  --sidebar-dropdown-bg: #111111;
+  --role-sidebar-bg: #0a0a0a;
+  --hq-border: rgba(255,255,255,0.08);
+
+  /* Content/widget theming */
+  --content-bg: #0a0a0a;
+  --content-card-bg: #0a0a0a;
+  --content-elevated-bg: #141414;
+  --content-text1: #ffffff;
+  --content-text2: #a0a0a0;
+  --content-text3: #666666;
+  --content-border: #1a1a1a;
+  --content-hover-bg: #1a1a1a;
+  --content-bar-track: #1a1a1a;
+  --content-widget-header-bg: transparent;
+  --content-widget-footer-bg: transparent;
+}
+
+.light {
+  --sidebar-border-color: #c8c7c2;
+  --sidebar-text-primary: #1a1a1a;
+  --sidebar-text-secondary: #444444;
+  --sidebar-text-muted: #777777;
+  --sidebar-text-dim: #555555;
+  --sidebar-hover-bg: rgba(0,0,0,0.04);
+  --sidebar-dropdown-bg: #f5f5f5;
+  --role-sidebar-bg: #e8e7e2;
+  --hq-border: #c8c7c2;
+
+  /* Content/widget theming - light */
+  --content-bg: #f0efea;
+  --content-card-bg: #ffffff;
+  --content-elevated-bg: #e6e5e0;
+  --content-text1: #1a1a1a;
+  --content-text2: #444444;
+  --content-text3: #777777;
+  --content-border: #c8c7c2;
+  --content-hover-bg: #e6e5e0;
+  --content-bar-track: #c8c7c2;
+  --content-widget-header-bg: #e6e5e0;
+  --content-widget-footer-bg: #e6e5e0;
+}
+
+/* ═══════════════════════════════════════════
+   GLOBAL INPUT TEXT STYLING — Gold typed text
+   ═══════════════════════════════════════════ */
+
+/* CHANGE 1 — Gold text color always */
+input, textarea, [contenteditable] {
+  color: #c9a227 !important;
+  caret-color: #c9a227;
+  font-family: 'Gotham', 'Montserrat', system-ui, sans-serif;
+}
+
+input::selection, textarea::selection, [contenteditable]::selection {
+  background: rgba(201, 162, 39, 0.25);
+  color: #c9a227;
+}
+
+input:focus, textarea:focus, [contenteditable]:focus {
+  color: #c9a227 !important;
+  caret-color: #e2b53f;
+  outline: none;
+}
+
+/* Placeholder stays neutral */
+input::placeholder, textarea::placeholder {
+  color: #909090 !important;
+  opacity: 1;
+}
+
+/* CHANGE 2 — Line spacing 25% wider */
+input, textarea {
+  line-height: 1.75;
+}
+
+/* CHANGE 3 — Font size 20% larger (12px baseline) */
+input, textarea {
+  font-size: 12px;
+}
+
+/* Light mode overrides */
+.light input, .light textarea, .light [contenteditable] {
+  color: #8a6c12 !important;
+  caret-color: #8a6c12;
+}
+
+.light input::selection, .light textarea::selection, .light [contenteditable]::selection {
+  background: rgba(138, 108, 18, 0.25);
+  color: #8a6c12;
+}
+
+.light input:focus, .light textarea:focus, .light [contenteditable]:focus {
+  color: #8a6c12 !important;
+  caret-color: #a07d15;
+}
+
+.light input::placeholder, .light textarea::placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+/* ── GESTALT INTELLIGENCE site-wide window animations ─────────────────── */
+
+@keyframes gibubblePulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 0 0 0 rgba(226,181,63,0.55); }
+  70%      { box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 0 0 18px rgba(226,181,63,0); }
+}
+
+.gi-bubble.has-proactive {
+  animation: gibubblePulse 2.5s ease-in-out infinite;
+}
+
+.gi-bubble:hover {
+  transform: scale(1.05);
+}
+
+.gi-bubble:hover .gi-bubble-label {
+  opacity: 1 !important;
+}
+
+@keyframes gitypingDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30%           { opacity: 1;   transform: translateY(-3px); }
+}
+
+/* ── Universal gold-input pulse ──────────────────────────────────────── */
+
+@keyframes goldInputPulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(226,181,63,0.15); }
+  50%      { box-shadow: 0 0 0 1px rgba(226,181,63,1.0);  }
+}
+
+.gold-input {
+  animation: goldInputPulse 2.5s ease-in-out infinite;
+}
+
+.gold-input:focus {
+  background: rgba(226,181,63,0.08);
+}
+
+[data-theme="light"] .gold-input:focus {
+  background: rgba(226,181,63,0.12);
+}
+  /* Sequential Bar Growth Animations - Overlapping timing with opacity fade-in */
+  @keyframes growWhiteBar {
+    0% { width: 0%; opacity: 0.1; }
+    25% { width: var(--target-width); opacity: 1; }
+    100% { width: var(--target-width); opacity: 1; }
+  }
+
+  @keyframes growYellowBar {
+    0%, 25% { width: 0%; opacity: 0.1; }
+    50% { width: var(--target-width); opacity: 1; }
+    100% { width: var(--target-width); opacity: 1; }
+  }
+
+  @keyframes growOrangeBar {
+    0%, 25% { width: 0%; opacity: 0.1; }
+    50% { width: 0%; opacity: 1; }
+    75% { width: var(--target-width); opacity: 1; }
+    100% { width: var(--target-width); opacity: 1; }
+  }
+
+  @keyframes growBlueBar {
+    0%, 25% { width: 0%; opacity: 0.1; }
+    50% { width: 0%; opacity: 1; }
+    100% { width: var(--target-width); opacity: 1; }
+  }
+
+  .bar-grow {
+    width: 0%;
+  }
+
+  .bar-grow[data-color="#FFFFFF"] { 
+    animation: growWhiteBar var(--animation-duration, 2s) ease-out forwards !important;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+  }
+  .bar-grow[data-color="#FFD700"] { 
+    animation: growYellowBar var(--animation-duration, 2s) ease-out forwards !important;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+  }
+  .bar-grow[data-color="#FF8C00"] { 
+    animation: growOrangeBar var(--animation-duration, 2s) ease-out forwards !important;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+  }
+  .bar-grow[data-color="#4169E1"] { 
+    animation: growBlueBar var(--animation-duration, 2s) ease-out forwards !important;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+  }
+
+  /* Navigation Demo Mode - Targeted for compact clinic rows */
+  @keyframes clinicNavigationDemo {
+    0% { 
+      opacity: 0.5 !important;
+      background: transparent !important;
+    }
+    25% { 
+      opacity: 1 !important;
+      background: hsl(var(--border) / 0.15) !important;
+    }
+    75% { 
+      opacity: 1 !important;
+      background: hsl(var(--border) / 0.15) !important;
+    }
+    100% {
+      opacity: 0.5 !important;
+      background: transparent !important;
+    }
+  }
+
+  /* Target each clinic row specifically with padding and rounding - excluding employee names */
+  .hover-demo-1 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 3.5s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-2 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 4.1s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-3 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 4.7s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-4 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 5.3s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-5 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 5.9s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-6 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 6.5s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-7 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 7.1s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-8 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 7.7s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-9 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 8.3s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-10 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 8.9s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-11 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 9.5s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-12 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 10.1s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-13 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 10.7s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-14 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 11.3s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+  .hover-demo-15 { animation: clinicNavigationDemo 1.8s ease-in-out !important; animation-delay: 11.9s !important; border-radius: 4px !important; background: hsl(var(--border) / 0.08) !important; }
+
+  /* Ensure employee names stay static during all interactions */
+  .employee-name-container {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    transform: none !important;
+    transition: none !important;
+    min-width: 8rem !important;
+    max-width: 8rem !important;
+    height: auto !important;
+  }
+
+  .employee-name-container * {
+    transform: none !important;
+    transition: none !important;
+    position: static !important;
+  }
+
+  /* Strengthen employee row layout to prevent shifts */
+  .flex.items-center.gap-3.flex-1 {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 !important;
+    gap: 0.75rem !important;
+    position: relative !important;
+    transform: none !important;
+  }
+
+  /* Ensure QuadrantBar container doesn't cause layout shifts */
+  .employee-name-container + * {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Clinic Card Slide In Animation */
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInEmployeeFromBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .clinic-card-slide-in {
+    animation: slideInFromBottom 0.4s ease-out;
+  }
+
+  .employee-card-slide-in {
+    animation: slideInEmployeeFromBottom 0.4s ease-out;
+  }
+
+/* Custom scrollbar styling */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 162, 39, 0.4) #1a1f2c;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #1a1f2c;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 39, 0.4);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 39, 0.6);
+}
+
+/* Hide scrollbar until hover */
+.scrollbar-hover-only {
+  scrollbar-width: none;
+}
+
+.scrollbar-hover-only::-webkit-scrollbar {
+  height: 0;
+}
+
+.scrollbar-hover-only:hover {
+  scrollbar-width: thin;
+}
+
+.scrollbar-hover-only:hover::-webkit-scrollbar {
+  height: 6px;
+}
+
+
+.react-flow__minimap {
+  background-color: hsl(var(--background) / 0.3) !important;
+  border: 1px solid hsl(var(--border) / 0.6) !important;
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+}
+
+.react-flow__attribution {
+  background-color: hsl(var(--background) / 0.3);
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+/* Print styles for job descriptions - 8.5" x 11" letter format */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+
+  /* Hide everything on the page */
+  html, body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Show only job description and its contents */
+  .job-description-print,
+  .job-description-print * {
+    visibility: visible !important;
+  }
+
+  .job-description-print {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    color: black !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide print/edit buttons in print view */
+  .job-description-print button {
+    display: none !important;
+  }
+
+  /* Typography */
+  .job-description-print h3 {
+    color: black !important;
+    font-size: 16pt !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .job-description-print h4 {
+    color: black !important;
+    font-size: 12pt !important;
+    font-weight: 600 !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .job-description-print h5 {
+    color: black !important;
+    font-size: 11pt !important;
+    font-weight: 500 !important;
+  }
+
+  .job-description-print p,
+  .job-description-print li {
+    color: #333 !important;
+    font-size: 10pt !important;
+  }
+
+  .job-description-print ul {
+    padding-left: 1.25rem !important;
+  }
+
+  .job-description-print li {
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Hide watermark metadata in print */
+  .job-description-print > div:first-child {
+    display: none !important;
+  }
+
+}
