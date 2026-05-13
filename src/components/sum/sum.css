@@ -22,7 +22,7 @@
   --sum-purple: #a855f7;
   --sum-hover: #1a1a1a;
 
-  font-family: "Montserrat", system-ui, sans-serif;
+  font-family: "Gotham", "Montserrat", system-ui, sans-serif;
   background: var(--sum-bg);
   color: var(--sum-tx);
   line-height: 1.55;
