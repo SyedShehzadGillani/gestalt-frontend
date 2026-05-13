@@ -46,6 +46,7 @@ import Funnel from "@/pages/auth/Funnel";
 import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
+import ClientStatus from "@/pages/client/ClientStatus";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
 
 // HQ Pages
