@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html, body {
+    font-family: 'Gotham', 'Montserrat', system-ui, sans-serif;
+  }
+}
+
 /* Gotham Font Family */
 @font-face {
   font-family: 'Gotham';
