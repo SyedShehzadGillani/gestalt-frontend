@@ -223,7 +223,6 @@ const ModuleRow = ({ mod, theme, go, onAskGI }: { mod: typeof MOCK_MODULES[numbe
 const fx = (n: number) => n.toFixed(1);
 
 export default function ClientStatus() {
-  useMontserrat();
   const navigate = useNavigate();
   const { id = "1" } = useParams<{ id: string }>();
   const [theme, setTheme] = useState<ThemeId>("dark");
@@ -241,7 +240,7 @@ export default function ClientStatus() {
   const go = (rel: string) => navigate(`/client/${id}/${rel}`);
 
   const t = THEMES[theme];
-  const ff = "'Montserrat', sans-serif";
+  const ff = "'Gotham', 'Montserrat', system-ui, sans-serif";
   const now = new Date();
   const dateStr = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).toUpperCase();
 
