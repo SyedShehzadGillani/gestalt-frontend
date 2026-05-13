@@ -12,6 +12,9 @@ import { RoleSidebar, RoleProvider } from "@/components/layout/RoleSidebar";
 import { TopNav } from "@/components/layout/TopNav";
 import { ProtectedHQRoute } from "@/components/hq/ProtectedHQRoute";
 import { PlatformFooter } from "@/components/layout/PlatformFooter";
+import { GIProvider, useGI } from "@/hooks/useGI";
+import { GIBubble } from "@/components/gi/GIBubble";
+import { GIWindow } from "@/components/gi/GIWindow";
 
 // Agency Pages
 import AgencyDashboard from "@/pages/agency/AgencyDashboard";
