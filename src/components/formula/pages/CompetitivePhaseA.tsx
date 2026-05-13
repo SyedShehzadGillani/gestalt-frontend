@@ -47,7 +47,7 @@ export function CompetitivePhaseA({ descText, setDescText, descSaved, onSave, on
         placeholder="Describe your business in 50 words or less…"
         className={`w-full bg-background border ${
           descSaved ? "border-gold text-gold" : "border-border text-foreground"
-        } px-3 py-2.5 text-[14px] leading-[1.7] outline-none focus:border-gold resize-none overflow-hidden disabled:cursor-default`}
+        } px-3 py-2.5 text-[14px] leading-[1.7] outline-none focus:border-gold resize-none overflow-hidden disabled:cursor-default font-semibold`}
         style={{ minHeight: 160 }}
       />
       <div className="flex justify-between items-center mt-2.5">
