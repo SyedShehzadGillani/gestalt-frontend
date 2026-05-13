@@ -239,13 +239,15 @@ const App = () => (
             <RoleProvider>
               <NavigationProvider>
                 <TourProvider>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/create-account" element={<CreateAccount />} />
-                    <Route path="/framework-audit" element={<Funnel />} />
-                    <Route path="/*" element={<AppLayout />} />
-                  </Routes>
-                  <TourOverlay />
+                  <GIProvider>
+                    <Routes>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/create-account" element={<CreateAccount />} />
+                      <Route path="/framework-audit" element={<Funnel />} />
+                      <Route path="/*" element={<AppLayout />} />
+                    </Routes>
+                    <TourOverlay />
+                  </GIProvider>
                 </TourProvider>
               </NavigationProvider>
             </RoleProvider>
