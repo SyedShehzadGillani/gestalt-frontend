@@ -99,6 +99,8 @@ function AppLayout() {
           <Route path="/agency/billing" element={<AgencyBilling />} />
           
           {/* Client Routes */}
+          <Route path="/client/status" element={<Navigate to="/client/1/status" replace />} />
+          <Route path="/client/:id/status" element={<ClientStatus />} />
           <Route path="/client/:id" element={<ClientOverview />} />
           <Route path="/client/:id/overview" element={<ClientOverview />} />
           <Route path="/client/:id/framework" element={<ClientFramework />} />
