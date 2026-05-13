@@ -46,6 +46,7 @@ import Funnel from "@/pages/auth/Funnel";
 import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
+import ClientStatus from "@/pages/client/ClientStatus";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
 
 // HQ Pages
@@ -98,6 +99,8 @@ function AppLayout() {
           <Route path="/agency/billing" element={<AgencyBilling />} />
           
           {/* Client Routes */}
+          <Route path="/client/status" element={<Navigate to="/client/1/status" replace />} />
+          <Route path="/client/:id/status" element={<ClientStatus />} />
           <Route path="/client/:id" element={<ClientOverview />} />
           <Route path="/client/:id/overview" element={<ClientOverview />} />
           <Route path="/client/:id/framework" element={<ClientFramework />} />
