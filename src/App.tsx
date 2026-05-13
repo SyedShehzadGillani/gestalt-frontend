@@ -223,6 +223,7 @@ function AppLayout() {
         </Routes>
       </main>
       <PlatformFooter />
+      <GlobalGI />
     </div>
   );
 }
