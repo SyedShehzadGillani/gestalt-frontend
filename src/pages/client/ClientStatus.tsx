@@ -1,24 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // ═══════════════════════════════════════════════════════════════
 // STATUS — B.A.S.E. Daily Brief
 // Route: /client/:id/status (first page after login)
 // Frontend only — mock data; Supabase wiring later.
+// Font: Gotham (loaded globally via src/index.css @font-face).
 // ═══════════════════════════════════════════════════════════════
 
-const FONT_URL =
-  "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap";
-const useMontserrat = () => {
-  useEffect(() => {
-    if (!document.querySelector(`link[href="${FONT_URL}"]`)) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = FONT_URL;
-      document.head.appendChild(link);
-    }
-  }, []);
-};
 
 // ─── DESIGN TOKENS (status-scope only — does not touch global theme) ───
 const Au = "#e2b53f";
@@ -234,7 +223,6 @@ const ModuleRow = ({ mod, theme, go, onAskGI }: { mod: typeof MOCK_MODULES[numbe
 const fx = (n: number) => n.toFixed(1);
 
 export default function ClientStatus() {
-  useMontserrat();
   const navigate = useNavigate();
   const { id = "1" } = useParams<{ id: string }>();
   const [theme, setTheme] = useState<ThemeId>("dark");
@@ -252,7 +240,7 @@ export default function ClientStatus() {
   const go = (rel: string) => navigate(`/client/${id}/${rel}`);
 
   const t = THEMES[theme];
-  const ff = "'Montserrat', sans-serif";
+  const ff = "'Gotham', 'Montserrat', system-ui, sans-serif";
   const now = new Date();
   const dateStr = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).toUpperCase();
 
