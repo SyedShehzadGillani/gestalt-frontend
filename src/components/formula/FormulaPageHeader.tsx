@@ -18,7 +18,7 @@ export function FormulaPageHeader({ pageId }: Props) {
         <span className="text-gold-dimlight text-[21px] font-semibold">{h.statLabel}</span>
         <span className="text-gold/50 text-[20px] italic">— {h.source}</span>
       </div>
-      <p className="text-muted-foreground text-[15px] leading-[1.85]">{h.payoff}</p>
+      <p className="text-muted-foreground text-[15px] leading-[1.85] text-slate-800 font-bold">{h.payoff}</p>
     </div>
   );
 }
