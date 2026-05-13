@@ -12,6 +12,9 @@ import { RoleSidebar, RoleProvider } from "@/components/layout/RoleSidebar";
 import { TopNav } from "@/components/layout/TopNav";
 import { ProtectedHQRoute } from "@/components/hq/ProtectedHQRoute";
 import { PlatformFooter } from "@/components/layout/PlatformFooter";
+import { GIProvider, useGI } from "@/hooks/useGI";
+import { GIBubble } from "@/components/gi/GIBubble";
+import { GIWindow } from "@/components/gi/GIWindow";
 
 // Agency Pages
 import AgencyDashboard from "@/pages/agency/AgencyDashboard";
@@ -69,6 +72,16 @@ import HQPermissions from "@/pages/hq/HQPermissions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+function GlobalGI() {
+  const gi = useGI();
+  return (
+    <>
+      <GIBubble hasProactive={gi.hasProactive} onToggle={gi.toggle} />
+      <GIWindow gi={gi} />
+    </>
+  );
+}
 
 function AppLayout() {
   return (
@@ -210,6 +223,7 @@ function AppLayout() {
         </Routes>
       </main>
       <PlatformFooter />
+      <GlobalGI />
     </div>
   );
 }
@@ -225,13 +239,15 @@ const App = () => (
             <RoleProvider>
               <NavigationProvider>
                 <TourProvider>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/create-account" element={<CreateAccount />} />
-                    <Route path="/framework-audit" element={<Funnel />} />
-                    <Route path="/*" element={<AppLayout />} />
-                  </Routes>
-                  <TourOverlay />
+                  <GIProvider>
+                    <Routes>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/create-account" element={<CreateAccount />} />
+                      <Route path="/framework-audit" element={<Funnel />} />
+                      <Route path="/*" element={<AppLayout />} />
+                    </Routes>
+                    <TourOverlay />
+                  </GIProvider>
                 </TourProvider>
               </NavigationProvider>
             </RoleProvider>
