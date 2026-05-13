@@ -73,6 +73,16 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+function GlobalGI() {
+  const gi = useGI();
+  return (
+    <>
+      <GIBubble hasProactive={gi.hasProactive} onToggle={gi.toggle} />
+      <GIWindow gi={gi} />
+    </>
+  );
+}
+
 function AppLayout() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
