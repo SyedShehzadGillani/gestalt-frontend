@@ -1,8 +1,7 @@
-// GIWindow — site-wide GESTALT INTELLIGENCE expanded chat.
-// Draggable by header, resizable from bottom-right corner, and supports a
-// 25%-smaller compact toggle. Position + size + scale persist to localStorage.
+// GIWindow — site-wide GESTALT INTELLIGENCE expanded chat (v15 spec §8.2).
+// State is owned by useGI. This is a pure render component plus dispatching.
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { Icon } from "@/components/sum/icons";
 import { GI_SUGGESTIONS, GI_TAB_LABELS } from "@/data/sum-data";
 import type { UseGIReturn } from "@/hooks/useGI";
@@ -13,103 +12,11 @@ interface Props {
   tabId?: string;
 }
 
-const DEFAULT_W = 420;
-const DEFAULT_H = 580;
-const MIN_W = 280;
-const MIN_H = 340;
-const STORAGE_KEY = "gi-window-frame-v1";
-
-interface Frame {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  compact: boolean;
-}
-
-function loadFrame(): Frame {
-  if (typeof window === "undefined") return { x: -1, y: -1, w: DEFAULT_W, h: DEFAULT_H, compact: false };
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { x: -1, y: -1, w: DEFAULT_W, h: DEFAULT_H, compact: false, ...JSON.parse(raw) };
-  } catch {}
-  return { x: -1, y: -1, w: DEFAULT_W, h: DEFAULT_H, compact: false };
-}
-
 export function GIWindow({ gi, tabId = "chat" }: Props) {
   const feedRef = useRef<HTMLDivElement | null>(null);
-  const [frame, setFrame] = useState<Frame>(loadFrame);
-
-  // Persist frame.
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(frame));
-    } catch {}
-  }, [frame]);
-
-  // Compute effective rect (anchor bottom-right on first load).
-  const scale = frame.compact ? 0.75 : 1;
-  const w = Math.round(frame.w * scale);
-  const h = Math.round(frame.h * scale);
-  const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
-  const vh = typeof window !== "undefined" ? window.innerHeight : 800;
-  const x = frame.x < 0 ? Math.max(8, vw - w - 24) : Math.min(Math.max(8, frame.x), vw - w - 8);
-  const y = frame.y < 0 ? Math.max(8, vh - h - 24) : Math.min(Math.max(8, frame.y), vh - h - 8);
-
   useEffect(() => {
     if (feedRef.current) feedRef.current.scrollTop = feedRef.current.scrollHeight;
   }, [gi.messages, gi.typing, gi.open]);
-
-  // Drag (by header).
-  const dragRef = useRef<{ startX: number; startY: number; origX: number; origY: number } | null>(null);
-  const onHeaderPointerDown = useCallback(
-    (e: React.PointerEvent) => {
-      if ((e.target as HTMLElement).closest("button")) return;
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-      dragRef.current = { startX: e.clientX, startY: e.clientY, origX: x, origY: y };
-    },
-    [x, y],
-  );
-  const onHeaderPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!dragRef.current) return;
-    const dx = e.clientX - dragRef.current.startX;
-    const dy = e.clientY - dragRef.current.startY;
-    setFrame((f) => ({
-      ...f,
-      x: Math.max(8, Math.min(window.innerWidth - 80, dragRef.current!.origX + dx)),
-      y: Math.max(8, Math.min(window.innerHeight - 60, dragRef.current!.origY + dy)),
-    }));
-  }, []);
-  const onHeaderPointerUp = useCallback((e: React.PointerEvent) => {
-    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    dragRef.current = null;
-  }, []);
-
-  // Resize (bottom-right corner) — adjusts the un-scaled w/h so dragging
-  // produces a free-form aspect ratio.
-  const resizeRef = useRef<{ startX: number; startY: number; origW: number; origH: number } | null>(null);
-  const onResizePointerDown = useCallback(
-    (e: React.PointerEvent) => {
-      e.stopPropagation();
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-      resizeRef.current = { startX: e.clientX, startY: e.clientY, origW: frame.w, origH: frame.h };
-    },
-    [frame.w, frame.h],
-  );
-  const onResizePointerMove = useCallback((e: React.PointerEvent) => {
-    if (!resizeRef.current) return;
-    const dx = (e.clientX - resizeRef.current.startX) / scale;
-    const dy = (e.clientY - resizeRef.current.startY) / scale;
-    setFrame((f) => ({
-      ...f,
-      w: Math.max(MIN_W, Math.min(1400, resizeRef.current!.origW + dx)),
-      h: Math.max(MIN_H, Math.min(1400, resizeRef.current!.origH + dy)),
-    }));
-  }, [scale]);
-  const onResizePointerUp = useCallback((e: React.PointerEvent) => {
-    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    resizeRef.current = null;
-  }, []);
 
   if (!gi.open) return null;
   const ctxLabel = GI_TAB_LABELS[tabId] ?? tabId.toUpperCase();
@@ -121,13 +28,13 @@ export function GIWindow({ gi, tabId = "chat" }: Props) {
       aria-label="GESTALT INTELLIGENCE"
       style={{
         position: "fixed",
-        left: x,
-        top: y,
+        right: 24,
+        bottom: 24,
         zIndex: 151,
-        width: w,
-        height: h,
-        maxWidth: "95vw",
-        maxHeight: "95vh",
+        width: 420,
+        height: 580,
+        maxWidth: "90vw",
+        maxHeight: "90vh",
         background: "var(--sum-bg2)",
         border: "1px solid var(--sum-bdr)",
         boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
@@ -137,10 +44,6 @@ export function GIWindow({ gi, tabId = "chat" }: Props) {
       }}
     >
       <header
-        onPointerDown={onHeaderPointerDown}
-        onPointerMove={onHeaderPointerMove}
-        onPointerUp={onHeaderPointerUp}
-        onPointerCancel={onHeaderPointerUp}
         style={{
           padding: "12px 14px",
           borderBottom: "1px solid var(--sum-bdr)",
@@ -149,9 +52,6 @@ export function GIWindow({ gi, tabId = "chat" }: Props) {
           gap: 10,
           background: "var(--sum-bg2)",
           flexShrink: 0,
-          cursor: dragRef.current ? "grabbing" : "grab",
-          userSelect: "none",
-          touchAction: "none",
         }}
       >
         <div style={{ width: 30, height: 30, borderRadius: "50%", flexShrink: 0, background: "linear-gradient(135deg, #c9a227 0%, #e2b53f 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -166,13 +66,6 @@ export function GIWindow({ gi, tabId = "chat" }: Props) {
           </div>
         </div>
         <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
-          <button
-            onClick={() => setFrame((f) => ({ ...f, compact: !f.compact }))}
-            title={frame.compact ? "Expand to full size" : "Shrink 25%"}
-            style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sum-tx4)", fontSize: 10, fontWeight: 700, letterSpacing: 0.5 }}
-          >
-            {frame.compact ? "100%" : "75%"}
-          </button>
           <button onClick={gi.clear} title="Clear conversation" style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--sum-tx4)" }}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
               <polyline points="3 6 5 6 21 6" />
@@ -243,27 +136,6 @@ export function GIWindow({ gi, tabId = "chat" }: Props) {
           </button>
         </div>
       </div>
-
-      {/* Resize handle (bottom-right) */}
-      <div
-        onPointerDown={onResizePointerDown}
-        onPointerMove={onResizePointerMove}
-        onPointerUp={onResizePointerUp}
-        onPointerCancel={onResizePointerUp}
-        title="Drag to resize"
-        style={{
-          position: "absolute",
-          right: 0,
-          bottom: 0,
-          width: 18,
-          height: 18,
-          cursor: "nwse-resize",
-          touchAction: "none",
-          background:
-            "linear-gradient(135deg, transparent 0 50%, var(--sum-gold) 50% 60%, transparent 60% 70%, var(--sum-gold) 70% 80%, transparent 80% 90%, var(--sum-gold) 90% 100%)",
-          opacity: 0.6,
-        }}
-      />
     </div>
   );
 }

@@ -12,9 +12,6 @@ import { RoleSidebar, RoleProvider } from "@/components/layout/RoleSidebar";
 import { TopNav } from "@/components/layout/TopNav";
 import { ProtectedHQRoute } from "@/components/hq/ProtectedHQRoute";
 import { PlatformFooter } from "@/components/layout/PlatformFooter";
-import { GIProvider, useGI } from "@/hooks/useGI";
-import { GIBubble } from "@/components/gi/GIBubble";
-import { GIWindow } from "@/components/gi/GIWindow";
 
 // Agency Pages
 import AgencyDashboard from "@/pages/agency/AgencyDashboard";
@@ -49,7 +46,6 @@ import Funnel from "@/pages/auth/Funnel";
 import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
-import ClientStatus from "@/pages/client/ClientStatus";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
 
 // HQ Pages
@@ -72,16 +68,6 @@ import HQPermissions from "@/pages/hq/HQPermissions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
-
-function GlobalGI() {
-  const gi = useGI();
-  return (
-    <>
-      <GIBubble hasProactive={gi.hasProactive} onToggle={gi.toggle} />
-      <GIWindow gi={gi} />
-    </>
-  );
-}
 
 function AppLayout() {
   return (
@@ -112,8 +98,6 @@ function AppLayout() {
           <Route path="/agency/billing" element={<AgencyBilling />} />
           
           {/* Client Routes */}
-          <Route path="/client/status" element={<Navigate to="/client/1/status" replace />} />
-          <Route path="/client/:id/status" element={<ClientStatus />} />
           <Route path="/client/:id" element={<ClientOverview />} />
           <Route path="/client/:id/overview" element={<ClientOverview />} />
           <Route path="/client/:id/framework" element={<ClientFramework />} />
@@ -223,7 +207,6 @@ function AppLayout() {
         </Routes>
       </main>
       <PlatformFooter />
-      <GlobalGI />
     </div>
   );
 }
@@ -239,15 +222,13 @@ const App = () => (
             <RoleProvider>
               <NavigationProvider>
                 <TourProvider>
-                  <GIProvider>
-                    <Routes>
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/create-account" element={<CreateAccount />} />
-                      <Route path="/framework-audit" element={<Funnel />} />
-                      <Route path="/*" element={<AppLayout />} />
-                    </Routes>
-                    <TourOverlay />
-                  </GIProvider>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/create-account" element={<CreateAccount />} />
+                    <Route path="/framework-audit" element={<Funnel />} />
+                    <Route path="/*" element={<AppLayout />} />
+                  </Routes>
+                  <TourOverlay />
                 </TourProvider>
               </NavigationProvider>
             </RoleProvider>

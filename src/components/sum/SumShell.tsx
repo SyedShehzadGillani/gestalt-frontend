@@ -5,6 +5,8 @@
 
 import { ReactNode } from "react";
 import "./sum.css";
+import { GIBubble } from "@/components/gi/GIBubble";
+import { GIWindow } from "@/components/gi/GIWindow";
 import type { UseGIReturn } from "@/hooks/useGI";
 
 interface Props {
@@ -17,13 +19,15 @@ interface Props {
 const TIMELINE_LEN = 8;
 const FILLED = 5;
 
-export function SumShell({ children, rightPanel }: Props) {
+export function SumShell({ gi, tabId, children, rightPanel }: Props) {
   return (
     <div className="sum-scope">
       <div className="sum-body">
         <div className="sum-main">{children}</div>
         {rightPanel}
       </div>
+      <GIBubble hasProactive={gi.hasProactive} onToggle={gi.toggle} />
+      <GIWindow gi={gi} tabId={tabId} />
       <GIFooterBar />
     </div>
   );

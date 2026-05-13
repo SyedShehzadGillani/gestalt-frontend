@@ -1,17 +1,9 @@
-// useGI — site-wide GESTALT INTELLIGENCE state hook + context provider.
-// State lives in <GIProvider> mounted at the App level so the bubble + window
-// persist across every route, and every page can read/dispatch into the same
-// conversation via useGI().
+// useGI — site-wide GESTALT INTELLIGENCE state hook (v15 spec §8).
+// Owns: open/close, conversation feed, narration cadence, ⌘K shortcut,
+// typing indicator, save destinations. Mounts once at the App level so
+// the window persists across tab navigation.
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   GI_DEMO_RESPONSES,
   GI_NARRATIONS,
@@ -22,13 +14,16 @@ import {
 export type SaveDestination = "vault" | "timeline";
 
 export interface UseGIReturn {
+  // window state
   open: boolean;
   setOpen: (v: boolean) => void;
   toggle: () => void;
 
+  // proactive bubble pulse
   hasProactive: boolean;
   clearProactive: () => void;
 
+  // conversation
   messages: GiMessage[];
   input: string;
   setInput: (v: string) => void;
@@ -36,14 +31,16 @@ export interface UseGIReturn {
   send: (raw?: string) => void;
   clear: () => void;
 
+  // narration cadence
   narrateTab: (tabId: string) => void;
 
+  // save flow
   savePickerFor: string | null;
   setSavePickerFor: (id: string | null) => void;
   saveMessage: (msgId: string, dest: SaveDestination) => void;
 }
 
-function useGIState(): UseGIReturn {
+export function useGI(): UseGIReturn {
   const [open, setOpen] = useState(false);
   const [hasProactive, setHasProactive] = useState(true);
   const [messages, setMessages] = useState<GiMessage[]>(() => GI_SEED_MESSAGES.slice());
@@ -113,6 +110,7 @@ function useGIState(): UseGIReturn {
     setNarrationsShown((cur) => {
       const seen = cur[tabId] ?? 0;
       const next = { ...cur, [tabId]: seen + 1 };
+      // Push narration message (full for first 2 visits, short after).
       const text = seen >= 2 ? narration.short : narration.full;
       const msg: GiMessage = {
         id: `gi-n-${tabId}-${Date.now()}`,
@@ -132,7 +130,7 @@ function useGIState(): UseGIReturn {
     setSavePickerFor(null);
   }, []);
 
-  // ⌘K / Ctrl+K — toggle window from anywhere.
+  // ⌘K / Ctrl+K — toggle window from anywhere on the platform.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -164,19 +162,4 @@ function useGIState(): UseGIReturn {
     }),
     [open, toggle, hasProactive, clearProactive, messages, input, typing, send, clear, narrateTab, savePickerFor, saveMessage],
   );
-}
-
-const GIContext = createContext<UseGIReturn | null>(null);
-
-export function GIProvider({ children }: { children: ReactNode }) {
-  const value = useGIState();
-  return <GIContext.Provider value={value}>{children}</GIContext.Provider>;
-}
-
-export function useGI(): UseGIReturn {
-  const ctx = useContext(GIContext);
-  if (!ctx) {
-    throw new Error("useGI must be used within <GIProvider>");
-  }
-  return ctx;
 }

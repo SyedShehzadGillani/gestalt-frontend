@@ -339,10 +339,11 @@ export default function GESTALT360() {
 
   return (
     <div style={{
-      background:T.bg, minHeight:"100vh", fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",
+      background:T.bg, minHeight:"100vh", fontFamily:"'Montserrat',sans-serif",
       display:"flex", flexDirection:"column", alignItems:"center",
       padding:"24px 16px 40px", boxSizing:"border-box", transition:"background 0.3s"
     }}>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
       {/* ── HEADER ── */}
       <div style={{ textAlign:"center", marginBottom:16, position:"relative", width:"100%", maxWidth:1360 }}>
@@ -350,7 +351,7 @@ export default function GESTALT360() {
           position:"absolute", right:0, top:0,
           background:"transparent", border:`1px solid ${T.border}`,
           color:T.text3, fontSize:9, letterSpacing:2, fontWeight:700,
-          padding:"6px 12px", cursor:"pointer", fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",
+          padding:"6px 12px", cursor:"pointer", fontFamily:"Montserrat,sans-serif",
           textTransform:"uppercase", transition:"all 0.2s"
         }}>
           {dark?"LIGHT MODE":"DARK MODE"}
@@ -465,14 +466,14 @@ export default function GESTALT360() {
                     transform={`rotate(${rot},${lx},${ly})`}
                     fill={isAct?"#fff":seg.color}
                     fontSize="11" fontWeight="800" letterSpacing="2.5"
-                    style={{fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
+                    style={{fontFamily:"Montserrat,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
                     {seg.label}
                   </text>
                   <text x={mx} y={my} textAnchor="middle" dominantBaseline="middle"
                     transform={`rotate(${rot},${mx},${my})`}
                     fill={seg.color} fontSize="7" fontWeight="700" letterSpacing="1.5"
                     opacity={isAct?"0.9":"0.45"}
-                    style={{fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",pointerEvents:"none"}}>
+                    style={{fontFamily:"Montserrat,sans-serif",pointerEvents:"none"}}>
                     {seg.module}
                   </text>
                 </g>
@@ -492,7 +493,7 @@ export default function GESTALT360() {
                     style={{transition:"all 0.2s"}}/>
                   <text fill={isAct?(dark?"#fff":T.text1):seg.color}
                     fontSize="9" fontWeight="700" letterSpacing="1.2"
-                    style={{fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
+                    style={{fontFamily:"Montserrat,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
                     <textPath href={`#tpm-${i}`} startOffset="50%" textAnchor="middle">
                       {seg.label}
                     </textPath>
@@ -513,7 +514,7 @@ export default function GESTALT360() {
                     strokeOpacity="0.85" style={{transition:"all 0.2s"}}/>
                   <text fill={isAct?(dark?"#fff":T.text1):seg.color}
                     fontSize="8" fontWeight="700" letterSpacing="0.8"
-                    style={{fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
+                    style={{fontFamily:"Montserrat,sans-serif",pointerEvents:"none",transition:"fill 0.2s"}}>
                     <textPath href={`#tp-${i}`} startOffset="50%" textAnchor="middle">
                       {seg.impact}
                     </textPath>
@@ -534,7 +535,7 @@ export default function GESTALT360() {
                 style={{transition:"all 0.2s"}}/>
               <text x={CX} y={CY+4} textAnchor="middle"
                 fill={dark?OVERALL_COLOR:OVERALL_COLOR_DARK} fontSize="58" fontWeight="900" opacity="0.75"
-                style={{fontFamily:"'Gotham','Montserrat',system-ui,sans-serif",pointerEvents:"none",dominantBaseline:"middle"}}>
+                style={{fontFamily:"Montserrat,sans-serif",pointerEvents:"none",dominantBaseline:"middle"}}>
                 {OVERALL}
               </text>
             </g>
