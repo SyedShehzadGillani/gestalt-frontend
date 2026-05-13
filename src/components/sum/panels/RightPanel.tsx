@@ -55,7 +55,7 @@ function Folders() {
   const total = JOURNAL_ENTRIES.length + NOTES.length;
   return (
     <div style={{ padding: 14 }}>
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: "var(--sum-tx4)", marginBottom: 6 }}>YOUR FOLDERS</div>
+      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: "var(--sum-tx4)", marginBottom: 6 }}>PERSONAL JOURNAL FOLDERS</div>
       <div style={{ fontSize: 10, color: "var(--sum-tx5)", marginBottom: 8, lineHeight: 1.5 }}>Drag any entry or note here to file it.</div>
       <div style={{ display: "flex", flexDirection: "column", border: "1px solid var(--sum-bdr)", background: "var(--sum-bg2)", marginBottom: 14 }}>
         <FolderRow icon="grid" label="All" count={total} active />
