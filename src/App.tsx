@@ -36,6 +36,9 @@ import ClientJournal from "@/pages/client/ClientJournal";
 import ClientStoryEngine from "@/pages/client/ClientStoryEngine";
 import ClientPolls from "@/pages/client/ClientPolls";
 import ClientVault from "@/pages/client/ClientVault";
+import VaultDocumentView from "@/pages/client/VaultDocumentView";
+import AgencyVault from "@/pages/agency/AgencyVault";
+import HQVault from "@/pages/hq/HQVault";
 import ClientTimeline from "@/pages/client/ClientTimeline";
 import ClientProjects from "@/pages/client/ClientProjects";
 import ClientProjectDetail from "@/pages/client/ClientProjectDetail";
@@ -110,6 +113,7 @@ function AppLayout() {
           <Route path="/client/:id/hive/position-builder" element={<HivePositionBuilder />} />
           <Route path="/client/:id/messaging" element={<ClientMessaging />} />
           <Route path="/client/:id/vault" element={<ClientVault />} />
+          <Route path="/client/:id/vault/document/:docId" element={<VaultDocumentView basePath="/client/:id/vault" />} />
           <Route path="/client/:id/timeline" element={<ClientTimeline />} />
           <Route path="/client/:id/personal-timeline" element={<ComingSoonPlaceholder title="Personal Timeline" subtitle="Your Journey" />} />
           <Route path="/client/:id/projects" element={<ClientProjects />} />
@@ -150,7 +154,8 @@ function AppLayout() {
           <Route path="/agency/projects" element={<ComingSoonPlaceholder title="Projects" subtitle="Active Initiatives" />} />
           <Route path="/agency/timeline" element={<ComingSoonPlaceholder title="Timeline" subtitle="Brand History" />} />
           <Route path="/agency/story-engine" element={<ClientStoryEngine />} />
-          <Route path="/agency/vault" element={<ComingSoonPlaceholder title="Vault" subtitle="Brand Assets" />} />
+          <Route path="/agency/vault" element={<AgencyVault />} />
+          <Route path="/agency/vault/document/:docId" element={<VaultDocumentView basePath="/agency/vault" />} />
           <Route path="/agency/vendors" element={<ComingSoonPlaceholder title="Vendors" subtitle="Access" />} />
           <Route path="/agency/polls" element={<ClientPolls />} />
           <Route path="/agency/creative" element={<ComingSoonPlaceholder title="Creative" subtitle="Campaign Intelligence" />} />
@@ -186,7 +191,8 @@ function AppLayout() {
           <Route path="/hq/base-formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
           <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/hq/sum-messaging" element={<ClientMessaging />} />
-          <Route path="/hq/sum-vault" element={<ComingSoonPlaceholder title="Vault" subtitle="Brand Assets" />} />
+          <Route path="/hq/sum-vault" element={<HQVault />} />
+          <Route path="/hq/sum-vault/document/:docId" element={<VaultDocumentView basePath="/hq/sum-vault" />} />
           <Route path="/hq/vendors" element={<ComingSoonPlaceholder title="Vendors" subtitle="Access" />} />
           <Route path="/hq/sum-timeline" element={<ComingSoonPlaceholder title="Timeline" subtitle="Brand History" />} />
           <Route path="/hq/sum-projects" element={<ComingSoonPlaceholder title="Projects" subtitle="Active Initiatives" />} />
