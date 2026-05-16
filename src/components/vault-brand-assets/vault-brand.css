@@ -1691,3 +1691,225 @@
   border: 1px solid var(--vb-border);
   display: inline-block;
 }
+
+/* ── Grid helpers ──────────────────────────────── */
+.vault-brand-scope .vb-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.vault-brand-scope .vb-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.vault-brand-scope .vb-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+/* ── Thumb row ─────────────────────────────────── */
+.vault-brand-scope .vb-thumb-row {
+  display: flex;
+  gap: 18px;
+}
+.vault-brand-scope .vb-thumb-wrap {
+  flex-wrap: wrap;
+}
+
+/* ── Section sub-label ─────────────────────────── */
+.vault-brand-scope .vb-section-sublabel {
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  margin-bottom: 12px;
+  margin-top: 4px;
+}
+
+/* ── Button row ────────────────────────────────── */
+.vault-brand-scope .vb-textbtn-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+/* ── Visual Identity ───────────────────────────── */
+.vault-brand-scope .vb-identity-group {
+  margin-bottom: 40px;
+}
+.vault-brand-scope .vb-identity-group-title {
+  color: var(--vb-t1);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+/* ── Icon library ──────────────────────────────── */
+.vault-brand-scope .vb-icon-lib-label {
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+.vault-brand-scope .vb-icon-lib {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.vault-brand-scope .vb-icon-tile {
+  text-align: center;
+}
+.vault-brand-scope .vb-icon-box {
+  width: 48px;
+  height: 48px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  color: var(--vb-t3);
+}
+.vault-brand-scope .vb-icon-name {
+  color: var(--vb-t5);
+  font-size: 7px;
+  font-weight: 600;
+}
+
+/* ── Social grid ───────────────────────────────── */
+.vault-brand-scope .vb-social-grid {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.vault-brand-scope .vb-social-tile {
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.vault-brand-scope .vb-social-box {
+  width: 140px;
+  height: 120px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  position: relative;
+  color: var(--vb-t5);
+}
+.vault-brand-scope .vb-social-platform {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--vb-border);
+  color: var(--vb-gold);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.vault-brand-scope .vb-social-box .vb-thumb-fmts {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+}
+
+/* ── Folder tree ───────────────────────────────── */
+.vault-brand-scope .vb-folder-tree {
+  padding: 20px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  font-family: monospace;
+}
+.vault-brand-scope .vb-folder-line {
+  color: var(--vb-t2);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* ── Asset index table ─────────────────────────── */
+.vault-brand-scope .vb-asset-index {
+  border: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-asset-index-head {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr;
+  padding: 10px 14px;
+  background: var(--vb-bg3);
+  border-bottom: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-asset-index-hcell {
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.vault-brand-scope .vb-asset-index-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-asset-index-row-alt {
+  background: var(--vb-bg2);
+}
+.vault-brand-scope .vb-asset-index-name {
+  color: var(--vb-t1);
+  font-size: 10px;
+  font-weight: 600;
+}
+.vault-brand-scope .vb-asset-index-desc {
+  color: var(--vb-t3);
+  font-size: 10px;
+}
+.vault-brand-scope .vb-asset-index-fmt {
+  color: var(--vb-t4);
+  font-size: 9px;
+}
+.vault-brand-scope .vb-asset-index-loc {
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-family: monospace;
+}
+
+/* ── Checklist ─────────────────────────────────── */
+.vault-brand-scope .vb-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s;
+}
+.vault-brand-scope .vb-checklist-item-done {
+  opacity: 0.6;
+}
+.vault-brand-scope .vb-checklist-box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--vb-border);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.vault-brand-scope .vb-checklist-box-checked {
+  background: var(--vb-gold);
+  border-color: var(--vb-gold);
+}
+.vault-brand-scope .vb-checklist-label {
+  color: var(--vb-t3);
+  font-size: 10px;
+  line-height: 1.6;
+}
