@@ -10,6 +10,7 @@ export const NAV_ICONS: Record<string, string> = {
   "my-profile": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
   "my-score": "M22 12h-4l-3 9L9 3l-3 9H2",
   "my-trajectory": "M23 6l-9.5 9.5-5-5L1 18",
+  "my-command-center": "M2 3h20v14H2zm7 17h6m-3-3v3",
 
   // B.A.S.E.
   overview: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
@@ -236,9 +237,25 @@ const sumSectionEmployee: NavSection = {
   helpId: "sum-messaging",
   items: [
     { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
-    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "status-personal", label: "STATUS - PERSONAL", subLabel: "Assigned From Projects" },
+    { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" },
+    { id: "journal", label: "MY JOURNAL", subLabel: "Private • Depth Scored" },
     { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
+    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
+    { id: "vendors", label: "VENDORS", subLabel: "Access" },
+    { id: "polls", label: "POLLS", subLabel: "Company Polls" },
+  ],
+};
+
+const businessSectionInvestor: NavSection = {
+  label: "BUSINESS",
+  accentColor: true,
+  items: [
+    { id: "biz-my-businesses", label: "MY BUSINESSES", subLabel: "My Client Accounts" },
+    { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
@@ -465,23 +482,20 @@ export const employeeConfig: RoleConfig = {
   label: "EMPLOYEE",
   entries: [
     { type: "standalone", item: { id: "my-profile", label: "MY PROFILE", subLabel: "" } },
-    { type: "standalone", item: { id: "my-score", label: "MY SCORE", subLabel: "H.I.V.E. Dashboard" } },
+    { type: "standalone", item: { id: "my-command-center", label: "MY COMMAND CENTER", subLabel: "H.I.V.E. Dashboard" } },
     { type: "standalone", item: { id: "my-trajectory", label: "MY TRAJECTORY", subLabel: "Score Over Time" } },
     { type: "section", section: baseSectionEmployee },
     { type: "section", section: hiveSectionDefault },
     { type: "section", section: sumSectionEmployee },
     { type: "divider" },
-    { type: "standalone", item: { id: "creative", label: "CREATIVE", subLabel: "Campaign Intelligence" } },
-    { type: "divider" },
     { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
     { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
-    { type: "standalone", item: { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" } },
+    { type: "section", section: adminSection },
   ],
-  bottomLocked: [], // Employee has no CERTIFIED/TRANSFORMATION
+  bottomLocked: [],
 };
 
 // ─── INVESTOR / OWNER ─────────────────────────────
-// Phase A skeleton — full nav built in Phase E
 export const investorConfig: RoleConfig = {
   accent: "#c9a227",
   darkBg: "#0a0a0a",
@@ -491,6 +505,15 @@ export const investorConfig: RoleConfig = {
     { type: "standalone", item: { id: "my-profile", label: "MY COMPANY PROFILE", subLabel: "" } },
     { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
     { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
+    { type: "section", section: businessSectionInvestor },
+    { type: "section", section: toolsSectionClient },
+    { type: "section", section: baseSectionClient() },
+    { type: "section", section: hiveSectionDefault },
+    { type: "section", section: sumSectionClient },
+    { type: "divider" },
+    { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
   ],
   bottomLocked: [],
 };
@@ -612,6 +635,7 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     // Employee
     "my-profile": `${prefix}/profile`,
     "my-score": `${prefix}/my-score`,
+    "my-command-center": `${prefix}/hive`,
     "my-trajectory": `${prefix}/my-trajectory`,
     
     // Locked

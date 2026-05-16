@@ -11,6 +11,7 @@ const roleAvatarData: Record<RoleType, { initials: string; name: string; roleLab
   client: { initials: "AC", name: "Alex Chen", roleLabel: "CLIENT — Northgate Solutions", email: "alex@northgate.com" },
   solopreneur: { initials: "AC", name: "Alex Chen", roleLabel: "SOLOPRENEUR — Northgate Solutions", email: "alex@northgate.com" },
   employee: { initials: "EM", name: "Alex Chen", roleLabel: "EMPLOYEE — Northgate Solutions", email: "alex@northgate.com" },
+  investor: { initials: "IO", name: "Alex Chen", roleLabel: "INVESTOR / OWNER — Northgate Holdings", email: "alex@northgate.com" },
 };
 
 const searchPlaceholders: Record<RoleType, string> = {
@@ -19,6 +20,7 @@ const searchPlaceholders: Record<RoleType, string> = {
   client: "Search Northgate Solutions...",
   solopreneur: "Search Northgate Solutions...",
   employee: "Search Northgate Solutions...",
+  investor: "Search portfolio companies...",
 };
 
 // When HQ is previewing CLIENT role, override placeholder
@@ -90,6 +92,7 @@ export function TopNav() {
     setRoleSwitcherOpen(false);
     if (newRole === "hq") navigate("/hq/dashboard");
     else if (newRole === "agency") navigate("/agency/dashboard");
+    else if (newRole === "investor") navigate("/investor/1");
     else navigate("/client/1");
   };
 
@@ -345,6 +348,7 @@ export function TopNav() {
                   role === "client" || role === "solopreneur" ? "/client/1/profile" :
                   role === "agency" ? "/agency/profile" :
                   role === "hq" ? "/hq/profile" :
+                  role === "investor" ? "/investor/1/profile" :
                   "/profile";
                 return [
                   { icon: "user", label: "MY PROFILE", route: profileRoute },
