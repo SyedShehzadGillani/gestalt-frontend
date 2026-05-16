@@ -1,4 +1,4 @@
-export type RoleType = "hq" | "agency" | "client" | "solopreneur" | "employee";
+export type RoleType = "hq" | "agency" | "client" | "solopreneur" | "employee" | "investor";
 
 // Icon path constants for nav items
 export const NAV_ICONS: Record<string, string> = {
@@ -36,10 +36,10 @@ export const NAV_ICONS: Record<string, string> = {
 
   // Business
   "biz-clients": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
+  "biz-my-business": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
+  "biz-my-businesses": "M3 21h18M3 7v14m6-14v14m6-14v14m6-14v14M3 7l9-4 9 4M6 11h.01M6 15h.01M12 11h.01M12 15h.01M18 11h.01M18 15h.01",
   "biz-revenue": "M23 6l-9.5 9.5-5-5L1 18",
   "biz-usage": "M22 12h-4l-3 9L9 3l-3 9H2",
-  "biz-mrr": "M23 6l-9.5 9.5-5-5L1 18",
-  "biz-churn": "M23 18l-9.5-9.5-5 5L1 6",
 
   // Management
   "mgmt-invoicing": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8",
@@ -70,7 +70,8 @@ export const NAV_ICONS: Record<string, string> = {
   "hq-settings": "M12 15a3 3 0 100-6 3 3 0 000 6zm7.94-2a7.94 7.94 0 000-2l2-1.56a.5.5 0 000-.68l-2-3.46a.5.5 0 00-.61-.22l-2.36.95a8 8 0 00-1.73-1l-.36-2.51A.48.48 0 0014 2h-4a.48.48 0 00-.48.42l-.36 2.5a8 8 0 00-1.73 1L5.07 5a.5.5 0 00-.61.22l-2 3.46a.49.49 0 00.12.66L4.57 11a7.94 7.94 0 000 2l-2 1.56a.49.49 0 00-.12.67l2 3.46a.5.5 0 00.61.22l2.36-.95a8 8 0 001.73 1l.36 2.51A.48.48 0 0010 22h4a.48.48 0 00.47-.42l.36-2.5a8 8 0 001.73-1l2.36.95a.5.5 0 00.61-.22l2-3.46a.49.49 0 00-.12-.67z",
   "hq-team": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
   "hq-overview": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
-  "hq-onboarding": "M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3",
+  "hq-overview-top": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
+  "hq-financials": "M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6",
   "hq-framework": "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
   "hq-focus": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
   "hq-formula": "M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7m-1.5-10.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
@@ -133,16 +134,15 @@ export interface RoleConfig {
 }
 
 // Shared section builders
-const baseSectionClient = (financialsLabel = "FINANCIALS", financialsSub = "Financial Intelligence"): NavSection => ({
+const baseSectionClient = (financialsLabel = "FINANCIALS", financialsSub = "21-PT Assessment"): NavSection => ({
   label: "B.A.S.E.",
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "onboarding", label: "ONBOARDING", subLabel: "Day 14 of 42" },
-    { id: "framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
-    { id: "financials", label: financialsLabel, subLabel: financialsSub },
+    { id: "overview", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
+    { id: "framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "focus", label: "FOCUS", subLabel: "Company Deep Dive" },
+    { id: "financials", label: financialsLabel, subLabel: financialsSub },
     { id: "formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 });
@@ -152,10 +152,10 @@ const baseSectionEmployee: NavSection = {
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
+    { id: "overview", label: "B.A.S.E. OVERVIEW", subLabel: "Company Dashboard" },
+    { id: "framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "focus", label: "FOCUS", subLabel: "Company Deep Dive" },
-    { id: "financials", label: "FINANCIALS", subLabel: "Financial Intelligence" },
+    { id: "financials", label: "FINANCIALS", subLabel: "21-PT Assessment" },
     { id: "formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 };
@@ -165,10 +165,10 @@ const baseSectionHQ: NavSection = {
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "hq-overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "hq-onboarding", label: "ONBOARDING", subLabel: "Day 14 of 42" },
-    { id: "hq-framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
+    { id: "hq-overview", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
+    { id: "hq-framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "hq-focus", label: "FOCUS", subLabel: "Company Deep Dive" },
+    { id: "hq-financials", label: "FINANCIALS", subLabel: "21-PT Assessment" },
     { id: "hq-formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 };
@@ -196,10 +196,9 @@ const sumSectionClient: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
     { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
     { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
   ],
 };
@@ -209,10 +208,9 @@ const sumSectionEmployee: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
     { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
     { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
   ],
 };
@@ -222,10 +220,9 @@ const sumSectionHQ: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "hq-messaging", label: "MESSAGING", subLabel: "Team Communication" },
+    { id: "hq-messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
     { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "hq-timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "hq-personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "hq-timeline", label: "TIMELINE", subLabel: "Brand History" },
     { id: "hq-projects", label: "PROJECTS", subLabel: "Active Initiatives" },
   ],
 };
@@ -234,10 +231,9 @@ const businessSectionClient: NavSection = {
   label: "BUSINESS",
   accentColor: true,
   items: [
-    { id: "biz-revenue", label: "REVENUE", subLabel: "Company Revenue" },
-    { id: "biz-usage", label: "USAGE", subLabel: "Platform Activity" },
-    { id: "biz-mrr", label: "MRR", subLabel: "Monthly Recurring Revenue" },
-    { id: "biz-churn", label: "CHURN", subLabel: "Customer Retention Rate" },
+    { id: "biz-my-business", label: "MY BUSINESS", subLabel: "My Client Accounts" },
+    { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
@@ -247,14 +243,12 @@ const businessSectionAgency: NavSection = {
   items: [
     { id: "biz-clients", label: "CLIENTS", subLabel: "My Client Accounts" },
     { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
-    { id: "biz-usage", label: "USAGE", subLabel: "Platform Activity" },
-    { id: "biz-mrr", label: "MRR", subLabel: "Monthly Recurring Revenue" },
-    { id: "biz-churn", label: "CHURN", subLabel: "Retention + Attrition Rate" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
-const managementSectionClient: NavSection = {
-  label: "MANAGEMENT",
+const toolsSectionClient: NavSection = {
+  label: "TOOLS",
   collapsedByDefault: true,
   items: [
     { id: "mgmt-invoicing", label: "INVOICING", subLabel: "Billing + Billable Hours" },
@@ -263,8 +257,8 @@ const managementSectionClient: NavSection = {
   ],
 };
 
-const managementSectionAgency: NavSection = {
-  label: "MANAGEMENT",
+const toolsSectionAgency: NavSection = {
+  label: "TOOLS",
   collapsedByDefault: true,
   items: [
     { id: "mgmt-invoicing", label: "INVOICING", subLabel: "Billing + Billable Hours" },
@@ -273,10 +267,14 @@ const managementSectionAgency: NavSection = {
   ],
 };
 
-const lockedItems: NavItem[] = [
-  { id: "certified", label: "CERTIFIED", subLabel: "Exit Badge", locked: true },
-  { id: "transformation", label: "TRANSFORMATION", subLabel: "Apply to Qualify", locked: true },
-];
+const adminSection: NavSection = {
+  label: "ADMIN",
+  collapsedByDefault: false,
+  items: [
+    { id: "certified", label: "CERTIFIED", subLabel: "Exit Badge", locked: true },
+    { id: "transformation", label: "TRANSFORMATION", subLabel: "Apply to Qualify", locked: true },
+  ],
+};
 
 // ─── CLIENT ────────────────────────────────────────
 export const clientConfig: RoleConfig = {
@@ -286,23 +284,23 @@ export const clientConfig: RoleConfig = {
   label: "CLIENT",
   entries: [
     // Top items (never collapsible)
-    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "" } },
-    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "AI Intelligence" } },
+    { type: "standalone", item: { id: "my-profile", label: "MY COMPANY PROFILE", subLabel: "" } },
+    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
     // Business
     { type: "section", section: businessSectionClient },
+    // Tools
+    { type: "section", section: toolsSectionClient },
     // Sections
     { type: "section", section: baseSectionClient() },
     { type: "section", section: hiveSectionDefault },
     { type: "section", section: sumSectionClient },
-    { type: "section", section: managementSectionClient },
-    { type: "divider" },
-    { type: "standalone", item: { id: "creative", label: "CREATIVE", subLabel: "Campaign Intelligence" } },
     { type: "divider" },
     { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
     { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
-    { type: "standalone", item: { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" } },
+    { type: "section", section: adminSection },
   ],
-  bottomLocked: lockedItems,
+  bottomLocked: [],
 };
 
 // ─── SOLOPRENEUR ───────────────────────────────────
@@ -312,7 +310,7 @@ export const solopreneurConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "SOLOPRENEUR",
   entries: [...clientConfig.entries], // Identical structure
-  bottomLocked: lockedItems,
+  bottomLocked: [],
 };
 
 // ─── AGENCY ────────────────────────────────────────
@@ -399,17 +397,38 @@ export const employeeConfig: RoleConfig = {
   bottomLocked: [], // Employee has no CERTIFIED/TRANSFORMATION
 };
 
+// ─── INVESTOR / OWNER ─────────────────────────────
+// Phase A skeleton — full nav built in Phase E
+export const investorConfig: RoleConfig = {
+  accent: "#c9a227",
+  darkBg: "#0a0a0a",
+  lightBg: "#e8e7e2",
+  label: "INVESTOR",
+  entries: [
+    { type: "standalone", item: { id: "my-profile", label: "MY COMPANY PROFILE", subLabel: "" } },
+    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
+  ],
+  bottomLocked: [],
+};
+
 export const roleConfigs: Record<RoleType, RoleConfig> = {
   client: clientConfig,
   solopreneur: solopreneurConfig,
   agency: agencyConfig,
   hq: hqConfig,
   employee: employeeConfig,
+  investor: investorConfig,
 };
 
 // Route mapping per nav item id
 export function getRouteForItem(itemId: string, role: RoleType, clientId?: string): string {
-  const prefix = role === "hq" ? "/hq" : clientId ? `/client/${clientId}` : "/agency";
+  const prefix =
+    role === "hq" ? "/hq"
+    : role === "investor" ? `/investor/${clientId ?? "1"}`
+    : role === "agency" ? "/agency"
+    : clientId ? `/client/${clientId}`
+    : "/agency";
   
   const routeMap: Record<string, string> = {
     // Client/Agency/Solo shared
@@ -439,10 +458,10 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     
     // Business
     "biz-clients": role === "agency" ? "/agency/clients" : `${prefix}/biz-clients`,
+    "biz-my-business": `${prefix}/my-business`,
+    "biz-my-businesses": `${prefix}/my-businesses`,
     "biz-revenue": role === "agency" ? "/agency/billing" : `${prefix}/biz-revenue`,
     "biz-usage": `${prefix}/biz-usage`,
-    "biz-mrr": `${prefix}/biz-mrr`,
-    "biz-churn": `${prefix}/biz-churn`,
     
     // Management
     "mgmt-invoicing": `${prefix}/mgmt-invoicing`,

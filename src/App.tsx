@@ -210,6 +210,16 @@ function AppLayout() {
           <Route path="/hq/refunds" element={<ComingSoonPlaceholder title="Refunds" subtitle="Refund Management" />} />
           <Route path="/hq/content" element={<ComingSoonPlaceholder title="Content" subtitle="Tutorials and Help" />} />
 
+          {/* Investor (Phase A scaffolding) */}
+          <Route path="/investor" element={<Navigate to="/investor/1" replace />} />
+          <Route path="/investor/:id" element={<ComingSoonPlaceholder title="Investor / Owner" subtitle="Multi-business portfolio" />} />
+          <Route path="/investor/:id/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
+
+          {/* Per-role coming-soon wildcards (override NotFound for known prefixes) */}
+          <Route path="/client/:id/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
+          <Route path="/agency/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
+          <Route path="/hq/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
+
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>

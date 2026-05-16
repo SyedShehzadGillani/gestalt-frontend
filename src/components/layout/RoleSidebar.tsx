@@ -50,6 +50,7 @@ export function RoleProvider({ children }: { children: React.ReactNode }) {
 export const allRoles: { type: RoleType; label: string; headerLabel: string; accent: string }[] = [
   { type: "hq", label: "HQ", headerLabel: "GESTALT HQ", accent: "#4882ff" },
   { type: "agency", label: "AGENCY", headerLabel: "AGENCY", accent: "#7c3aed" },
+  { type: "investor", label: "INVESTOR", headerLabel: "INVESTOR / OWNER", accent: "#c9a227" },
   { type: "client", label: "CLIENT", headerLabel: "CLIENT", accent: "#c9a227" },
   { type: "solopreneur", label: "SOLOPRENEUR", headerLabel: "SOLOPRENEUR", accent: "#e2b53f" },
   { type: "employee", label: "EMPLOYEE", headerLabel: "EMPLOYEE", accent: "#888888" },
