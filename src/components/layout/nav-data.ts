@@ -100,6 +100,16 @@ export const NAV_ICONS: Record<string, string> = {
   "hq-research": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
   "hq-analytics": "M12 20V10M18 20V4M6 20v-4",
   "hq-my-tasks": "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
+  "hq-status-personal": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
+  "hq-status-creative": "M12 19l7-7 3 3-7 7-3-3zm-7.5.25L2 21l1.75-2.5 5-5 1.5 1.5-5 5z",
+  "hq-creative-brief": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6",
+  "hq-brand-foundation": "M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zm-3-4V7a4 4 0 00-8 0v4",
+  "hq-visual-identity": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
+  "hq-digital": "M2 3h20v14H2zm7 17h6m-3-3v3",
+  "hq-video-content": "M23 7l-7 5 7 5V7zM1 5h14v14H1V5z",
+  "hq-print-physical": "M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z",
+  "hq-campaign": "M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 11-5.8-1.6",
+  "hq-prompt-builder": "M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7m-1.5-10.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
 };
 
 // Items whose icon color is always #e2b53f regardless of role accent
@@ -238,9 +248,31 @@ const sumSectionHQ: NavSection = {
   helpId: "sum-messaging",
   items: [
     { id: "hq-messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
-    { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "hq-timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "hq-status-personal", label: "STATUS - PERSONAL", subLabel: "Assigned From Projects" },
+    { id: "hq-my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" },
+    { id: "hq-journal", label: "MY JOURNAL", subLabel: "Private • Depth Scored" },
     { id: "hq-projects", label: "PROJECTS", subLabel: "Active Initiatives" },
+    { id: "hq-timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "hq-story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
+    { id: "hq-vendors", label: "VENDORS", subLabel: "Access" },
+    { id: "hq-polls", label: "POLLS", subLabel: "Company Polls" },
+  ],
+};
+
+const creativeSectionHQ: NavSection = {
+  label: "CREATIVE",
+  accentColor: true,
+  items: [
+    { id: "hq-status-creative", label: "STATUS - CREATIVE", subLabel: "Brief status + AI priority" },
+    { id: "hq-creative-brief", label: "CREATIVE BRIEF", subLabel: "Campaign Documentation" },
+    { id: "hq-brand-foundation", label: "BRAND FOUNDATION", subLabel: "Name, story, voice, guardrails" },
+    { id: "hq-visual-identity", label: "VISUAL IDENTITY", subLabel: "Logo, color, type, photography" },
+    { id: "hq-digital", label: "DIGITAL", subLabel: "Website, email, social, ads" },
+    { id: "hq-video-content", label: "VIDEO + CONTENT", subLabel: "Film, demo, story series, scripts" },
+    { id: "hq-print-physical", label: "PRINT + PHYSICAL", subLabel: "Brochure, packaging, signage" },
+    { id: "hq-campaign", label: "CAMPAIGN", subLabel: "Title, concept, manifesto, calendar" },
+    { id: "hq-prompt-builder", label: "PROMPT BUILDER", subLabel: "Generate ready-to-use prompts" },
   ],
 };
 
@@ -377,11 +409,12 @@ export const hqConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "HQ",
   entries: [
-    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "hq-overview-top", label: "OVERVIEW", subLabel: "Platform Health" } },
     { type: "standalone", item: { id: "hq-dashboard", label: "DASHBOARD", subLabel: "Platform Health" } },
     { type: "standalone", item: { id: "hq-alerts", label: "ALERTS", subLabel: "System + Client Alerts" } },
     { type: "section", section: {
       label: "BUSINESS",
+      accentColor: true,
       items: [
         { id: "hq-agencies", label: "AGENCIES", subLabel: "All Agency Accounts" },
         { id: "hq-clients", label: "CLIENTS", subLabel: "All Client Accounts" },
@@ -401,7 +434,7 @@ export const hqConfig: RoleConfig = {
       label: "SUPPORT",
       items: [
         { id: "hq-tickets", label: "TICKETS", subLabel: "Open Support Requests" },
-        { id: "hq-ai-help", label: "AI HELP", subLabel: "GESTALT INTELLIGENCE Diagnostics" },
+        { id: "hq-ai-help", label: "AI HELP", subLabel: "GESTALT AI Diagnostics" },
         { id: "hq-features", label: "FEATURES", subLabel: "Requested Features" },
       ],
     }},
@@ -412,6 +445,14 @@ export const hqConfig: RoleConfig = {
         { id: "hq-team", label: "TEAM", subLabel: "HQ Staff Management" },
       ],
     }},
+    { type: "section", section: baseSectionHQ },
+    { type: "section", section: hiveSectionHQ },
+    { type: "section", section: sumSectionHQ },
+    { type: "section", section: creativeSectionHQ },
+    { type: "divider" },
+    { type: "standalone", item: { id: "hq-research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "hq-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
   ],
   bottomLocked: [],
 };
@@ -555,6 +596,18 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "hq-research": "/hq/research",
     "hq-analytics": "/hq/analytics",
     "hq-my-tasks": "/hq/my-tasks",
+    "hq-status-personal": "/hq/status-personal",
+    "hq-status-creative": "/hq/status-creative",
+    "hq-creative-brief": "/hq/creative-brief",
+    "hq-brand-foundation": "/hq/brand-foundation",
+    "hq-visual-identity": "/hq/visual-identity",
+    "hq-digital": "/hq/digital",
+    "hq-video-content": "/hq/video-content",
+    "hq-print-physical": "/hq/print-physical",
+    "hq-campaign": "/hq/campaign",
+    "hq-prompt-builder": "/hq/prompt-builder",
+    "hq-financials": "/hq/base-financials",
+    "hq-overview-top": "/hq/overview",
     
     // Employee
     "my-profile": `${prefix}/profile`,
