@@ -264,3 +264,405 @@
   border: 1px solid var(--vb-border);
   display: inline-block;
 }
+
+/* ─── ECard ─────────────────────────────────────────────────────── */
+
+.vault-brand-scope .vb-ecard {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-ecard-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vault-brand-scope .vb-ecard-head.has-body {
+  margin-bottom: 16px;
+}
+
+.vault-brand-scope .vb-ecard-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.vault-brand-scope .vb-ecard-title {
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.vault-brand-scope .vb-ecard-date {
+  color: var(--vb-t5);
+  font-size: 8px;
+}
+
+.vault-brand-scope .vb-ecard-badge-formula {
+  color: var(--vb-gold);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 1px 6px;
+  border: 1px solid var(--vb-gold-bord);
+  opacity: 0.8;
+}
+
+.vault-brand-scope .vb-ecard-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.vault-brand-scope .vb-ecard-regen {
+  background: none;
+  border: none;
+  color: var(--vb-gold);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.vault-brand-scope .vb-ecard-regen:hover {
+  opacity: 1;
+}
+
+.vault-brand-scope .vb-ecard-edit-btn {
+  background: none;
+  border: none;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-ecard-edit-btn:hover {
+  color: var(--vb-t1);
+}
+
+.vault-brand-scope .vb-ecard-desc {
+  color: var(--vb-t3);
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.vault-brand-scope .vb-ecard-desc.is-editing {
+  color: var(--vb-gold);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.vault-brand-scope .vb-ecard-saved {
+  padding: 24px 28px;
+  position: relative;
+}
+
+.vault-brand-scope .vb-ecard-quote {
+  color: var(--vb-t5);
+  font-size: 42px;
+  font-family: Georgia, serif;
+  line-height: 1;
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  opacity: 0.15;
+}
+
+.vault-brand-scope .vb-ecard-content {
+  color: var(--vb-t1);
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 300;
+  padding-left: 28px;
+  white-space: pre-line;
+}
+
+.vault-brand-scope .vb-ecard-content.is-large-3 { font-size: 36px; }
+.vault-brand-scope .vb-ecard-content.is-large-7 { font-size: 28px; }
+
+.vault-brand-scope .vb-ecard-textarea {
+  width: 100%;
+  padding: 24px 28px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t1);
+  font-size: 22px;
+  font-weight: 300;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+  min-height: 80px;
+  line-height: 1.5;
+  display: block;
+  font-family: inherit;
+}
+
+.vault-brand-scope .vb-ecard-save-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.vault-brand-scope .vb-btn-primary {
+  padding: 8px 20px;
+  background: none;
+  border: 1px solid var(--vb-t4);
+  color: var(--vb-t1);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-btn-secondary {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-alignment {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--vb-gold-tint);
+  border: 1px solid var(--vb-gold-bord);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vault-brand-scope .vb-alignment-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--vb-gold);
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.vault-brand-scope .vb-alignment-text {
+  color: var(--vb-gold-dim);
+  font-size: 9px;
+}
+
+.vault-brand-scope .vb-alignment-link {
+  background: none;
+  border: none;
+  color: var(--vb-gold);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-versions {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-versions-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: var(--vb-t5);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.vault-brand-scope .vb-versions-strip {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.vault-brand-scope .vb-version-card {
+  flex-shrink: 0;
+  min-width: 140px;
+}
+
+.vault-brand-scope .vb-version-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid var(--vb-border);
+  cursor: pointer;
+  text-align: left;
+  color: var(--vb-t4);
+}
+
+.vault-brand-scope .vb-version-btn.is-active {
+  background: var(--vb-bg3);
+  border-color: var(--vb-t4);
+  color: var(--vb-t1);
+}
+
+.vault-brand-scope .vb-version-label {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.vault-brand-scope .vb-version-meta {
+  color: var(--vb-t5);
+  font-size: 8px;
+  margin-top: 4px;
+}
+
+.vault-brand-scope .vb-version-preview {
+  font-size: 9px;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+.vault-brand-scope .vb-version-use {
+  width: 100%;
+  margin-top: 4px;
+  padding: 4px 10px;
+  background: none;
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-tag-gi {
+  color: var(--vb-gold);
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-left: 4px;
+}
+
+.vault-brand-scope .vb-tag-active {
+  color: var(--vb-gold);
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-left: 4px;
+}
+
+/* ─── Cascading Pitch ────────────────────────────────────────────── */
+
+.vault-brand-scope .vb-pitch-wrap {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-pitch-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.vault-brand-scope .vb-pitch-eyebrow {
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.vault-brand-scope .vb-pitch-examples-toggle {
+  background: none;
+  border: none;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-pitch-examples-toggle.is-on {
+  color: var(--vb-gold);
+}
+
+.vault-brand-scope .vb-pitch-intro {
+  color: var(--vb-t3);
+  font-size: 11px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.vault-brand-scope .vb-pitch-tier {
+  margin-bottom: 16px;
+  padding: 24px 28px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-pitch-tier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.vault-brand-scope .vb-pitch-label {
+  color: var(--vb-t3);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.vault-brand-scope .vb-pitch-slash {
+  color: var(--vb-t5);
+  font-size: 11px;
+}
+
+.vault-brand-scope .vb-pitch-seconds {
+  color: var(--vb-gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.vault-brand-scope .vb-pitch-example {
+  padding: 12px;
+  background: var(--vb-gold-tint);
+  border: 1px solid var(--vb-gold-bord);
+  margin-bottom: 10px;
+}
+
+.vault-brand-scope .vb-pitch-example-eyebrow {
+  color: var(--vb-t5);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.vault-brand-scope .vb-pitch-example-text {
+  color: var(--vb-gold-dim);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.vault-brand-scope .vb-pitch-empty {
+  color: var(--vb-t5);
+  font-size: 11px;
+  font-style: italic;
+}
