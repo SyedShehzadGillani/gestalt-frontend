@@ -4,12 +4,18 @@ import { BrandFoundationSection } from "@/components/vault-brand-assets/BrandFou
 import { MessagingSection } from "@/components/vault-brand-assets/MessagingSection";
 import { ColorSystemSection } from "@/components/vault-brand-assets/ColorSystemSection";
 import { TypographySection } from "@/components/vault-brand-assets/TypographySection";
+import { PhotographySection } from "@/components/vault-brand-assets/PhotographySection";
+import { VideoLibrarySection } from "@/components/vault-brand-assets/VideoLibrarySection";
+import { MotionSection } from "@/components/vault-brand-assets/MotionSection";
 
 const IMPLEMENTED: Record<string, () => JSX.Element> = {
   foundation: BrandFoundationSection,
   messaging: MessagingSection,
   color: ColorSystemSection,
   typography: TypographySection,
+  photography: PhotographySection,
+  video: VideoLibrarySection,
+  motion: MotionSection,
 };
 
 export default function BrandAssetsVault() {
