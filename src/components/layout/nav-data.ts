@@ -1,4 +1,4 @@
-export type RoleType = "hq" | "agency" | "client" | "solopreneur" | "employee";
+export type RoleType = "hq" | "agency" | "client" | "solopreneur" | "employee" | "investor";
 
 // Icon path constants for nav items
 export const NAV_ICONS: Record<string, string> = {
@@ -10,6 +10,7 @@ export const NAV_ICONS: Record<string, string> = {
   "my-profile": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
   "my-score": "M22 12h-4l-3 9L9 3l-3 9H2",
   "my-trajectory": "M23 6l-9.5 9.5-5-5L1 18",
+  "my-command-center": "M2 3h20v14H2zm7 17h6m-3-3v3",
 
   // B.A.S.E.
   overview: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
@@ -36,10 +37,10 @@ export const NAV_ICONS: Record<string, string> = {
 
   // Business
   "biz-clients": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
+  "biz-my-business": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
+  "biz-my-businesses": "M3 21h18M3 7v14m6-14v14m6-14v14m6-14v14M3 7l9-4 9 4M6 11h.01M6 15h.01M12 11h.01M12 15h.01M18 11h.01M18 15h.01",
   "biz-revenue": "M23 6l-9.5 9.5-5-5L1 18",
   "biz-usage": "M22 12h-4l-3 9L9 3l-3 9H2",
-  "biz-mrr": "M23 6l-9.5 9.5-5-5L1 18",
-  "biz-churn": "M23 18l-9.5-9.5-5 5L1 6",
 
   // Management
   "mgmt-invoicing": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8",
@@ -51,6 +52,17 @@ export const NAV_ICONS: Record<string, string> = {
   research: "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
   "nav-analytics": "M12 20V10M18 20V4M6 20v-4",
   "my-tasks": "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
+  "status-personal": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
+  "status-business": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
+  "status-creative": "M12 19l7-7 3 3-7 7-3-3zm-7.5.25L2 21l1.75-2.5 5-5 1.5 1.5-5 5z",
+  "creative-brief": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6",
+  "brand-foundation": "M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zm-3-4V7a4 4 0 00-8 0v4",
+  "visual-identity": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
+  "digital": "M2 3h20v14H2zm7 17h6m-3-3v3",
+  "video-content": "M23 7l-7 5 7 5V7zM1 5h14v14H1V5z",
+  "print-physical": "M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z",
+  "campaign": "M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 11-5.8-1.6",
+  "prompt-builder": "M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7m-1.5-10.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
   certified: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
   transformation: "M18 3a3 3 0 011 5.83V9a9 9 0 01-9 9H8.83A3 3 0 115 16.17V12a5 5 0 005-5V5.17A3 3 0 0118 3z",
 
@@ -70,7 +82,8 @@ export const NAV_ICONS: Record<string, string> = {
   "hq-settings": "M12 15a3 3 0 100-6 3 3 0 000 6zm7.94-2a7.94 7.94 0 000-2l2-1.56a.5.5 0 000-.68l-2-3.46a.5.5 0 00-.61-.22l-2.36.95a8 8 0 00-1.73-1l-.36-2.51A.48.48 0 0014 2h-4a.48.48 0 00-.48.42l-.36 2.5a8 8 0 00-1.73 1L5.07 5a.5.5 0 00-.61.22l-2 3.46a.49.49 0 00.12.66L4.57 11a7.94 7.94 0 000 2l-2 1.56a.49.49 0 00-.12.67l2 3.46a.5.5 0 00.61.22l2.36-.95a8 8 0 001.73 1l.36 2.51A.48.48 0 0010 22h4a.48.48 0 00.47-.42l.36-2.5a8 8 0 001.73-1l2.36.95a.5.5 0 00.61-.22l2-3.46a.49.49 0 00-.12-.67z",
   "hq-team": "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m22 0v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M12 7a4 4 0 11-8 0 4 4 0 018 0z",
   "hq-overview": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
-  "hq-onboarding": "M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3",
+  "hq-overview-top": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
+  "hq-financials": "M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6",
   "hq-framework": "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
   "hq-focus": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
   "hq-formula": "M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7m-1.5-10.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
@@ -88,6 +101,16 @@ export const NAV_ICONS: Record<string, string> = {
   "hq-research": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
   "hq-analytics": "M12 20V10M18 20V4M6 20v-4",
   "hq-my-tasks": "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
+  "hq-status-personal": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
+  "hq-status-creative": "M12 19l7-7 3 3-7 7-3-3zm-7.5.25L2 21l1.75-2.5 5-5 1.5 1.5-5 5z",
+  "hq-creative-brief": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6",
+  "hq-brand-foundation": "M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zm-3-4V7a4 4 0 00-8 0v4",
+  "hq-visual-identity": "M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z",
+  "hq-digital": "M2 3h20v14H2zm7 17h6m-3-3v3",
+  "hq-video-content": "M23 7l-7 5 7 5V7zM1 5h14v14H1V5z",
+  "hq-print-physical": "M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z",
+  "hq-campaign": "M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 11-5.8-1.6",
+  "hq-prompt-builder": "M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7m-1.5-10.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
 };
 
 // Items whose icon color is always #e2b53f regardless of role accent
@@ -133,16 +156,15 @@ export interface RoleConfig {
 }
 
 // Shared section builders
-const baseSectionClient = (financialsLabel = "FINANCIALS", financialsSub = "Financial Intelligence"): NavSection => ({
+const baseSectionClient = (financialsLabel = "FINANCIALS", financialsSub = "21-PT Assessment"): NavSection => ({
   label: "B.A.S.E.",
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "onboarding", label: "ONBOARDING", subLabel: "Day 14 of 42" },
-    { id: "framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
-    { id: "financials", label: financialsLabel, subLabel: financialsSub },
+    { id: "overview", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
+    { id: "framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "focus", label: "FOCUS", subLabel: "Company Deep Dive" },
+    { id: "financials", label: financialsLabel, subLabel: financialsSub },
     { id: "formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 });
@@ -152,10 +174,10 @@ const baseSectionEmployee: NavSection = {
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
+    { id: "overview", label: "B.A.S.E. OVERVIEW", subLabel: "Company Dashboard" },
+    { id: "framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "focus", label: "FOCUS", subLabel: "Company Deep Dive" },
-    { id: "financials", label: "FINANCIALS", subLabel: "Financial Intelligence" },
+    { id: "financials", label: "FINANCIALS", subLabel: "21-PT Assessment" },
     { id: "formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 };
@@ -165,10 +187,10 @@ const baseSectionHQ: NavSection = {
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "hq-overview", label: "OVERVIEW", subLabel: "Company Dashboard" },
-    { id: "hq-onboarding", label: "ONBOARDING", subLabel: "Day 14 of 42" },
-    { id: "hq-framework", label: "FRAMEWORK", subLabel: "21-Point Assessment" },
+    { id: "hq-overview", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
+    { id: "hq-framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "hq-focus", label: "FOCUS", subLabel: "Company Deep Dive" },
+    { id: "hq-financials", label: "FINANCIALS", subLabel: "21-PT Assessment" },
     { id: "hq-formula", label: "FORMULA", subLabel: "Interaction Strategy" },
   ],
 };
@@ -196,11 +218,16 @@ const sumSectionClient: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
-    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
+    { id: "status-personal", label: "STATUS - PERSONAL", subLabel: "Assigned From Projects" },
+    { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" },
+    { id: "journal", label: "MY JOURNAL", subLabel: "Private • Depth Scored" },
     { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
+    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
+    { id: "vendors", label: "VENDORS", subLabel: "Access" },
+    { id: "polls", label: "POLLS", subLabel: "Company Polls" },
   ],
 };
 
@@ -209,11 +236,26 @@ const sumSectionEmployee: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "messaging", label: "MESSAGING", subLabel: "Team Communication" },
-    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
+    { id: "status-personal", label: "STATUS - PERSONAL", subLabel: "Assigned From Projects" },
+    { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" },
+    { id: "journal", label: "MY JOURNAL", subLabel: "Private • Depth Scored" },
     { id: "projects", label: "PROJECTS", subLabel: "Active Initiatives" },
+    { id: "timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "vault", label: "VAULT", subLabel: "Brand Assets" },
+    { id: "vendors", label: "VENDORS", subLabel: "Access" },
+    { id: "polls", label: "POLLS", subLabel: "Company Polls" },
+  ],
+};
+
+const businessSectionInvestor: NavSection = {
+  label: "BUSINESS",
+  accentColor: true,
+  items: [
+    { id: "biz-my-businesses", label: "MY BUSINESSES", subLabel: "My Client Accounts" },
+    { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
@@ -222,11 +264,32 @@ const sumSectionHQ: NavSection = {
   fullName: "Strategic Unified Messaging",
   helpId: "sum-messaging",
   items: [
-    { id: "hq-messaging", label: "MESSAGING", subLabel: "Team Communication" },
-    { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
-    { id: "hq-timeline", label: "BRAND TIMELINE", subLabel: "Company History" },
-    { id: "hq-personal-timeline", label: "PERSONAL TIMELINE", subLabel: "Your Journey" },
+    { id: "hq-messaging", label: "MESSAGING", subLabel: "Groups + Direct" },
+    { id: "hq-status-personal", label: "STATUS - PERSONAL", subLabel: "Assigned From Projects" },
+    { id: "hq-my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" },
+    { id: "hq-journal", label: "MY JOURNAL", subLabel: "Private • Depth Scored" },
     { id: "hq-projects", label: "PROJECTS", subLabel: "Active Initiatives" },
+    { id: "hq-timeline", label: "TIMELINE", subLabel: "Brand History" },
+    { id: "hq-story-engine", label: "STORY ENGINE", subLabel: "Submit Ideas" },
+    { id: "hq-vault", label: "VAULT", subLabel: "Brand Assets" },
+    { id: "hq-vendors", label: "VENDORS", subLabel: "Access" },
+    { id: "hq-polls", label: "POLLS", subLabel: "Company Polls" },
+  ],
+};
+
+const creativeSectionHQ: NavSection = {
+  label: "CREATIVE",
+  accentColor: true,
+  items: [
+    { id: "hq-status-creative", label: "STATUS - CREATIVE", subLabel: "Brief status + AI priority" },
+    { id: "hq-creative-brief", label: "CREATIVE BRIEF", subLabel: "Campaign Documentation" },
+    { id: "hq-brand-foundation", label: "BRAND FOUNDATION", subLabel: "Name, story, voice, guardrails" },
+    { id: "hq-visual-identity", label: "VISUAL IDENTITY", subLabel: "Logo, color, type, photography" },
+    { id: "hq-digital", label: "DIGITAL", subLabel: "Website, email, social, ads" },
+    { id: "hq-video-content", label: "VIDEO + CONTENT", subLabel: "Film, demo, story series, scripts" },
+    { id: "hq-print-physical", label: "PRINT + PHYSICAL", subLabel: "Brochure, packaging, signage" },
+    { id: "hq-campaign", label: "CAMPAIGN", subLabel: "Title, concept, manifesto, calendar" },
+    { id: "hq-prompt-builder", label: "PROMPT BUILDER", subLabel: "Generate ready-to-use prompts" },
   ],
 };
 
@@ -234,10 +297,9 @@ const businessSectionClient: NavSection = {
   label: "BUSINESS",
   accentColor: true,
   items: [
-    { id: "biz-revenue", label: "REVENUE", subLabel: "Company Revenue" },
-    { id: "biz-usage", label: "USAGE", subLabel: "Platform Activity" },
-    { id: "biz-mrr", label: "MRR", subLabel: "Monthly Recurring Revenue" },
-    { id: "biz-churn", label: "CHURN", subLabel: "Customer Retention Rate" },
+    { id: "biz-my-business", label: "MY BUSINESS", subLabel: "My Client Accounts" },
+    { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
@@ -247,14 +309,12 @@ const businessSectionAgency: NavSection = {
   items: [
     { id: "biz-clients", label: "CLIENTS", subLabel: "My Client Accounts" },
     { id: "biz-revenue", label: "REVENUE", subLabel: "Agency Billing + ARR" },
-    { id: "biz-usage", label: "USAGE", subLabel: "Platform Activity" },
-    { id: "biz-mrr", label: "MRR", subLabel: "Monthly Recurring Revenue" },
-    { id: "biz-churn", label: "CHURN", subLabel: "Retention + Attrition Rate" },
+    { id: "biz-usage", label: "USAGE", subLabel: "Client Platform Activity" },
   ],
 };
 
-const managementSectionClient: NavSection = {
-  label: "MANAGEMENT",
+const toolsSectionClient: NavSection = {
+  label: "TOOLS",
   collapsedByDefault: true,
   items: [
     { id: "mgmt-invoicing", label: "INVOICING", subLabel: "Billing + Billable Hours" },
@@ -263,8 +323,8 @@ const managementSectionClient: NavSection = {
   ],
 };
 
-const managementSectionAgency: NavSection = {
-  label: "MANAGEMENT",
+const toolsSectionAgency: NavSection = {
+  label: "TOOLS",
   collapsedByDefault: true,
   items: [
     { id: "mgmt-invoicing", label: "INVOICING", subLabel: "Billing + Billable Hours" },
@@ -273,10 +333,30 @@ const managementSectionAgency: NavSection = {
   ],
 };
 
-const lockedItems: NavItem[] = [
-  { id: "certified", label: "CERTIFIED", subLabel: "Exit Badge", locked: true },
-  { id: "transformation", label: "TRANSFORMATION", subLabel: "Apply to Qualify", locked: true },
-];
+const creativeSection: NavSection = {
+  label: "CREATIVE",
+  accentColor: true,
+  items: [
+    { id: "status-creative", label: "STATUS - CREATIVE", subLabel: "Brief status + AI priority" },
+    { id: "creative-brief", label: "CREATIVE BRIEF", subLabel: "Campaign Documentation" },
+    { id: "brand-foundation", label: "BRAND FOUNDATION", subLabel: "Name, story, voice, guardrails" },
+    { id: "visual-identity", label: "VISUAL IDENTITY", subLabel: "Logo, color, type, photography" },
+    { id: "digital", label: "DIGITAL", subLabel: "Website, email, social, ads" },
+    { id: "video-content", label: "VIDEO + CONTENT", subLabel: "Film, demo, story series, scripts" },
+    { id: "print-physical", label: "PRINT + PHYSICAL", subLabel: "Brochure, packaging, signage" },
+    { id: "campaign", label: "CAMPAIGN", subLabel: "Title, concept, manifesto, calendar" },
+    { id: "prompt-builder", label: "PROMPT BUILDER", subLabel: "Generate ready-to-use prompts" },
+  ],
+};
+
+const adminSection: NavSection = {
+  label: "ADMIN",
+  collapsedByDefault: false,
+  items: [
+    { id: "certified", label: "CERTIFIED", subLabel: "Exit Badge", locked: true },
+    { id: "transformation", label: "TRANSFORMATION", subLabel: "Apply to Qualify", locked: true },
+  ],
+};
 
 // ─── CLIENT ────────────────────────────────────────
 export const clientConfig: RoleConfig = {
@@ -286,23 +366,23 @@ export const clientConfig: RoleConfig = {
   label: "CLIENT",
   entries: [
     // Top items (never collapsible)
-    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "" } },
-    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "AI Intelligence" } },
+    { type: "standalone", item: { id: "my-profile", label: "MY COMPANY PROFILE", subLabel: "" } },
+    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
     // Business
     { type: "section", section: businessSectionClient },
+    // Tools
+    { type: "section", section: toolsSectionClient },
     // Sections
     { type: "section", section: baseSectionClient() },
     { type: "section", section: hiveSectionDefault },
     { type: "section", section: sumSectionClient },
-    { type: "section", section: managementSectionClient },
-    { type: "divider" },
-    { type: "standalone", item: { id: "creative", label: "CREATIVE", subLabel: "Campaign Intelligence" } },
     { type: "divider" },
     { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
     { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
-    { type: "standalone", item: { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" } },
+    { type: "section", section: adminSection },
   ],
-  bottomLocked: lockedItems,
+  bottomLocked: [],
 };
 
 // ─── SOLOPRENEUR ───────────────────────────────────
@@ -312,7 +392,7 @@ export const solopreneurConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "SOLOPRENEUR",
   entries: [...clientConfig.entries], // Identical structure
-  bottomLocked: lockedItems,
+  bottomLocked: [],
 };
 
 // ─── AGENCY ────────────────────────────────────────
@@ -322,10 +402,19 @@ export const agencyConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "AGENCY",
   entries: [
+    { type: "standalone", item: { id: "my-profile", label: "MY AGENCY PROFILE", subLabel: "" } },
     { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
-    { type: "standalone", item: { id: "client-dashboard", label: "CLIENT DASHBOARD", subLabel: "All Client Accounts" } },
     { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
     { type: "section", section: businessSectionAgency },
+    { type: "section", section: toolsSectionAgency },
+    { type: "section", section: baseSectionClient() },
+    { type: "section", section: hiveSectionDefault },
+    { type: "section", section: sumSectionClient },
+    { type: "section", section: creativeSection },
+    { type: "divider" },
+    { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
   ],
   bottomLocked: [],
 };
@@ -337,11 +426,12 @@ export const hqConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "HQ",
   entries: [
-    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "hq-overview-top", label: "OVERVIEW", subLabel: "Platform Health" } },
     { type: "standalone", item: { id: "hq-dashboard", label: "DASHBOARD", subLabel: "Platform Health" } },
     { type: "standalone", item: { id: "hq-alerts", label: "ALERTS", subLabel: "System + Client Alerts" } },
     { type: "section", section: {
       label: "BUSINESS",
+      accentColor: true,
       items: [
         { id: "hq-agencies", label: "AGENCIES", subLabel: "All Agency Accounts" },
         { id: "hq-clients", label: "CLIENTS", subLabel: "All Client Accounts" },
@@ -361,7 +451,7 @@ export const hqConfig: RoleConfig = {
       label: "SUPPORT",
       items: [
         { id: "hq-tickets", label: "TICKETS", subLabel: "Open Support Requests" },
-        { id: "hq-ai-help", label: "AI HELP", subLabel: "GESTALT INTELLIGENCE Diagnostics" },
+        { id: "hq-ai-help", label: "AI HELP", subLabel: "GESTALT AI Diagnostics" },
         { id: "hq-features", label: "FEATURES", subLabel: "Requested Features" },
       ],
     }},
@@ -372,6 +462,14 @@ export const hqConfig: RoleConfig = {
         { id: "hq-team", label: "TEAM", subLabel: "HQ Staff Management" },
       ],
     }},
+    { type: "section", section: baseSectionHQ },
+    { type: "section", section: hiveSectionHQ },
+    { type: "section", section: sumSectionHQ },
+    { type: "section", section: creativeSectionHQ },
+    { type: "divider" },
+    { type: "standalone", item: { id: "hq-research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "hq-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
   ],
   bottomLocked: [],
 };
@@ -384,19 +482,40 @@ export const employeeConfig: RoleConfig = {
   label: "EMPLOYEE",
   entries: [
     { type: "standalone", item: { id: "my-profile", label: "MY PROFILE", subLabel: "" } },
-    { type: "standalone", item: { id: "my-score", label: "MY SCORE", subLabel: "H.I.V.E. Dashboard" } },
+    { type: "standalone", item: { id: "my-command-center", label: "MY COMMAND CENTER", subLabel: "H.I.V.E. Dashboard" } },
     { type: "standalone", item: { id: "my-trajectory", label: "MY TRAJECTORY", subLabel: "Score Over Time" } },
     { type: "section", section: baseSectionEmployee },
     { type: "section", section: hiveSectionDefault },
     { type: "section", section: sumSectionEmployee },
     { type: "divider" },
-    { type: "standalone", item: { id: "creative", label: "CREATIVE", subLabel: "Campaign Intelligence" } },
+    { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
+  ],
+  bottomLocked: [],
+};
+
+// ─── INVESTOR / OWNER ─────────────────────────────
+export const investorConfig: RoleConfig = {
+  accent: "#c9a227",
+  darkBg: "#0a0a0a",
+  lightBg: "#e8e7e2",
+  label: "INVESTOR",
+  entries: [
+    { type: "standalone", item: { id: "my-profile", label: "MY COMPANY PROFILE", subLabel: "" } },
+    { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
+    { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
+    { type: "section", section: businessSectionInvestor },
+    { type: "section", section: toolsSectionClient },
+    { type: "section", section: baseSectionClient() },
+    { type: "section", section: hiveSectionDefault },
+    { type: "section", section: sumSectionClient },
     { type: "divider" },
     { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
     { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
-    { type: "standalone", item: { id: "my-tasks", label: "MY TASKS", subLabel: "Assigned From Projects" } },
+    { type: "section", section: adminSection },
   ],
-  bottomLocked: [], // Employee has no CERTIFIED/TRANSFORMATION
+  bottomLocked: [],
 };
 
 export const roleConfigs: Record<RoleType, RoleConfig> = {
@@ -405,11 +524,17 @@ export const roleConfigs: Record<RoleType, RoleConfig> = {
   agency: agencyConfig,
   hq: hqConfig,
   employee: employeeConfig,
+  investor: investorConfig,
 };
 
 // Route mapping per nav item id
 export function getRouteForItem(itemId: string, role: RoleType, clientId?: string): string {
-  const prefix = role === "hq" ? "/hq" : clientId ? `/client/${clientId}` : "/agency";
+  const prefix =
+    role === "hq" ? "/hq"
+    : role === "investor" ? `/investor/${clientId ?? "1"}`
+    : role === "agency" ? "/agency"
+    : clientId ? `/client/${clientId}`
+    : "/agency";
   
   const routeMap: Record<string, string> = {
     // Client/Agency/Solo shared
@@ -429,20 +554,31 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "projects": `${prefix}/projects`,
     "timeline": `${prefix}/timeline`,
     "story-engine": `${prefix}/story-engine`,
-    "vault": `${prefix}/vault`,
+    "vault": role === "client" ? `${prefix}/vault/brand` : `${prefix}/vault`,
     "vendors": `${prefix}/vendors`,
     "polls": `${prefix}/polls`,
     "creative": `${prefix}/creative`,
     "research": `${prefix}/research`,
     "nav-analytics": `${prefix}/analytics`,
     "my-tasks": `${prefix}/my-tasks`,
+    "status-personal": `${prefix}/status-personal`,
+    "status-business": `${prefix}/status-business`,
+    "status-creative": `${prefix}/status-creative`,
+    "creative-brief": `${prefix}/creative-brief`,
+    "brand-foundation": `${prefix}/brand-foundation`,
+    "visual-identity": `${prefix}/visual-identity`,
+    "digital": `${prefix}/digital`,
+    "video-content": `${prefix}/video-content`,
+    "print-physical": `${prefix}/print-physical`,
+    "campaign": `${prefix}/campaign`,
+    "prompt-builder": `${prefix}/prompt-builder`,
     
     // Business
     "biz-clients": role === "agency" ? "/agency/clients" : `${prefix}/biz-clients`,
+    "biz-my-business": `${prefix}/my-business`,
+    "biz-my-businesses": `${prefix}/my-businesses`,
     "biz-revenue": role === "agency" ? "/agency/billing" : `${prefix}/biz-revenue`,
     "biz-usage": `${prefix}/biz-usage`,
-    "biz-mrr": `${prefix}/biz-mrr`,
-    "biz-churn": `${prefix}/biz-churn`,
     
     // Management
     "mgmt-invoicing": `${prefix}/mgmt-invoicing`,
@@ -483,10 +619,23 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "hq-research": "/hq/research",
     "hq-analytics": "/hq/analytics",
     "hq-my-tasks": "/hq/my-tasks",
+    "hq-status-personal": "/hq/status-personal",
+    "hq-status-creative": "/hq/status-creative",
+    "hq-creative-brief": "/hq/creative-brief",
+    "hq-brand-foundation": "/hq/brand-foundation",
+    "hq-visual-identity": "/hq/visual-identity",
+    "hq-digital": "/hq/digital",
+    "hq-video-content": "/hq/video-content",
+    "hq-print-physical": "/hq/print-physical",
+    "hq-campaign": "/hq/campaign",
+    "hq-prompt-builder": "/hq/prompt-builder",
+    "hq-financials": "/hq/base-financials",
+    "hq-overview-top": "/hq/overview",
     
     // Employee
     "my-profile": `${prefix}/profile`,
     "my-score": `${prefix}/my-score`,
+    "my-command-center": `${prefix}/hive`,
     "my-trajectory": `${prefix}/my-trajectory`,
     
     // Locked
