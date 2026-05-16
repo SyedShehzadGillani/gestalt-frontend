@@ -37,6 +37,7 @@ import ClientStoryEngine from "@/pages/client/ClientStoryEngine";
 import ClientPolls from "@/pages/client/ClientPolls";
 import ClientVault from "@/pages/client/ClientVault";
 import VaultDocumentView from "@/pages/client/VaultDocumentView";
+import BrandAssetsVault from "@/pages/client/vault-brand-assets/BrandAssetsVault";
 import AgencyVault from "@/pages/agency/AgencyVault";
 import HQVault from "@/pages/hq/HQVault";
 import ClientTimeline from "@/pages/client/ClientTimeline";
@@ -113,6 +114,7 @@ function AppLayout() {
           <Route path="/client/:id/hive/position-builder" element={<HivePositionBuilder />} />
           <Route path="/client/:id/messaging" element={<ClientMessaging />} />
           <Route path="/client/:id/vault" element={<ClientVault />} />
+          <Route path="/client/:id/vault/brand" element={<BrandAssetsVault />} />
           <Route path="/client/:id/vault/document/:docId" element={<VaultDocumentView basePath="/client/:id/vault" />} />
           <Route path="/client/:id/timeline" element={<ClientTimeline />} />
           <Route path="/client/:id/personal-timeline" element={<ComingSoonPlaceholder title="Personal Timeline" subtitle="Your Journey" />} />

@@ -1,0 +1,266 @@
+.vault-brand-scope {
+  --vb-bg: hsl(var(--background));
+  --vb-bg2: hsl(var(--card));
+  --vb-bg3: hsl(var(--muted));
+  --vb-border: hsl(var(--border));
+  --vb-t1: hsl(var(--foreground));
+  --vb-t2: hsl(var(--foreground) / 0.78);
+  --vb-t3: hsl(var(--muted-foreground));
+  --vb-t4: hsl(var(--muted-foreground) / 0.7);
+  --vb-t5: hsl(var(--muted-foreground) / 0.5);
+  --vb-gold: hsl(var(--gold));
+  --vb-gold-dim: hsl(var(--gold) / 0.75);
+  --vb-gold-tint: hsl(var(--gold) / 0.08);
+  --vb-gold-bord: hsl(var(--gold) / 0.18);
+  --vb-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  background: var(--vb-bg);
+  color: var(--vb-t1);
+  min-height: calc(100vh - 64px);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+.vault-brand-scope .vb-nav {
+  border-right: 1px solid var(--vb-border);
+  background: var(--vb-bg2);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.vault-brand-scope .vb-nav-header {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-nav-eyebrow {
+  color: var(--vb-gold);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.vault-brand-scope .vb-nav-title {
+  color: var(--vb-t1);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.vault-brand-scope .vb-nav-sub {
+  color: var(--vb-t3);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.vault-brand-scope .vb-storage {
+  padding: 12px;
+  border-bottom: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-storage-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.vault-brand-scope .vb-storage-label {
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.vault-brand-scope .vb-storage-value {
+  color: var(--vb-t3);
+  font-size: 8px;
+}
+
+.vault-brand-scope .vb-storage-track {
+  height: 3px;
+  background: var(--vb-border);
+}
+
+.vault-brand-scope .vb-storage-fill {
+  height: 3px;
+  background: var(--vb-gold);
+}
+
+.vault-brand-scope .vb-nav-list {
+  flex: 1;
+  padding: 6px 0;
+  overflow-y: auto;
+}
+
+.vault-brand-scope .vb-nav-link {
+  width: 100%;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.vault-brand-scope .vb-nav-link:hover {
+  color: var(--vb-t1);
+  background: var(--vb-bg3);
+}
+
+.vault-brand-scope .vb-nav-link.is-active {
+  color: var(--vb-gold);
+}
+
+.vault-brand-scope .vb-main {
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+}
+
+.vault-brand-scope .vb-header {
+  padding: 36px 48px 28px;
+  border-bottom: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.vault-brand-scope .vb-title {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: var(--vb-t1);
+}
+
+.vault-brand-scope .vb-subtitle {
+  color: var(--vb-t3);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.vault-brand-scope .vb-search {
+  position: relative;
+}
+
+.vault-brand-scope .vb-search input {
+  width: 100%;
+  padding: 10px 14px 10px 34px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  color: var(--vb-gold);
+  font-size: 11px;
+  outline: none;
+}
+
+.vault-brand-scope .vb-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--vb-t4);
+}
+
+.vault-brand-scope .vb-content {
+  padding: 0 48px 80px;
+}
+
+.vault-brand-scope .vb-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--vb-border);
+}
+
+.vault-brand-scope .vb-section.is-closed {
+  padding: 20px 0;
+}
+
+.vault-brand-scope .vb-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.vault-brand-scope .vb-section-title {
+  color: var(--vb-t1);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.vault-brand-scope .vb-section-body {
+  margin-top: 24px;
+}
+
+.vault-brand-scope .vb-iconbtn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--vb-t4);
+  display: inline-flex;
+  align-items: center;
+}
+
+.vault-brand-scope .vb-iconbtn:hover {
+  color: var(--vb-t1);
+}
+
+.vault-brand-scope .vb-textbtn {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vb-t4);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+}
+
+.vault-brand-scope .vb-textbtn:hover {
+  color: var(--vb-t1);
+}
+
+.vault-brand-scope .vb-footer {
+  padding: 20px 48px;
+  border-top: 1px solid var(--vb-border);
+  display: flex;
+  justify-content: space-between;
+  color: var(--vb-t5);
+  font-size: 9px;
+}
+
+.vault-brand-scope .vb-placeholder {
+  color: var(--vb-t4);
+  font-size: 11px;
+  padding: 24px;
+  border: 1px dashed var(--vb-border);
+  text-align: center;
+  font-style: italic;
+}
+
+.vault-brand-scope .vb-chip-saved {
+  color: var(--vb-t3);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 2px 8px;
+  border: 1px solid var(--vb-border);
+  display: inline-block;
+}
