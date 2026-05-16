@@ -284,6 +284,22 @@ const toolsSectionAgency: NavSection = {
   ],
 };
 
+const creativeSection: NavSection = {
+  label: "CREATIVE",
+  accentColor: true,
+  items: [
+    { id: "status-creative", label: "STATUS - CREATIVE", subLabel: "Brief status + AI priority" },
+    { id: "creative-brief", label: "CREATIVE BRIEF", subLabel: "Campaign Documentation" },
+    { id: "brand-foundation", label: "BRAND FOUNDATION", subLabel: "Name, story, voice, guardrails" },
+    { id: "visual-identity", label: "VISUAL IDENTITY", subLabel: "Logo, color, type, photography" },
+    { id: "digital", label: "DIGITAL", subLabel: "Website, email, social, ads" },
+    { id: "video-content", label: "VIDEO + CONTENT", subLabel: "Film, demo, story series, scripts" },
+    { id: "print-physical", label: "PRINT + PHYSICAL", subLabel: "Brochure, packaging, signage" },
+    { id: "campaign", label: "CAMPAIGN", subLabel: "Title, concept, manifesto, calendar" },
+    { id: "prompt-builder", label: "PROMPT BUILDER", subLabel: "Generate ready-to-use prompts" },
+  ],
+};
+
 const adminSection: NavSection = {
   label: "ADMIN",
   collapsedByDefault: false,
@@ -337,10 +353,19 @@ export const agencyConfig: RoleConfig = {
   lightBg: "#e8e7e2",
   label: "AGENCY",
   entries: [
+    { type: "standalone", item: { id: "my-profile", label: "MY AGENCY PROFILE", subLabel: "" } },
     { type: "standalone", item: { id: "command", label: "COMMAND CENTER", subLabel: "Agency Dashboard" } },
-    { type: "standalone", item: { id: "client-dashboard", label: "CLIENT DASHBOARD", subLabel: "All Client Accounts" } },
     { type: "standalone", item: { id: "alerts", label: "ALERTS", subLabel: "Client + Platform Alerts" } },
     { type: "section", section: businessSectionAgency },
+    { type: "section", section: toolsSectionAgency },
+    { type: "section", section: baseSectionClient() },
+    { type: "section", section: hiveSectionDefault },
+    { type: "section", section: sumSectionClient },
+    { type: "section", section: creativeSection },
+    { type: "divider" },
+    { type: "standalone", item: { id: "research", label: "RESEARCH", subLabel: "Knowledge Engine" } },
+    { type: "standalone", item: { id: "nav-analytics", label: "ANALYTICS", subLabel: "Data + Trends" } },
+    { type: "section", section: adminSection },
   ],
   bottomLocked: [],
 };
