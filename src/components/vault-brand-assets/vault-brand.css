@@ -1913,3 +1913,638 @@
   font-size: 10px;
   line-height: 1.6;
 }
+
+/* ── UploadBtn ─────────────────────────────────── */
+.vault-brand-scope .vb-upload-wrap {
+  position: relative;
+  display: inline-block;
+}
+.vault-brand-scope .vb-upload-dropdown {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  z-index: 40;
+  width: 280px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  padding: 16px;
+}
+.vault-brand-scope .vb-upload-dropdown-title {
+  color: var(--vb-t1);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+.vault-brand-scope .vb-upload-dropzone {
+  padding: 20px;
+  border: 2px dashed var(--vb-border);
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 12px;
+  color: var(--vb-t5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.vault-brand-scope .vb-upload-dropzone-hint {
+  color: var(--vb-t4);
+  font-size: 9px;
+}
+.vault-brand-scope .vb-upload-cat-label {
+  color: var(--vb-t5);
+  font-size: 8px;
+  margin-bottom: 6px;
+}
+.vault-brand-scope .vb-upload-cat-list {
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.vault-brand-scope .vb-upload-cat-btn {
+  width: 100%;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  color: var(--vb-t3);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-align: left;
+}
+.vault-brand-scope .vb-upload-cat-btn:hover {
+  color: var(--vb-t1);
+}
+.vault-brand-scope .vb-upload-actions {
+  display: flex;
+  gap: 6px;
+}
+.vault-brand-scope .vb-upload-submit {
+  flex: 1;
+  padding: 8px 0;
+  background: none;
+  border: 1px solid var(--vb-t4);
+  color: var(--vb-t1);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.vault-brand-scope .vb-upload-cancel {
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t4);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+/* ── TagBar ────────────────────────────────────── */
+.vault-brand-scope .vb-tagbar {
+  padding: 12px 48px;
+  border-bottom: 1px solid var(--vb-border);
+  background: var(--vb-bg2);
+}
+.vault-brand-scope .vb-tagbar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.vault-brand-scope .vb-tagbar-label {
+  color: var(--vb-t5);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.vault-brand-scope .vb-quick-tag {
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+.vault-brand-scope .vb-quick-tag:hover {
+  color: var(--vb-t1);
+  border-color: var(--vb-t4);
+}
+.vault-brand-scope .vb-quick-tag.is-active {
+  color: var(--vb-gold);
+  border-color: var(--vb-gold);
+  background: rgba(226,181,63,0.1);
+  font-weight: 700;
+}
+.vault-brand-scope .vb-quick-tag-pin {
+  border-style: dashed;
+  border-color: var(--vb-t5);
+  color: var(--vb-t5);
+}
+.vault-brand-scope .vb-quick-tag-sm {
+  padding: 3px 10px;
+  font-size: 8px;
+}
+.vault-brand-scope .vb-tagbar-clear {
+  background: none;
+  border: none;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.vault-brand-scope .vb-tagbar-expand {
+  background: none;
+  border: none;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.vault-brand-scope .vb-tagbar-status {
+  color: var(--vb-gold);
+  font-size: 9px;
+  margin-bottom: 4px;
+}
+.vault-brand-scope .vb-tagbar-hint {
+  color: var(--vb-t5);
+  font-size: 8px;
+}
+.vault-brand-scope .vb-tagbar-all {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--vb-border);
+}
+
+/* ── FavoritesBar ──────────────────────────────── */
+.vault-brand-scope .vb-favbar {
+  padding: 24px 48px;
+  border-bottom: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-favbar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.vault-brand-scope .vb-favbar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--vb-t1);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.vault-brand-scope .vb-favbar-icon {
+  color: var(--vb-gold);
+}
+.vault-brand-scope .vb-favbar-count {
+  color: var(--vb-t5);
+  font-size: 9px;
+  font-weight: 400;
+}
+.vault-brand-scope .vb-favbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vault-brand-scope .vb-fav-compact {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.vault-brand-scope .vb-fav-item-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.vault-brand-scope .vb-fav-thumb {
+  width: 140px;
+  height: 120px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  color: var(--vb-t5);
+  margin-bottom: 8px;
+}
+.vault-brand-scope .vb-fav-remove {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background: var(--vb-bg);
+  border: 1px solid var(--vb-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--vb-t4);
+}
+.vault-brand-scope .vb-fav-expanded {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.vault-brand-scope .vb-fav-card {
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  cursor: pointer;
+}
+.vault-brand-scope .vb-fav-card-img {
+  height: 160px;
+  background: var(--vb-bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid var(--vb-border);
+  color: var(--vb-t5);
+}
+.vault-brand-scope .vb-fav-card-meta {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vault-brand-scope .vb-fav-card-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* ── Dashboard stats ───────────────────────────── */
+.vault-brand-scope .vb-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.vault-brand-scope .vb-stat-card {
+  padding: 16px;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-stat-label {
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.vault-brand-scope .vb-stat-value {
+  color: var(--vb-gold);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* ── GI Alert ──────────────────────────────────── */
+.vault-brand-scope .vb-gi-alert {
+  padding: 16px;
+  background: var(--vb-gold-tint);
+  border: 1px solid var(--vb-gold-bord);
+  margin-bottom: 16px;
+}
+.vault-brand-scope .vb-gi-alert-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.vault-brand-scope .vb-gi-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--vb-gold);
+}
+.vault-brand-scope .vb-gi-label {
+  color: var(--vb-gold);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+.vault-brand-scope .vb-gi-body {
+  color: var(--vb-gold-dim);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.vault-brand-scope .vb-gi-body strong {
+  color: var(--vb-gold);
+  font-weight: 800;
+}
+
+/* ── Dashboard expand toggle ───────────────────── */
+.vault-brand-scope .vb-dash-toggle {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  color: var(--vb-t4);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.vault-brand-scope .vb-dash-expanded {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Files Needing Review ──────────────────────── */
+.vault-brand-scope .vb-review-panel {
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-review-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+.vault-brand-scope .vb-review-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vb-t1);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.vault-brand-scope .vb-review-shield {
+  color: var(--vb-gold);
+}
+.vault-brand-scope .vb-review-count {
+  color: var(--vb-t5);
+  font-size: 9px;
+  font-weight: 400;
+}
+.vault-brand-scope .vb-review-panel-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vb-t4);
+}
+.vault-brand-scope .vb-review-hint {
+  color: var(--vb-t5);
+  font-size: 9px;
+}
+.vault-brand-scope .vb-review-row {
+  border-top: 1px solid var(--vb-border);
+}
+.vault-brand-scope .vb-review-item {
+  padding: 12px 14px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.vault-brand-scope .vb-review-thumb {
+  width: 56px;
+  height: 44px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: var(--vb-t5);
+}
+.vault-brand-scope .vb-review-body {
+  flex: 1;
+}
+.vault-brand-scope .vb-review-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.vault-brand-scope .vb-review-file {
+  background: none;
+  border: none;
+  color: var(--vb-t1);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+.vault-brand-scope .vb-review-item-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.vault-brand-scope .vb-urgency-tag {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 6px;
+  border: 1px solid;
+}
+.vault-brand-scope .vb-review-btn {
+  background: none;
+  border: 1px solid var(--vb-border);
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 4px 10px;
+}
+.vault-brand-scope .vb-review-reason {
+  color: var(--vb-t3);
+  font-size: 10px;
+  line-height: 1.6;
+}
+.vault-brand-scope .vb-review-age {
+  color: var(--vb-t5);
+  font-size: 8px;
+  margin-top: 4px;
+}
+.vault-brand-scope .vb-review-deps {
+  padding: 8px 14px 14px 84px;
+  background: var(--vb-bg3);
+}
+.vault-brand-scope .vb-review-deps-label {
+  color: var(--vb-t4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.vault-brand-scope .vb-review-dep-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: var(--vb-t3);
+  font-size: 10px;
+}
+.vault-brand-scope .vb-review-dep-update {
+  background: none;
+  border: none;
+  color: var(--vb-gold);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 6px;
+}
+
+/* ── Recent Uploads ────────────────────────────── */
+.vault-brand-scope .vb-recent-panel {
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  padding: 16px;
+}
+.vault-brand-scope .vb-recent-title {
+  color: var(--vb-t1);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+.vault-brand-scope .vb-recent-strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+}
+.vault-brand-scope .vb-recent-item {
+  flex-shrink: 0;
+  text-align: center;
+}
+.vault-brand-scope .vb-recent-thumb {
+  width: 80px;
+  height: 64px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  color: var(--vb-t5);
+}
+.vault-brand-scope .vb-recent-name {
+  color: var(--vb-t3);
+  font-size: 9px;
+  font-weight: 600;
+}
+.vault-brand-scope .vb-recent-date {
+  color: var(--vb-t5);
+  font-size: 8px;
+}
+
+/* ── Custom Categories ─────────────────────────── */
+.vault-brand-scope .vb-custom-cats-panel {
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  padding: 16px;
+}
+.vault-brand-scope .vb-custom-cats-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.vault-brand-scope .vb-custom-cats-title {
+  color: var(--vb-t1);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.vault-brand-scope .vb-custom-cats-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.vault-brand-scope .vb-cat-chip {
+  padding: 8px 14px;
+  background: var(--vb-bg3);
+  border: 1px solid var(--vb-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--vb-t4);
+}
+.vault-brand-scope .vb-cat-chip span:first-of-type {
+  color: var(--vb-t2);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.vault-brand-scope .vb-cat-count {
+  color: var(--vb-t5);
+  font-size: 8px;
+}
+.vault-brand-scope .vb-custom-cats-hint {
+  color: var(--vb-t5);
+  font-size: 9px;
+  margin-top: 8px;
+}
+
+/* ── Add Widget ────────────────────────────────── */
+.vault-brand-scope .vb-add-widget-wrap {
+  position: relative;
+  display: inline-block;
+}
+.vault-brand-scope .vb-add-widget-btn {
+  padding: 8px 16px;
+  background: none;
+  border: 1px dashed var(--vb-gold-bord);
+  color: var(--vb-gold-dim);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vault-brand-scope .vb-add-widget-menu {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  z-index: 30;
+  background: var(--vb-bg2);
+  border: 1px solid var(--vb-border);
+  padding: 4px;
+  width: 200px;
+}
+.vault-brand-scope .vb-add-widget-item {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--vb-t3);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-align: left;
+}
+.vault-brand-scope .vb-add-widget-item:hover {
+  color: var(--vb-t1);
+}

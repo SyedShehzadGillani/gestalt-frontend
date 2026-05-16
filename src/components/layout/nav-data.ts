@@ -429,7 +429,7 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "projects": `${prefix}/projects`,
     "timeline": `${prefix}/timeline`,
     "story-engine": `${prefix}/story-engine`,
-    "vault": `${prefix}/vault`,
+    "vault": role === "client" ? `${prefix}/vault/brand` : `${prefix}/vault`,
     "vendors": `${prefix}/vendors`,
     "polls": `${prefix}/polls`,
     "creative": `${prefix}/creative`,

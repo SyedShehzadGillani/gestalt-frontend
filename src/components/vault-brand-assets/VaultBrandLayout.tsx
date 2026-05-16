@@ -1,6 +1,9 @@
 import { useState, type ReactNode } from "react";
-import { Search, Upload, Download, Sun, Moon, ChevronDown, ChevronUp, Pencil } from "lucide-react";
+import { Download, Sun, Moon, ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { VAULT_SECTIONS } from "./nav-config";
+import { UploadBtn } from "./UploadBtn";
+import { TagBar } from "./TagBar";
+import { FavoritesBar } from "./FavoritesBar";
 import "./vault-brand.css";
 
 type Props = {
@@ -66,9 +69,7 @@ export function VaultBrandLayout({ children }: Props) {
               <p className="vb-subtitle">Master the system. Protect the brand.</p>
             </div>
             <div style={{ display: "flex", gap: 4 }}>
-              <button type="button" className="vb-textbtn">
-                <Upload size={14} /> Upload Assets
-              </button>
+              <UploadBtn />
               <button type="button" className="vb-textbtn">
                 <Download size={14} /> Download Media Kit
               </button>
@@ -76,11 +77,16 @@ export function VaultBrandLayout({ children }: Props) {
           </div>
           <div className="vb-search">
             <span className="vb-search-icon">
-              <Search size={14} />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="6" /><path d="M21 21l-4.35-4.35" />
+              </svg>
             </span>
             <input placeholder="Search assets, campaigns, tags..." />
           </div>
         </header>
+
+        <TagBar />
+        <FavoritesBar />
 
         <div className="vb-content">{children}</div>
 
@@ -110,9 +116,7 @@ export function VaultBrandSection({ id, title, defaultClosed, children }: Sectio
           <button
             type="button"
             className="vb-iconbtn"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
+            onClick={(e) => e.stopPropagation()}
             aria-label={`Add to ${title}`}
           >
             <Pencil size={14} />

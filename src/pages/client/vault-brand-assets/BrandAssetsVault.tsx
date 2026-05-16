@@ -19,8 +19,10 @@ import { FolderStructureSection } from "@/components/vault-brand-assets/FolderSt
 import { AssetIndexSection } from "@/components/vault-brand-assets/AssetIndexSection";
 import { ReadMeSection } from "@/components/vault-brand-assets/ReadMeSection";
 import { ChecklistSection } from "@/components/vault-brand-assets/ChecklistSection";
+import { DashboardSection } from "@/components/vault-brand-assets/DashboardSection";
 
 const IMPLEMENTED: Record<string, () => JSX.Element> = {
+  dashboard: DashboardSection,
   foundation: BrandFoundationSection,
   messaging: MessagingSection,
   color: ColorSystemSection,
