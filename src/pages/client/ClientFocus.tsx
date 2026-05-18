@@ -11,7 +11,7 @@ import type { PollSubmission } from "@/components/poll/PollTypes";
 // Generate 100-point questions (4 categories x 25 questions each)
 const generateFocusQuestions = () => {
   const categories = ["PERCEPTION", "CLARITY", "IDENTITY", "CULTURE"];
-  const questions = [];
+  const questions: { id: number; category: string; text: string }[] = [];
   
   const questionTemplates = {
     PERCEPTION: [

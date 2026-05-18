@@ -630,7 +630,7 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "hq-campaign": "/hq/campaign",
     "hq-prompt-builder": "/hq/prompt-builder",
     "hq-financials": "/hq/base-financials",
-    "hq-overview-top": "/hq/overview",
+    
     
     // Employee
     "my-profile": `${prefix}/profile`,
