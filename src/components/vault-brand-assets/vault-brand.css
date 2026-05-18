@@ -1105,9 +1105,10 @@
 /* Typography */
 
 .vault-brand-scope .vb-typo-family {
-  color: var(--vb-t4);
-  font-size: 11px;
+  color: var(--vb-t1);
   margin-bottom: 40px;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .vault-brand-scope .vb-typo-grid {
