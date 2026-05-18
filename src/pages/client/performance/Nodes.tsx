@@ -309,7 +309,7 @@ const empReady = Boolean(empForm.first && empForm.last && empForm.email && empFo
       if (classList.length) sel += '.' + classList.slice(0, 2).join('.');
       const parent = node.parentElement;
       if (parent) {
-        const sibs = Array.from(parent.children).filter((c: Element) => c.nodeName === node!.nodeName);
+        const sibs = (Array.from(parent.children) as Element[]).filter((c) => c.nodeName === node!.nodeName);
         if (sibs.length > 1) {
           const idx = sibs.indexOf(node as Element) + 1;
           sel += `:nth-of-type(${idx})`;
