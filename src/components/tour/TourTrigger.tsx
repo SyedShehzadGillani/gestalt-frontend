@@ -19,7 +19,7 @@ export function TourTrigger() {
   const isMessagingPage = location.pathname.includes('/messaging');
   
   const getAvailableTours = () => {
-    const tours = [];
+    const tours: { id: string; name: string; completed: boolean }[] = [];
     
     if (isAssessmentPage) {
       tours.push({
