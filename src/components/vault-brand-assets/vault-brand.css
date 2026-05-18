@@ -178,12 +178,12 @@
 }
 
 .vault-brand-scope .vb-section {
-  padding: 40px 0;
+  padding: 88px 0;
   border-bottom: 1px solid var(--vb-border);
 }
 
 .vault-brand-scope .vb-section.is-closed {
-  padding: 20px 0;
+  padding: 40px 0;
 }
 
 .vault-brand-scope .vb-section-head {
@@ -202,7 +202,7 @@
 }
 
 .vault-brand-scope .vb-section-body {
-  margin-top: 24px;
+  margin-top: 48px;
 }
 
 .vault-brand-scope .vb-iconbtn {
