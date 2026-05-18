@@ -4,7 +4,7 @@ import { FONT_WEIGHTS } from "./data/color-data";
 export function TypographySection() {
   return (
     <>
-      <div className="vb-typo-family">Gotham</div>
+      <div className="vb-typo-family text-7xl font-extralight">Gotham</div>
       <div className="vb-typo-grid">
         {FONT_WEIGHTS.map((fw) => (
           <div key={fw.name}>
