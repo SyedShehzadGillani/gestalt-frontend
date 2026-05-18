@@ -862,59 +862,74 @@
 
 .vault-brand-scope .vb-ramp-tile {
   height: 64px;
-  padding: 6px 3px;
+  padding: 6px 6px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vault-brand-scope .vb-ramp-tile.is-active {
+  transform: scaleY(1.18);
+  z-index: 3;
+  box-shadow: 0 0 0 2px var(--vb-t1), 0 8px 24px rgba(0,0,0,0.35);
 }
 
 .vault-brand-scope .vb-ramp-stop-num {
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .vault-brand-scope .vb-ramp-stop-hex {
-  font-size: 6px;
-  opacity: 0.7;
+  font-size: 9px;
+  opacity: 0.75;
+  font-weight: 600;
 }
 
-.vault-brand-scope .vb-ramp-editor {
-  position: absolute;
-  top: 68px;
-  left: -20px;
-  z-index: 20;
-  width: 160px;
-  padding: 10px;
+.vault-brand-scope .vb-ramp-editor-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 200;
+}
+
+.vault-brand-scope .vb-ramp-editor-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 201;
+  width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
   background: var(--vb-bg2);
   border: 1px solid var(--vb-border);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
 }
 
-.vault-brand-scope .vb-ramp-editor-row {
+.vault-brand-scope .vb-ramp-editor-header {
   display: flex;
-  gap: 6px;
+  gap: 14px;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--vb-border);
 }
 
-.vault-brand-scope .vb-ramp-mini-wheel {
-  width: 32px;
-  height: 32px;
-  padding: 0;
+.vault-brand-scope .vb-ramp-editor-preview {
+  width: 56px;
+  height: 56px;
   border: 1px solid var(--vb-border);
-  background: none;
-  cursor: pointer;
+  flex-shrink: 0;
 }
 
-.vault-brand-scope .vb-ramp-hex-input {
+.vault-brand-scope .vb-ramp-editor-title {
   flex: 1;
-  padding: 4px 6px;
-  background: var(--vb-bg3);
-  border: 1px solid var(--vb-border);
-  color: var(--vb-t1);
-  font-size: 10px;
-  outline: none;
-  font-family: inherit;
+  min-width: 0;
 }
 
 /* Gradients */
