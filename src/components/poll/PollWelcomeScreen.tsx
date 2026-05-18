@@ -44,11 +44,11 @@ export function PollWelcomeScreen({
   const config = pollConfig[pollType];
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center animate-fade-in px-4 py-8">
-      <div className="w-full max-w-[600px] mx-auto text-center">
+    <div className="min-h-[calc(100vh-64px)] flex flex-col animate-fade-in px-4 py-8">
+      <div className="w-full max-w-[600px] mx-auto text-center" style={{ marginTop: '5vh' }}>
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <img src={gestaltLogo} alt="GESTALT" className="w-16 h-16 opacity-50" />
+          <img src={gestaltLogo} alt="GESTALT" className="w-16 h-16 opacity-50 [.light_&]:invert" />
         </div>
 
         {/* Header Badge */}
