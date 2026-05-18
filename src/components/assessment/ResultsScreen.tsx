@@ -381,7 +381,7 @@ export function ResultsScreen({
                 <div className="text-[17px] font-bold tracking-[1px] uppercase mb-3">
                   <span className="text-gold">{String(blindspot.questionNumber).padStart(2, '0')}</span>
                   <span className="text-foreground-muted"> / </span>
-                  <span className="text-white">{blindspot.category}</span>
+                  <span className="text-white [.light_&]:text-black">{blindspot.category}</span>
                 </div>
 
                 {/* Question */}
@@ -469,15 +469,15 @@ export function ResultsScreen({
         {/* Actions */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-4">
           <Button variant="secondary" className="gap-2 text-gold">
-            <Download className="w-4 h-4 text-white" />
+            <Download className="w-4 h-4 text-white [.light_&]:text-black" />
             Download PDF Report
           </Button>
           <Button variant="secondary" className="gap-2 text-gold">
-            <Share2 className="w-4 h-4 text-white" />
+            <Share2 className="w-4 h-4 text-white [.light_&]:text-black" />
             Share Results
           </Button>
           <Button variant="secondary" className="gap-2 text-gold" onClick={onReturnToDashboard}>
-            <ArrowLeft className="w-4 h-4 text-white" />
+            <ArrowLeft className="w-4 h-4 text-white [.light_&]:text-black" />
             Return to Dashboard
           </Button>
         </div>

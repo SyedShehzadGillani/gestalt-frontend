@@ -59,7 +59,7 @@ export function QuestionScreen({
                     index < currentCategoryIndex 
                       ? "text-gold/50" 
                       : index === currentCategoryIndex 
-                        ? "text-white text-[13px]" 
+                        ? "text-white [.light_&]:text-black text-[13px]" 
                         : "text-foreground-muted"
                   } ${canNavigate ? "cursor-pointer hover:text-gold transition-colors duration-200" : ""}`}
                   onClick={() => {
@@ -88,7 +88,7 @@ export function QuestionScreen({
               {String(questionNumber).padStart(2, "0")}
             </span>
             <span className="text-[18px] md:text-[21px] font-light text-gold">/</span>
-            <span className="text-[18px] md:text-[21px] font-book tracking-[2px] text-white uppercase">
+            <span className="text-[18px] md:text-[21px] font-book tracking-[2px] text-white [.light_&]:text-black uppercase">
               {question.category}
             </span>
           </div>
@@ -158,9 +158,9 @@ export function QuestionScreen({
           {question.citations.map((citation, index) => (
             <div key={index} className="text-left">
               <p className="text-[18px] md:text-[19px] text-foreground-muted leading-relaxed">
-                <span className="text-white font-book">
+                <span className="text-white [.light_&]:text-black font-book">
                   {citation.highlight.split(/([$€£]?\d+(?:\.\d+)?[%xkKmMbBtT]?(?:\s*(?:trillion|billion|million|thousand))?)/g).map((part, i) => 
-                    /[$€£]?\d+(?:\.\d+)?[%xkKmMbBtT]?(?:\s*(?:trillion|billion|million|thousand))?/.test(part) ? <strong key={i} className="font-bold text-white">{part}</strong> : part
+                    /[$€£]?\d+(?:\.\d+)?[%xkKmMbBtT]?(?:\s*(?:trillion|billion|million|thousand))?/.test(part) ? <strong key={i} className="font-bold text-white [.light_&]:text-black">{part}</strong> : part
                   )}
                 </span>{" "}
                 {citation.text.split(/([$€£]?\d+(?:\.\d+)?[%xkKmMbBtT]?(?:\s*(?:trillion|billion|million|thousand))?)/g).map((part, i) => 

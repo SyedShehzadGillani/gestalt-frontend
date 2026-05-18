@@ -129,7 +129,7 @@ export function ConfidenceScreen({
               {String(questionNumber).padStart(2, "0")}
             </span>
             <span className="text-[18px] md:text-[21px] font-light text-gold">/</span>
-            <span className="text-[18px] md:text-[21px] font-book tracking-[2px] text-white uppercase">
+            <span className="text-[18px] md:text-[21px] font-book tracking-[2px] text-white [.light_&]:text-black uppercase">
               CONFIDENCE
             </span>
           </div>
