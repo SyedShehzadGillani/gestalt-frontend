@@ -129,6 +129,26 @@ export function TopNav() {
       {/* RIGHT — Icon row */}
       <div className="flex items-center" style={{ gap: 8, paddingRight: 20 }}>
 
+        {/* TEMP: Onboarding demo launcher — remove once client picks a concept (see DEC-010) */}
+        <button
+          onClick={() => navigate("/onboarding")}
+          style={{
+            marginRight: 12,
+            padding: "6px 14px",
+            background: "#c9a227",
+            color: "#0a0a0a",
+            border: "none",
+            fontSize: 10,
+            fontWeight: 800,
+            letterSpacing: 2,
+            cursor: "pointer",
+            fontFamily: "inherit",
+          }}
+          title="Temporary — client demo launcher"
+        >
+          ONBOARDING DEMOS
+        </button>
+
         {/* 1. Search */}
         <div className="relative" ref={searchRef} style={{ marginRight: 12 }}>
           <div
