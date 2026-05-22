@@ -1,7 +1,39 @@
+import { useLocation } from "react-router-dom";
 import { MODULE_NAV } from "@/components/formula/formula-data";
 
 interface Props {
   activeModuleId?: string;
+}
+
+/**
+ * Maps the current pathname to a MODULE_NAV id. Returns null if the route
+ * is not a journey-module page (header should not render).
+ */
+function detectModuleFromPath(pathname: string): string | null {
+  const p = pathname.toLowerCase();
+  if (/\/framework(\/|$)/.test(p)) return "framework";
+  if (/\/financials(\/|$)/.test(p)) return "financials";
+  if (/\/focus(\/|$)/.test(p)) return "focus";
+  if (/\/formula(\/|$)/.test(p)) return "formula";
+  if (/\/hive(\/|$)/.test(p)) return "hive";
+  if (/\/vault(\/|$)/.test(p)) return "vault";
+  if (/\/analytics(\/|$)/.test(p)) return "analytics";
+  // S.U.M. = messaging + the standalone S.U.M. surfaces per glossary
+  if (/\/(messaging|journal|story-engine|polls|timeline|projects|notes)(\/|$)/.test(p)) return "sum";
+  if (/\/sum-/.test(p)) return "sum";
+  return null;
+}
+
+/**
+ * Route-aware wrapper: renders `FormulaModuleNav` for the active module on
+ * any journey-module route (framework / financials / focus / formula /
+ * sum / hive / vault / analytics). Returns null elsewhere.
+ */
+export function ModuleJourneyHeader() {
+  const { pathname } = useLocation();
+  const id = detectModuleFromPath(pathname);
+  if (!id) return null;
+  return <FormulaModuleNav activeModuleId={id} />;
 }
 
 /**

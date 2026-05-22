@@ -12,6 +12,7 @@ import { RoleSidebar, RoleProvider } from "@/components/layout/RoleSidebar";
 import { TopNav } from "@/components/layout/TopNav";
 import { ProtectedHQRoute } from "@/components/hq/ProtectedHQRoute";
 import { PlatformFooter } from "@/components/layout/PlatformFooter";
+import { ModuleJourneyHeader } from "@/components/formula/FormulaModuleNav";
 
 // Agency Pages
 import AgencyDashboard from "@/pages/agency/AgencyDashboard";
@@ -89,6 +90,7 @@ function AppLayout() {
           backgroundColor: "var(--content-bg)",
         }}
       >
+        <ModuleJourneyHeader />
         <Routes>
           {/* Default redirect */}
           <Route path="/" element={<Navigate to="/client/1" replace />} />

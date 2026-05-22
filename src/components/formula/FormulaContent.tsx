@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { ALL_SECTION_IDS, TOUR_TIPS } from "@/components/formula/formula-data";
 import { CongratsOverlay } from "@/components/formula/CongratsOverlay";
 import { FormulaPanel, type PanelMessage } from "@/components/formula/FormulaPanel";
-import { FormulaModuleNav } from "@/components/formula/FormulaModuleNav";
 import { FormulaTabStrip } from "@/components/formula/FormulaTabStrip";
 import { InstructionBlock } from "@/components/formula/InstructionBlock";
 import { ArchPage } from "@/components/formula/pages/ArchPage";
@@ -96,7 +95,6 @@ export function FormulaContent() {
 
   return (
     <div className="formula-scope flex flex-col h-full">
-      <FormulaModuleNav activeModuleId="formula" />
       <FormulaTabStrip activePage={activePage} signedOff={signedOff} onChange={changePage} />
 
       <div className="flex-1 flex overflow-hidden">
