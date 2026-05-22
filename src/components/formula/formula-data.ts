@@ -316,14 +316,14 @@ export interface ModuleNavItem {
 }
 
 export const MODULE_NAV: ModuleNavItem[] = [
-  { id: "framework", label: "FRAMEWORK", time: "DAY 1", sub: "30 SEC", color: "#6b0901" },
-  { id: "financials", label: "FINANCIAL WIZARD", time: "DAY 1", sub: "5 MIN", color: "#c14000" },
-  { id: "focus", label: "FOCUS", time: "WEEK 1", sub: "30 MIN", color: "#ffad33" },
-  { id: "formula", label: "FORMULA", time: "WEEKS 2–4", sub: "3 FULL DAYS", color: "#d5e24a" },
-  { id: "sum", label: "S.U.M.", time: "WEEKS 3–4", sub: "30 MIN/EMPLOYEE", color: "#b5eb41" },
-  { id: "hive", label: "H.I.V.E.", time: "WEEKS 4–6", sub: "15 MIN/EMP + ONGOING", color: "#94d900" },
-  { id: "vault", label: "VAULT + BRAND AUDIT", time: "WEEKS 5–6", sub: "2–4 HOURS", color: "#57d900" },
-  { id: "analytics", label: "ANALYTICS", time: "DAY 42+", sub: "CONTINUOUS", color: "#57d900" },
+  { id: "framework", label: "FRAMEWORK", time: "DAY 1", sub: "90 SEC", color: "#6b0901" },
+  { id: "financials", label: "FINANCIALS", time: "WEEK 3", sub: "5 MIN", color: "#c14000" },
+  { id: "focus", label: "FOCUS", time: "WEEKS 1–2", sub: "30 MIN", color: "#ffad33" },
+  { id: "formula", label: "FORMULA", time: "WEEKS 3–4", sub: "3 FULL DAYS", color: "#d5e24a" },
+  { id: "sum", label: "S.U.M.", time: "WEEKS 4–6", sub: "30 MIN/EMPLOYEE", color: "#b5eb41" },
+  { id: "hive", label: "H.I.V.E.", time: "WEEKS 5–6", sub: "15 MIN/EMP + ONGOING", color: "#94d900" },
+  { id: "vault", label: "VAULT + BRAND AUDIT", time: "DAY 42+", sub: "2–4 HOURS", color: "#57d900" },
+  { id: "analytics", label: "ANALYTICS", time: "", sub: "CONTINUOUS", color: "#57d900" },
 ];
 
 // ── INTELLIGENCE STAGES — sidebar tracker per FORMULA section ──
