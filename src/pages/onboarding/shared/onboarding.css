@@ -1,0 +1,82 @@
+/* Scoped to .onboarding-scope so shell stays untouched */
+
+.onboarding-scope {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  color: #e8e8e8;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.onboarding-scope * { box-sizing: border-box; }
+
+.onboarding-scope .ob-exit {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  background: transparent;
+  border: 1px solid #1e1e1e;
+  color: #555;
+  padding: 8px 14px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 50;
+}
+.onboarding-scope .ob-exit:hover { color: #c9a227; border-color: rgba(201,162,39,.4); }
+
+.onboarding-scope input::placeholder { color: rgba(201,162,39,.15); }
+
+.onboarding-scope .ob-btn {
+  margin-top: 28px;
+  padding: 14px 40px;
+  background: #c9a227;
+  border: none;
+  color: #0a0a0a;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.onboarding-scope .ob-btn-ghost {
+  background: transparent;
+  color: #555;
+  border: 1px solid #1e1e1e;
+}
+
+.onboarding-scope .ob-label {
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #c9a227;
+  margin-bottom: 24px;
+  opacity: .65;
+}
+
+/* Index page */
+.ob-index { width: 100%; height: 100%; display: flex; flex-direction: column; padding: 64px 80px; gap: 32px; overflow-y: auto; }
+.ob-index h1 { font-size: 36px; font-weight: 200; color: #ddd; margin: 0; }
+.ob-index p.sub { font-size: 14px; color: #555; max-width: 560px; line-height: 1.7; font-weight: 300; }
+.ob-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; }
+.ob-card { background: #0e0e0e; border: 1px solid #1a1a1a; padding: 28px; display: flex; flex-direction: column; gap: 14px; transition: border-color .2s; }
+.ob-card:hover { border-color: rgba(201,162,39,.4); }
+.ob-card .tag { font-size: 8px; letter-spacing: 4px; color: #c9a227; font-weight: 800; }
+.ob-card h3 { font-size: 22px; font-weight: 300; color: #ddd; margin: 0; }
+.ob-card p { font-size: 12px; color: #666; line-height: 1.7; flex: 1; margin: 0; font-weight: 300; }
+
+/* End choice screen */
+.ob-finale { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; text-align: center; gap: 18px; }
+.ob-finale .num { font-size: 96px; font-weight: 800; color: #e2b53f; line-height: 1; }
+.ob-finale .label { font-size: 10px; letter-spacing: 5px; color: #555; font-weight: 700; }
+.ob-finale h2 { font-size: 28px; font-weight: 200; color: #ccc; margin: 8px 0 4px; max-width: 600px; }
+.ob-finale p { font-size: 13px; color: #666; max-width: 560px; line-height: 1.8; font-weight: 300; }
+.ob-finale .choice { display: flex; gap: 12px; margin-top: 24px; }
+.ob-finale .choice button { padding: 16px 36px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 2px; cursor: pointer; border: none; }
+.ob-finale .choice .primary { background: #c9a227; color: #0a0a0a; }
+.ob-finale .choice .ghost { background: transparent; color: #aaa; border: 1px solid #2a2a2a; }
