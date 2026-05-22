@@ -129,7 +129,7 @@ export function TopNav() {
       {/* RIGHT — Icon row */}
       <div className="flex items-center" style={{ gap: 8, paddingRight: 20 }}>
 
-        {/* TEMP: Onboarding demo launcher — remove once client picks a concept (see DEC-010) */}
+        {/* Onboarding launcher — points at the single Constellation flow (see DEC-010) */}
         <button
           onClick={() => navigate("/onboarding")}
           style={{
@@ -144,9 +144,9 @@ export function TopNav() {
             cursor: "pointer",
             fontFamily: "inherit",
           }}
-          title="Temporary — client demo launcher"
+          title="Launch onboarding flow"
         >
-          ONBOARDING DEMOS
+          ONBOARDING
         </button>
 
         {/* 1. Search */}

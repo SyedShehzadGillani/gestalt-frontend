@@ -72,11 +72,8 @@ import HQPermissions from "@/pages/hq/HQPermissions";
 
 import NotFound from "./pages/NotFound";
 
-// Onboarding demos (fullscreen, outside shell)
-import OnboardingIndex from "@/pages/onboarding/OnboardingIndex";
-import DemoA_Constellation from "@/pages/onboarding/DemoA_Constellation";
-import DemoB_CardDeck from "@/pages/onboarding/DemoB_CardDeck";
-import DemoC_HubWheel from "@/pages/onboarding/DemoC_HubWheel";
+// Onboarding flow (fullscreen, outside shell) — single flow, Constellation picked by client
+import OnboardingFlow from "@/pages/onboarding/OnboardingFlow";
 
 const queryClient = new QueryClient();
 
@@ -252,10 +249,7 @@ const App = () => (
                     <Route path="/login" element={<Login />} />
                     <Route path="/create-account" element={<CreateAccount />} />
                     <Route path="/framework-audit" element={<Funnel />} />
-                    <Route path="/onboarding" element={<OnboardingIndex />} />
-                    <Route path="/onboarding/constellation" element={<DemoA_Constellation />} />
-                    <Route path="/onboarding/carddeck" element={<DemoB_CardDeck />} />
-                    <Route path="/onboarding/hubwheel" element={<DemoC_HubWheel />} />
+                    <Route path="/onboarding" element={<OnboardingFlow />} />
                     <Route path="/*" element={<AppLayout />} />
                   </Routes>
                   <TourOverlay />
