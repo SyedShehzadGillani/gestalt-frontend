@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import type { OnboardingQuestion, Pillar } from "./onboarding-data";
-import { PILLARS } from "./onboarding-data";
+import type { OnboardingQuestion, Pillar, Demographic } from "./onboarding-data";
+import { FRAMEWORK_PILLARS, FOCUS_PILLARS, pickForDemo } from "./onboarding-data";
 
 type Props = {
   question: OnboardingQuestion;
   questionNumber: number; // 1-based position in current module (e.g. 4 of 21)
   total: number;
   module: "FRAMEWORK" | "FOCUS";
+  demographic: Demographic;
   onSubmit: (answer: "Y" | "N") => void;
   onPrev?: () => void;
 };
 
-export function QuestionScreen({ question, questionNumber, total, module, onSubmit, onPrev }: Props) {
+export function QuestionScreen({ question, questionNumber, total, module, demographic, onSubmit, onPrev }: Props) {
   const [pick, setPick] = useState<"Y" | "N" | null>(null);
 
   // Reset on question change.
@@ -34,12 +35,21 @@ export function QuestionScreen({ question, questionNumber, total, module, onSubm
     return () => window.removeEventListener("keydown", onKey);
   }, [pick, onSubmit, onPrev]);
 
+  // Pillar breadcrumb varies by module: FRAMEWORK = 4 pillars, FOCUS = 5 pillars.
+  const breadcrumbPillars: Pillar[] = module === "FRAMEWORK" ? FRAMEWORK_PILLARS : FOCUS_PILLARS;
+
+  // Resolve text + NO stats for current demographic (NO stats drive the visible
+  // urgency framing pre-answer, matching the existing UI tone; YES stats are
+  // stored for future post-answer affirmation panel).
+  const text = pickForDemo(question.text, demographic);
+  const visibleStats = pickForDemo(question.noStats, demographic);
+
   return (
     <div className="ob-q">
       {/* Top pillar breadcrumb */}
       <div className="ob-q-breadcrumb">
         <span className="muted">WELCOME</span>
-        {PILLARS.map((p) => (
+        {breadcrumbPillars.map((p) => (
           <span key={p} className={p === question.pillar ? "active" : "muted"}>
             <span className="slash"> / </span>{p}
           </span>
@@ -53,7 +63,7 @@ export function QuestionScreen({ question, questionNumber, total, module, onSubm
       <div className="ob-q-rule" />
 
       {/* Question text */}
-      <h2 className="ob-q-text">{question.text}</h2>
+      <h2 className="ob-q-text">{text}</h2>
 
       {/* Y / N buttons */}
       <div className="ob-q-choices">
@@ -74,9 +84,9 @@ export function QuestionScreen({ question, questionNumber, total, module, onSubm
 
       <div className="ob-q-rule" />
 
-      {/* Citations */}
+      {/* Citations (NO-path stats — urgency framing of what's at stake) */}
       <div className="ob-q-citations">
-        {question.citations.map((c, i) => (
+        {visibleStats.map((c, i) => (
           <div key={i} className="ob-q-citation">
             <div><strong>{c.highlight}</strong> {c.text}</div>
             <div className="ob-q-source">-{c.source}</div>
