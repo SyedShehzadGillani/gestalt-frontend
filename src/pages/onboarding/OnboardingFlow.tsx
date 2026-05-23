@@ -1,35 +1,24 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EndChoiceScreen } from "./shared/EndChoiceScreen";
 import { useConstellation } from "./shared/ConstellationCanvas";
 import { HUD } from "./shared/HUD";
 import { MessagingTicker } from "./shared/MessagingTicker";
 import { QuestionScreen } from "./shared/QuestionScreen";
-import { BlindspotPanel } from "./shared/BlindspotPanel";
 import { DemographicPicker } from "./shared/DemographicPicker";
-import { LeadCapture, type Lead } from "./shared/LeadCapture";
-import { Paywall, type Credentials } from "./shared/Paywall";
+import { LeadCapture } from "./shared/LeadCapture";
+import { Paywall } from "./shared/Paywall";
+import { ConfidenceStep } from "./shared/ConfidenceStep";
+import { ResultsDashboard } from "./shared/ResultsDashboard";
+import { downloadResultsPdf } from "./shared/results-pdf";
 import {
-  FRAMEWORK_QUESTIONS,
-  FOCUS_QUESTIONS,
-  TICKER_MESSAGES,
-  ONBOARDING_LS_KEYS,
-  pickForDemo,
-  type Demographic,
+  FRAMEWORK_QUESTIONS, FOCUS_QUESTIONS, TICKER_MESSAGES, type Demographic,
 } from "./shared/onboarding-data";
+import type { Answer } from "./shared/results-logic";
+import {
+  type OnboardingSession, type Scene, emptySession, loadSession, saveSession, clearSession,
+} from "./shared/session";
 import "./shared/onboarding.css";
-
-type Scene =
-  | "demographic"
-  | "lead"
-  | "framework-intro"
-  | "framework"
-  | "framework-blindspot"
-  | "paywall"
-  | "focus-intro"
-  | "focus"
-  | "focus-blindspot"
-  | "end";
 
 const DATA_POINTS_PER_Q = 47;
 
@@ -38,107 +27,55 @@ export default function OnboardingFlow() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const constellation = useConstellation(canvasRef);
 
-  const [scene, setScene] = useState<Scene>("demographic");
-  const [demographic, setDemographic] = useState<Demographic | null>(null);
-  const [lead, setLead] = useState<Lead | null>(null);
-  const [credentials, setCredentials] = useState<Credentials | null>(null);
+  const [s, setS] = useState<OnboardingSession>(() => loadSession() ?? emptySession());
 
-  const [fwAnswers, setFwAnswers] = useState<("Y" | "N")[]>([]);
-  const [focusAnswers, setFocusAnswers] = useState<("Y" | "N")[]>([]);
-  const [pendingBlindspotIdx, setPendingBlindspotIdx] = useState<number | null>(null);
+  // Persist on every change.
+  useEffect(() => { saveSession(s); }, [s]);
 
-  const fwIdx = fwAnswers.length;
-  const focusIdx = focusAnswers.length;
+  const patch = (p: Partial<OnboardingSession>) => setS((prev) => ({ ...prev, ...p }));
+  const go = (scene: Scene) => patch({ scene });
 
-  const totalAnswered = fwAnswers.length + focusAnswers.length;
-  const yesCount = fwAnswers.filter((a) => a === "Y").length + focusAnswers.filter((a) => a === "Y").length;
-  const blindspotCount = fwAnswers.filter((a) => a === "N").length + focusAnswers.filter((a) => a === "N").length;
-  const confidence = totalAnswered === 0 ? 0 : Math.round((yesCount / totalAnswered) * 100);
-  const intelligence = totalAnswered * DATA_POINTS_PER_Q + (demographic ? 80 : 0) + (lead ? 120 : 0);
+  const fwIdx = s.fwAnswers.length;
+  const focusIdx = s.focusAnswers.length;
 
-  // Seed background nodes so canvas isn't blank on landing.
+  const totalAnswered = s.fwAnswers.length + s.focusAnswers.length;
+  const yesCnt = s.fwAnswers.filter((a) => a === "Y").length + s.focusAnswers.filter((a) => a === "Y").length;
+  const blindspotCount = totalAnswered - yesCnt;
+  const confidence = totalAnswered === 0 ? 0 : Math.round((yesCnt / totalAnswered) * 100);
+  const intelligence = totalAnswered * DATA_POINTS_PER_Q + (s.demographic ? 80 : 0) + (s.lead ? 120 : 0);
+
+  // Seed background nodes once.
   useEffect(() => {
     constellation.addNodes(6, "gold");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleAnswer = (module: "FRAMEWORK" | "FOCUS", answer: "Y" | "N") => {
+  const handleAnswer = (module: "FRAMEWORK" | "FOCUS", answer: Answer, elapsedMs: number) => {
     if (answer === "Y") constellation.addNodes(4, "gold");
     else constellation.addNodes(3, "red");
 
     if (module === "FRAMEWORK") {
-      const next = [...fwAnswers, answer];
-      setFwAnswers(next);
-      try { localStorage.setItem(ONBOARDING_LS_KEYS.fwAnswers, JSON.stringify(next)); } catch { /* ignore */ }
-
-      if (answer === "N") {
-        setPendingBlindspotIdx(next.length - 1);
-        setScene("framework-blindspot");
-      } else if (next.length >= FRAMEWORK_QUESTIONS.length) {
-        setScene("paywall");
-      }
+      const fwAnswers = [...s.fwAnswers, answer];
+      const fwTimings = [...s.fwTimings, elapsedMs];
+      const done = fwAnswers.length >= FRAMEWORK_QUESTIONS.length;
+      patch({ fwAnswers, fwTimings, scene: done ? "framework-confidence" : "framework" });
     } else {
-      const next = [...focusAnswers, answer];
-      setFocusAnswers(next);
-      try { localStorage.setItem(ONBOARDING_LS_KEYS.focusAnswers, JSON.stringify(next)); } catch { /* ignore */ }
-
-      if (answer === "N") {
-        setPendingBlindspotIdx(next.length - 1);
-        setScene("focus-blindspot");
-      } else if (next.length >= FOCUS_QUESTIONS.length) {
-        setScene("end");
-      }
+      const focusAnswers = [...s.focusAnswers, answer];
+      const focusTimings = [...s.focusTimings, elapsedMs];
+      const done = focusAnswers.length >= FOCUS_QUESTIONS.length;
+      patch({ focusAnswers, focusTimings, scene: done ? "focus-confidence" : "focus" });
     }
   };
 
-  const continueAfterBlindspot = () => {
-    if (scene === "framework-blindspot") {
-      if (fwAnswers.length >= FRAMEWORK_QUESTIONS.length) setScene("paywall");
-      else setScene("framework");
-    } else if (scene === "focus-blindspot") {
-      if (focusAnswers.length >= FOCUS_QUESTIONS.length) setScene("end");
-      else setScene("focus");
-    }
-    setPendingBlindspotIdx(null);
-  };
+  const goPrevFw = () => fwIdx > 0 && patch({ fwAnswers: s.fwAnswers.slice(0, -1), fwTimings: s.fwTimings.slice(0, -1) });
+  const goPrevFocus = () => focusIdx > 0 && patch({ focusAnswers: s.focusAnswers.slice(0, -1), focusTimings: s.focusTimings.slice(0, -1) });
 
-  const goPrevFw = () => {
-    if (fwAnswers.length === 0) return;
-    const next = fwAnswers.slice(0, -1);
-    setFwAnswers(next);
-  };
-  const goPrevFocus = () => {
-    if (focusAnswers.length === 0) return;
-    const next = focusAnswers.slice(0, -1);
-    setFocusAnswers(next);
-  };
-
-  const currentBlindspot = useMemo(() => {
-    if (pendingBlindspotIdx == null) return null;
-    if (scene === "framework-blindspot") return FRAMEWORK_QUESTIONS[pendingBlindspotIdx];
-    if (scene === "focus-blindspot") return FOCUS_QUESTIONS[pendingBlindspotIdx];
-    return null;
-  }, [pendingBlindspotIdx, scene]);
-
-  useEffect(() => {
-    if (!currentBlindspot || !demographic) return;
-    try {
-      const raw = localStorage.getItem(ONBOARDING_LS_KEYS.blindspots);
-      const arr: { id: string; pillar: string; text: string }[] = raw ? JSON.parse(raw) : [];
-      if (!arr.find((b) => b.id === currentBlindspot.id)) {
-        arr.push({
-          id: currentBlindspot.id,
-          pillar: currentBlindspot.pillar,
-          text: pickForDemo(currentBlindspot.text, demographic),
-        });
-        localStorage.setItem(ONBOARDING_LS_KEYS.blindspots, JSON.stringify(arr));
-      }
-    } catch { /* ignore */ }
-  }, [currentBlindspot, demographic]);
+  const startOver = () => { clearSession(); setS(emptySession()); };
 
   return (
     <div className="onboarding-scope">
       <button className="ob-exit" onClick={() => nav("/")}>✕ EXIT</button>
+      {s.scene !== "demographic" && <button className="ob-startover" onClick={startOver}>↺ Start over</button>}
 
       <div className="ob-stage">
         {/* Left: constellation canvas */}
@@ -155,94 +92,122 @@ export default function OnboardingFlow() {
 
         {/* Right: scene panel */}
         <div className="ob-panel">
-          {scene === "demographic" && (
+          {s.scene === "demographic" && (
             <DemographicPicker
-              onPick={(d) => {
-                setDemographic(d);
+              onPick={(d: Demographic) => {
                 constellation.addNodes(4, "gold");
-                try { localStorage.setItem(ONBOARDING_LS_KEYS.demographic, d); } catch { /* ignore */ }
-                setScene("lead");
+                patch({ demographic: d, scene: "lead" });
               }}
             />
           )}
 
-          {scene === "lead" && (
+          {s.scene === "lead" && (
             <LeadCapture
               onSubmit={(l) => {
-                setLead(l);
                 constellation.addNodes(5, "gold");
-                try { localStorage.setItem(ONBOARDING_LS_KEYS.lead, JSON.stringify(l)); } catch { /* ignore */ }
-                setScene("framework-intro");
+                patch({ lead: l, scene: "framework-intro" });
               }}
             />
           )}
 
-          {scene === "framework-intro" && lead && demographic && (
+          {s.scene === "framework-intro" && s.lead && (
             <div className="ob-intro">
               <div className="ob-label">FRAMEWORK · 21-POINT ASSESSMENT</div>
-              <h2 className="ob-intro-h2">Welcome, {lead.firstName}.</h2>
-              <p className="ob-intro-sub">21 binary questions across 4 pillars. <strong>YES</strong> confirms value. <strong>NO</strong> exposes a blindspot.</p>
+              <h2 className="ob-intro-h2">Welcome, {s.lead.firstName}.</h2>
+              <p className="ob-intro-sub">21 questions across 4 pillars. <strong>YES</strong> confirms value. <strong>NO</strong> exposes a blindspot.</p>
               <p className="ob-intro-sub muted">Use <span className="kbd">Y</span> / <span className="kbd">N</span> / <span className="kbd">Enter</span> to move fast. <span className="kbd">←</span> to go back.</p>
-              <button className="ob-btn" onClick={() => setScene("framework")}>BEGIN ASSESSMENT</button>
+              <button className="ob-btn" onClick={() => go("framework")}>BEGIN ASSESSMENT</button>
             </div>
           )}
 
-          {scene === "framework" && demographic && fwIdx < FRAMEWORK_QUESTIONS.length && (
+          {s.scene === "framework" && s.demographic && fwIdx < FRAMEWORK_QUESTIONS.length && (
             <QuestionScreen
               question={FRAMEWORK_QUESTIONS[fwIdx]}
               questionNumber={fwIdx + 1}
               total={FRAMEWORK_QUESTIONS.length}
               module="FRAMEWORK"
-              demographic={demographic}
-              onSubmit={(a) => handleAnswer("FRAMEWORK", a)}
+              demographic={s.demographic}
+              onSubmit={(a, ms) => handleAnswer("FRAMEWORK", a, ms)}
               onPrev={fwIdx > 0 ? goPrevFw : undefined}
             />
           )}
 
-          {scene === "framework-blindspot" && currentBlindspot && demographic && (
-            <BlindspotPanel question={currentBlindspot} demographic={demographic} onContinue={continueAfterBlindspot} />
+          {s.scene === "framework-confidence" && (
+            <ConfidenceStep module="FRAMEWORK" onSubmit={(r) => patch({ fwConfidence: r, scene: "framework-results" })} />
           )}
 
-          {scene === "paywall" && lead && (
+          {s.scene === "framework-results" && s.demographic && (
+            <ResultsDashboard
+              module="FRAMEWORK"
+              questions={FRAMEWORK_QUESTIONS}
+              answers={s.fwAnswers}
+              timings={s.fwTimings}
+              confidence={s.fwConfidence ?? 0}
+              demographic={s.demographic}
+              onNext={() => go("paywall")}
+              onReturn={() => nav("/")}
+              onDownloadPdf={() => downloadResultsPdf({
+                module: "FRAMEWORK", companyName: s.lead?.companyName ?? "Your Company",
+                questions: FRAMEWORK_QUESTIONS, answers: s.fwAnswers, demographic: s.demographic!, confidence: s.fwConfidence ?? 0,
+              })}
+            />
+          )}
+
+          {s.scene === "paywall" && s.lead && (
             <Paywall
-              lead={lead}
+              lead={s.lead}
               blindspotCount={blindspotCount}
               onUnlock={(c) => {
-                setCredentials(c);
-                try { localStorage.setItem(ONBOARDING_LS_KEYS.credentials, JSON.stringify({ username: c.username })); } catch { /* ignore */ }
                 constellation.addNodes(10, "gold");
-                setScene("focus-intro");
+                patch({ credentials: { username: c.username }, scene: "focus-intro" });
               }}
             />
           )}
 
-          {scene === "focus-intro" && lead && credentials && (
+          {s.scene === "focus-intro" && s.credentials && (
             <div className="ob-intro">
               <div className="ob-label">FOCUS · 100-POINT DEEP DIVE</div>
-              <h2 className="ob-intro-h2">Account unlocked, {credentials.username}.</h2>
+              <h2 className="ob-intro-h2">Account unlocked, {s.credentials.username}.</h2>
               <p className="ob-intro-sub">100 questions across 5 pillars. Same rules — same speed. Response timing measured.</p>
-              <p className="ob-intro-sub muted">~20-30 minutes. Or take it in chunks — your progress saves.</p>
-              <button className="ob-btn" onClick={() => setScene("focus")}>BEGIN DEEP DIVE</button>
+              <p className="ob-intro-sub muted">~20-30 minutes. Or take it in chunks — your progress saves automatically.</p>
+              <button className="ob-btn" onClick={() => go("focus")}>BEGIN DEEP DIVE</button>
             </div>
           )}
 
-          {scene === "focus" && demographic && focusIdx < FOCUS_QUESTIONS.length && (
+          {s.scene === "focus" && s.demographic && focusIdx < FOCUS_QUESTIONS.length && (
             <QuestionScreen
               question={FOCUS_QUESTIONS[focusIdx]}
               questionNumber={focusIdx + 1}
               total={FOCUS_QUESTIONS.length}
               module="FOCUS"
-              demographic={demographic}
-              onSubmit={(a) => handleAnswer("FOCUS", a)}
+              demographic={s.demographic}
+              onSubmit={(a, ms) => handleAnswer("FOCUS", a, ms)}
               onPrev={focusIdx > 0 ? goPrevFocus : undefined}
             />
           )}
 
-          {scene === "focus-blindspot" && currentBlindspot && demographic && (
-            <BlindspotPanel question={currentBlindspot} demographic={demographic} onContinue={continueAfterBlindspot} />
+          {s.scene === "focus-confidence" && (
+            <ConfidenceStep module="FOCUS" onSubmit={(r) => patch({ focusConfidence: r, scene: "focus-results" })} />
           )}
 
-          {scene === "end" && (
+          {s.scene === "focus-results" && s.demographic && (
+            <ResultsDashboard
+              module="FOCUS"
+              questions={FOCUS_QUESTIONS}
+              answers={s.focusAnswers}
+              timings={s.focusTimings}
+              confidence={s.focusConfidence ?? 0}
+              demographic={s.demographic}
+              onNext={() => go("end")}
+              onReturn={() => nav("/")}
+              onDownloadPdf={() => downloadResultsPdf({
+                module: "FOCUS", companyName: s.lead?.companyName ?? "Your Company",
+                questions: FOCUS_QUESTIONS, answers: s.focusAnswers, demographic: s.demographic!, confidence: s.focusConfidence ?? 0,
+              })}
+            />
+          )}
+
+          {s.scene === "end" && (
             <EndChoiceScreen
               demoName="Constellation"
               vaultView={

@@ -206,38 +206,49 @@
 .ob-q-rule { height: 1px; background: rgba(201,162,39,.15); margin: 14px 0; }
 .ob-q-text { font-size: 26px; font-weight: 300; color: #e2b53f; line-height: 1.35; margin: 16px 0 28px; }
 
-.ob-q-choices { display: flex; flex-direction: column; gap: 10px; max-width: 200px; margin-bottom: 6px; }
+/* ── YES/NO/SUBMIT button system (per design_navigatin.png) ────────────────
+   Colors: YES = gold, NO = red, SUBMIT = gold.
+   Solid (default): transparent fill, 1px full-color border, full-color text.
+   Selected (.picked): solid full-color fill, dark text.
+   Rollover (hover): 21% bg opacity, 1px 100%-opacity border, full-color text. */
+.ob-q-choices { display: flex; flex-direction: column; gap: 10px; max-width: 220px; margin-bottom: 6px; }
 .ob-q-choice {
   padding: 14px 28px;
   background: transparent;
-  border: 1px solid rgba(201,162,39,.5);
-  color: #c9a227;
+  border: 1px solid;
   font-family: inherit;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 4px;
   cursor: pointer;
-  transition: background .15s, border-color .15s;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.ob-q-choice:hover { border-color: #e2b53f; color: #e2b53f; }
-.ob-q-choice.picked { background: rgba(201,162,39,.12); border-color: #e2b53f; color: #e2b53f; }
+/* YES = gold */
+.ob-q-choice--yes { border-color: #c9a227; color: #e2b53f; }
+.ob-q-choice--yes:hover { background: rgba(201,162,39,.21); border-color: #e2b53f; }
+.ob-q-choice--yes.picked { background: #c9a227; border-color: #c9a227; color: #0d0d0d; }
+/* NO = red */
+.ob-q-choice--no { border-color: #b83030; color: #d06464; }
+.ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; }
+.ob-q-choice--no.picked { background: #8b2020; border-color: #8b2020; color: #f3dada; }
 
 .ob-q-submit {
   width: 100%;
   padding: 16px;
-  background: rgba(201,162,39,.45);
-  color: #0a0a0a;
-  border: none;
+  background: transparent;
+  border: 1px solid #c9a227;
+  color: #e2b53f;
   font-family: inherit;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 4px;
   cursor: pointer;
-  transition: background .15s;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.ob-q-submit.active { background: #c9a227; }
-.ob-q-submit.active:hover { background: #e2b53f; }
-.ob-q-submit:disabled { cursor: not-allowed; }
+.ob-q-submit:hover:not(:disabled) { background: rgba(201,162,39,.21); border-color: #e2b53f; }
+.ob-q-submit.active { background: #c9a227; border-color: #c9a227; color: #0d0d0d; }
+.ob-q-submit.active:hover { background: #e2b53f; border-color: #e2b53f; }
+.ob-q-submit:disabled { opacity: .55; cursor: not-allowed; }
 
 .ob-q-citations { margin-top: 10px; display: flex; flex-direction: column; gap: 14px; }
 .ob-q-citation { font-size: 12px; color: #888; line-height: 1.6; font-weight: 300; }
@@ -336,3 +347,98 @@
 .ob-finale .choice button { padding: 16px 36px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 2px; cursor: pointer; border: none; }
 .ob-finale .choice .primary { background: #c9a227; color: #0a0a0a; }
 .ob-finale .choice .ghost { background: transparent; color: #aaa; border: 1px solid #2a2a2a; }
+
+/* ── Confidence step ──────────────────────────────────────────────────── */
+.ob-confidence { max-width: 520px; }
+.ob-confidence-h2 { font-size: 26px; color: #e2b53f; margin: 10px 0 6px; font-weight: 300; }
+.ob-confidence-sub { color: #9aa0a6; margin-bottom: 22px; }
+.ob-confidence-scale { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.ob-confidence-dot {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: transparent; border: 1px solid #c9a227; color: #e2b53f;
+  font-family: inherit; font-weight: 700; cursor: pointer; transition: background .15s, color .15s;
+}
+.ob-confidence-dot:hover { background: rgba(201,162,39,.21); }
+.ob-confidence-dot.picked { background: #c9a227; color: #0d0d0d; }
+
+/* ── Blindspot card (results list) ───────────────────────────────────── */
+.ob-bs-card {
+  position: relative; padding: 22px 24px; margin-bottom: 14px;
+  background: linear-gradient(90deg, rgba(139,32,32,.18), rgba(139,32,32,.04));
+  border: 1px solid rgba(184,48,48,.35); border-left: 3px solid #b83030; border-radius: 6px;
+}
+.ob-bs-card-head { font-size: 12px; letter-spacing: .1em; color: #d06464; font-weight: 700; margin-bottom: 12px; }
+.ob-bs-card-head span { color: #fff; }
+.ob-bs-card-q { font-size: 19px; color: #e2b53f; margin-bottom: 14px; line-height: 1.4; }
+.ob-bs-card-no { color: #9aa0a6; font-weight: 700; }
+.ob-bs-card-impl { color: #d6d9dc; line-height: 1.6; margin-bottom: 16px; max-width: 60ch; }
+.ob-bs-card-stat { color: #9aa0a6; font-size: 14px; margin-bottom: 14px; }
+.ob-bs-card-stat strong { color: #e2b53f; }
+.ob-bs-card-src { font-style: italic; color: #6b7176; }
+.ob-bs-card-solution { color: #8a8f94; font-size: 13px; letter-spacing: .04em; margin-bottom: 12px; }
+.ob-bs-card-meta { display: flex; gap: 26px; font-size: 12px; letter-spacing: .06em; color: #6b7176; }
+.ob-bs-card-meta strong { color: #c9ccce; }
+.ob-bs-card-meta .pr-high, .ob-bs-card-meta .im-high { color: #b83030; }
+.ob-bs-card-meta .pr-medium, .ob-bs-card-meta .im-medium { color: #e2b53f; }
+.ob-bs-card-meta .pr-low, .ob-bs-card-meta .im-low { color: #5fcc00; }
+
+/* ── Results dashboard ────────────────────────────────────────────────── */
+.ob-results { max-width: 880px; margin: 0 auto; padding: 8px 4px 60px; overflow-y: auto; max-height: 100%; }
+.ob-results-hero { text-align: center; margin-bottom: 34px; }
+.ob-results-score { font-size: 72px; font-weight: 800; color: #e2b53f; line-height: 1; }
+.ob-results-score span { font-size: 14px; font-weight: 700; letter-spacing: .12em; color: #9aa0a6; display: block; margin-top: 6px; }
+.ob-results-band { display: inline-block; margin-top: 14px; padding: 5px 14px; border-radius: 4px; background: rgba(95,204,0,.12); color: #5fcc00; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.ob-results-tagline { color: #9aa0a6; max-width: 50ch; margin: 16px auto 0; line-height: 1.6; }
+
+.ob-results-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+.ob-stat-card { padding: 18px; background: #16181c; border: 1px solid #24272c; border-radius: 8px; }
+.ob-stat-card.highlight { background: linear-gradient(135deg, rgba(201,162,39,.14), rgba(201,162,39,.02)); border-color: rgba(201,162,39,.4); }
+.ob-stat-label { font-size: 11px; letter-spacing: .1em; color: #8a8f94; margin-bottom: 8px; }
+.ob-stat-value { font-size: 30px; font-weight: 800; color: #e2b53f; }
+.ob-stat-value span { font-size: 14px; color: #8a8f94; font-weight: 600; }
+.ob-stat-sub { font-size: 11px; color: #6b7176; margin-top: 6px; }
+
+.ob-results-panel { padding: 22px; background: #131519; border: 1px solid #24272c; border-radius: 8px; margin-bottom: 22px; }
+.ob-panel-head { display: flex; justify-content: space-between; margin-bottom: 14px; }
+.ob-panel-head h3 { color: #fff; font-size: 15px; margin: 0; }
+.ob-panel-head span { color: #6b7176; font-size: 12px; }
+.ob-panel-count { text-align: right; font-size: 10px; letter-spacing: .1em; color: #6b7176; }
+.ob-panel-count strong { font-size: 22px; color: #e2b53f; }
+
+.ob-spectrum-top { margin-bottom: 12px; }
+.ob-spectrum-top strong { font-size: 34px; color: #e2b53f; font-weight: 800; }
+.ob-spectrum-top span { color: #8a8f94; }
+.ob-spectrum-top em { float: right; font-style: normal; font-size: 11px; letter-spacing: .12em; color: #8a8f94; margin-top: 16px; }
+.ob-spectrum-bar { position: relative; height: 14px; border-radius: 7px; background: linear-gradient(90deg, #da3832, #e2b53f 50%, #5fcc00); }
+.ob-spectrum-marker { position: absolute; top: -5px; width: 3px; height: 24px; background: #fff; transform: translateX(-50%); box-shadow: 0 0 6px rgba(255,255,255,.6); }
+.ob-spectrum-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 9px; letter-spacing: .06em; color: #6b7176; }
+.ob-spectrum-labels .active { color: #e2b53f; font-weight: 700; }
+
+.ob-results-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 30px; }
+.ob-pillar-card { padding: 16px; background: #16181c; border: 1px solid #24272c; border-radius: 8px; }
+.ob-pillar-name { font-size: 11px; letter-spacing: .1em; color: #8a8f94; margin-bottom: 10px; }
+.ob-pillar-pct { font-size: 24px; font-weight: 800; }
+.ob-pillar-pct.good { color: #5fcc00; }
+.ob-pillar-pct.bad { color: #da3832; }
+.ob-pillar-pct span { font-size: 12px; color: #8a8f94; font-weight: 600; }
+.ob-pillar-bar { height: 4px; background: #24272c; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+.ob-pillar-bar div { height: 100%; }
+.ob-pillar-bar div.good { background: #5fcc00; }
+.ob-pillar-bar div.bad { background: #da3832; }
+
+.ob-results-blindspots h2 { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 24px; letter-spacing: .04em; }
+.ob-bs-count { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #8b2020; color: #fff; border-radius: 6px; font-size: 18px; font-weight: 800; }
+.ob-bs-intro { color: #8a8f94; margin: 6px 0 20px; }
+
+.ob-results-next { margin-top: 26px; padding: 26px; border: 1px solid rgba(201,162,39,.4); border-radius: 8px; background: #131519; }
+.ob-next-tag { display: inline-block; padding: 4px 10px; background: rgba(201,162,39,.16); color: #e2b53f; font-size: 10px; letter-spacing: .12em; border-radius: 3px; }
+.ob-results-next h3 { color: #fff; font-size: 19px; margin: 12px 0 8px; }
+.ob-results-next p { color: #8a8f94; margin-bottom: 16px; max-width: 60ch; }
+.ob-results-next .ob-q-submit { max-width: 260px; }
+
+.ob-results-footer { display: flex; gap: 26px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 34px; padding-top: 24px; border-top: 1px solid #24272c; }
+.ob-results-footer button { background: none; border: none; color: #e2b53f; font-size: 13px; cursor: pointer; }
+.ob-results-footer .ob-q-submit { max-width: 200px; color: #0d0d0d; }
+
+.ob-startover { position: absolute; top: 16px; right: 96px; background: none; border: none; color: #6b7176; font-size: 12px; cursor: pointer; z-index: 5; }
+.ob-startover:hover { color: #9aa0a6; }
