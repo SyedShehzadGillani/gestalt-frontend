@@ -347,3 +347,16 @@
 .ob-finale .choice button { padding: 16px 36px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 2px; cursor: pointer; border: none; }
 .ob-finale .choice .primary { background: #c9a227; color: #0a0a0a; }
 .ob-finale .choice .ghost { background: transparent; color: #aaa; border: 1px solid #2a2a2a; }
+
+/* ── Confidence step ──────────────────────────────────────────────────── */
+.ob-confidence { max-width: 520px; }
+.ob-confidence-h2 { font-size: 26px; color: #e2b53f; margin: 10px 0 6px; font-weight: 300; }
+.ob-confidence-sub { color: #9aa0a6; margin-bottom: 22px; }
+.ob-confidence-scale { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.ob-confidence-dot {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: transparent; border: 1px solid #c9a227; color: #e2b53f;
+  font-family: inherit; font-weight: 700; cursor: pointer; transition: background .15s, color .15s;
+}
+.ob-confidence-dot:hover { background: rgba(201,162,39,.21); }
+.ob-confidence-dot.picked { background: #c9a227; color: #0d0d0d; }
