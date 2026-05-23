@@ -153,7 +153,7 @@ function AppLayout() {
           <Route path="/agency/framework" element={<ComingSoonPlaceholder title="Framework" subtitle="21-Point Assessment" />} />
           <Route path="/agency/financials" element={<AgencyFinancials />} />
           <Route path="/agency/focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
-          <Route path="/agency/formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
+          <Route path="/agency/formula" element={<ClientFormula />} />
           <Route path="/agency/hive" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/agency/messaging" element={<ClientMessaging />} />
           <Route path="/agency/journal" element={<ClientJournal />} />
@@ -195,7 +195,7 @@ function AppLayout() {
           <Route path="/hq/onboarding" element={<ComingSoonPlaceholder title="Onboarding" subtitle="Day 14 of 42" />} />
           <Route path="/hq/base-framework" element={<ComingSoonPlaceholder title="Framework" subtitle="21-Point Assessment" />} />
           <Route path="/hq/base-focus" element={<ComingSoonPlaceholder title="Focus" subtitle="Company Deep Dive" />} />
-          <Route path="/hq/base-formula" element={<ComingSoonPlaceholder title="Formula" subtitle="Interaction Strategy" />} />
+          <Route path="/hq/base-formula" element={<ClientFormula />} />
           <Route path="/hq/hive-performance" element={<ComingSoonPlaceholder title="Performance" subtitle="Human Capital Performance System" />} />
           <Route path="/hq/sum-messaging" element={<ClientMessaging />} />
           <Route path="/hq/sum-vault" element={<HQVault />} />
@@ -218,6 +218,7 @@ function AppLayout() {
           {/* Investor (Phase A scaffolding) */}
           <Route path="/investor" element={<Navigate to="/investor/1" replace />} />
           <Route path="/investor/:id" element={<ComingSoonPlaceholder title="Investor / Owner" subtitle="Multi-business portfolio" />} />
+          <Route path="/investor/:id/formula" element={<ClientFormula />} />
           <Route path="/investor/:id/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
 
           {/* Per-role coming-soon wildcards (override NotFound for known prefixes) */}
