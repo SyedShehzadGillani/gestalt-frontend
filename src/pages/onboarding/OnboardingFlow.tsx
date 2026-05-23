@@ -14,6 +14,7 @@ import {
   FOCUS_QUESTIONS,
   TICKER_MESSAGES,
   ONBOARDING_LS_KEYS,
+  pickForDemo,
   type Demographic,
 } from "./shared/onboarding-data";
 import "./shared/onboarding.css";
@@ -119,16 +120,21 @@ export default function OnboardingFlow() {
     return null;
   }, [pendingBlindspotIdx, scene]);
 
-  const persistBlindspots = (q: { id: string; pillar: string; text: string } | null) => {
-    if (!q) return;
+  useEffect(() => {
+    if (!currentBlindspot || !demographic) return;
     try {
       const raw = localStorage.getItem(ONBOARDING_LS_KEYS.blindspots);
       const arr: { id: string; pillar: string; text: string }[] = raw ? JSON.parse(raw) : [];
-      if (!arr.find((b) => b.id === q.id)) arr.push(q);
-      localStorage.setItem(ONBOARDING_LS_KEYS.blindspots, JSON.stringify(arr));
+      if (!arr.find((b) => b.id === currentBlindspot.id)) {
+        arr.push({
+          id: currentBlindspot.id,
+          pillar: currentBlindspot.pillar,
+          text: pickForDemo(currentBlindspot.text, demographic),
+        });
+        localStorage.setItem(ONBOARDING_LS_KEYS.blindspots, JSON.stringify(arr));
+      }
     } catch { /* ignore */ }
-  };
-  useEffect(() => { persistBlindspots(currentBlindspot); }, [currentBlindspot]);
+  }, [currentBlindspot, demographic]);
 
   return (
     <div className="onboarding-scope">
@@ -171,29 +177,30 @@ export default function OnboardingFlow() {
             />
           )}
 
-          {scene === "framework-intro" && lead && (
+          {scene === "framework-intro" && lead && demographic && (
             <div className="ob-intro">
               <div className="ob-label">FRAMEWORK · 21-POINT ASSESSMENT</div>
               <h2 className="ob-intro-h2">Welcome, {lead.firstName}.</h2>
-              <p className="ob-intro-sub">21 binary questions across 5 pillars. <strong>YES</strong> confirms value. <strong>NO</strong> exposes a blindspot.</p>
+              <p className="ob-intro-sub">21 binary questions across 4 pillars. <strong>YES</strong> confirms value. <strong>NO</strong> exposes a blindspot.</p>
               <p className="ob-intro-sub muted">Use <span className="kbd">Y</span> / <span className="kbd">N</span> / <span className="kbd">Enter</span> to move fast. <span className="kbd">←</span> to go back.</p>
               <button className="ob-btn" onClick={() => setScene("framework")}>BEGIN ASSESSMENT</button>
             </div>
           )}
 
-          {scene === "framework" && fwIdx < FRAMEWORK_QUESTIONS.length && (
+          {scene === "framework" && demographic && fwIdx < FRAMEWORK_QUESTIONS.length && (
             <QuestionScreen
               question={FRAMEWORK_QUESTIONS[fwIdx]}
               questionNumber={fwIdx + 1}
               total={FRAMEWORK_QUESTIONS.length}
               module="FRAMEWORK"
+              demographic={demographic}
               onSubmit={(a) => handleAnswer("FRAMEWORK", a)}
               onPrev={fwIdx > 0 ? goPrevFw : undefined}
             />
           )}
 
-          {scene === "framework-blindspot" && currentBlindspot && (
-            <BlindspotPanel question={currentBlindspot} onContinue={continueAfterBlindspot} />
+          {scene === "framework-blindspot" && currentBlindspot && demographic && (
+            <BlindspotPanel question={currentBlindspot} demographic={demographic} onContinue={continueAfterBlindspot} />
           )}
 
           {scene === "paywall" && lead && (
@@ -219,19 +226,20 @@ export default function OnboardingFlow() {
             </div>
           )}
 
-          {scene === "focus" && focusIdx < FOCUS_QUESTIONS.length && (
+          {scene === "focus" && demographic && focusIdx < FOCUS_QUESTIONS.length && (
             <QuestionScreen
               question={FOCUS_QUESTIONS[focusIdx]}
               questionNumber={focusIdx + 1}
               total={FOCUS_QUESTIONS.length}
               module="FOCUS"
+              demographic={demographic}
               onSubmit={(a) => handleAnswer("FOCUS", a)}
               onPrev={focusIdx > 0 ? goPrevFocus : undefined}
             />
           )}
 
-          {scene === "focus-blindspot" && currentBlindspot && (
-            <BlindspotPanel question={currentBlindspot} onContinue={continueAfterBlindspot} />
+          {scene === "focus-blindspot" && currentBlindspot && demographic && (
+            <BlindspotPanel question={currentBlindspot} demographic={demographic} onContinue={continueAfterBlindspot} />
           )}
 
           {scene === "end" && (

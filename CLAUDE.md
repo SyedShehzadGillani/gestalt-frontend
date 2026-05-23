@@ -1,5 +1,33 @@
 # gestalt-react — React Code Rules
 
+## Vault (Project Knowledge Base)
+
+`vault/` is symlinked at `gestalt-react/vault/` → never committed to git.
+
+**Read vault before starting any task** — it contains specs, decisions, bug log, phase plans, and context that are not in the code.
+
+| Need | File |
+|------|------|
+| Module specs, design system | `vault/gestaltai/` |
+| Active phase plan + status | `vault/plans/` |
+| Architecture/tech decisions | `vault/adr/` |
+| Bug inventory | `vault/bugs/BUGLOG.md` |
+| Product/UX decisions | `vault/decisions/DECISIONS.md` |
+| Non-obvious context notes | `vault/context/CONTEXT.md` |
+| Glossary, abbreviations, scores | `vault/PROJECT-GLOSSARY.md` |
+
+**Update vault when:**
+
+| Event | Update |
+|-------|--------|
+| Bug found + fixed | `vault/bugs/BUGLOG.md` — prepend `BUG-NNN` |
+| Architecture/tech decision | `vault/adr/ADR-NNN-title.md` + update `vault/adr/README.md` |
+| Product/UX decision | `vault/decisions/DECISIONS.md` — prepend `DEC-NNN` |
+| Phase task completed | `vault/plans/PHASES.md` — check off item |
+| Non-obvious fact discovered | `vault/context/CONTEXT.md` — prepend dated note |
+
+Search for existing entries before adding — update in-place if related entry exists.
+
 ## Language & Files
 - TypeScript only — no `.jsx` files for new components
 - Imports: always use `@/` alias, never relative `../../../`
