@@ -360,3 +360,24 @@
 }
 .ob-confidence-dot:hover { background: rgba(201,162,39,.21); }
 .ob-confidence-dot.picked { background: #c9a227; color: #0d0d0d; }
+
+/* ── Blindspot card (results list) ───────────────────────────────────── */
+.ob-bs-card {
+  position: relative; padding: 22px 24px; margin-bottom: 14px;
+  background: linear-gradient(90deg, rgba(139,32,32,.18), rgba(139,32,32,.04));
+  border: 1px solid rgba(184,48,48,.35); border-left: 3px solid #b83030; border-radius: 6px;
+}
+.ob-bs-card-head { font-size: 12px; letter-spacing: .1em; color: #d06464; font-weight: 700; margin-bottom: 12px; }
+.ob-bs-card-head span { color: #fff; }
+.ob-bs-card-q { font-size: 19px; color: #e2b53f; margin-bottom: 14px; line-height: 1.4; }
+.ob-bs-card-no { color: #9aa0a6; font-weight: 700; }
+.ob-bs-card-impl { color: #d6d9dc; line-height: 1.6; margin-bottom: 16px; max-width: 60ch; }
+.ob-bs-card-stat { color: #9aa0a6; font-size: 14px; margin-bottom: 14px; }
+.ob-bs-card-stat strong { color: #e2b53f; }
+.ob-bs-card-src { font-style: italic; color: #6b7176; }
+.ob-bs-card-solution { color: #8a8f94; font-size: 13px; letter-spacing: .04em; margin-bottom: 12px; }
+.ob-bs-card-meta { display: flex; gap: 26px; font-size: 12px; letter-spacing: .06em; color: #6b7176; }
+.ob-bs-card-meta strong { color: #c9ccce; }
+.ob-bs-card-meta .pr-high, .ob-bs-card-meta .im-high { color: #b83030; }
+.ob-bs-card-meta .pr-medium, .ob-bs-card-meta .im-medium { color: #e2b53f; }
+.ob-bs-card-meta .pr-low, .ob-bs-card-meta .im-low { color: #5fcc00; }
