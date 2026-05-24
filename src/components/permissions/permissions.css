@@ -1,0 +1,92 @@
+/* Org Permissions page — scoped theme tokens.
+   Driven by the app's global `.light` class (no local dark/light state).
+   Core colors source from app tokens; specialized shades match the canonical mockup. */
+
+.perms-scope {
+  --perm-bg: hsl(var(--background));
+  --perm-bg2: #111111;
+  --perm-bg3: #161616;
+  --perm-bg-exp: #0e0e0e;
+  --perm-border: #1e1e1e;
+  --perm-border-lt: #181818;
+  --perm-text: hsl(var(--foreground));
+  --perm-text-sec: #a0a0a0;
+  --perm-text-dim: #4a4a4a;
+  --perm-gold: hsl(var(--gold));
+  --perm-gold-hi: hsl(var(--gold-highlight));
+  --perm-gold-dim: hsl(var(--gold-dimlight));
+  --perm-gray-blue: hsl(var(--gray-blue));
+  --perm-red: #8b2020;
+  --perm-green: #78b956;
+  --perm-orange: #c45c00;
+  --perm-amber: #d4880f;
+  --perm-input-bg: #0e0e0e;
+  --perm-role-full: #c18d30;
+  --perm-role-scoped: #4d5562;
+  --perm-role-vendor: #8a6b20;
+  --perm-role-hq: #e2b53f;
+  --perm-slash: #2a2a2a;
+  --perm-pending: #333333;
+  --perm-pending-bg: #131313;
+  --perm-alert-bg: #160a0a;
+  --perm-alert-border: #5d1414;
+  --perm-warn-bg: #161208;
+  --perm-warn-border: #8a6b20;
+  --perm-paused-bg: #14120c;
+  --perm-detail-bg: #0c0c0c;
+  --perm-selected-row: rgba(201, 162, 39, 0.06);
+  --perm-row-alt: rgba(255, 255, 255, 0.012);
+  --perm-hover-row: rgba(201, 162, 39, 0.04);
+  --perm-drop-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  --perm-on-gold: #0a0a0a;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--perm-text);
+  background: var(--perm-bg);
+  font-family: Gotham, Montserrat, sans-serif;
+}
+
+.light .perms-scope {
+  --perm-bg2: #f8f7f4;
+  --perm-bg3: #eae9e4;
+  --perm-bg-exp: #fafaf8;
+  --perm-border: #d4d3ce;
+  --perm-border-lt: #e0dfda;
+  --perm-text-sec: #4a4a4a;
+  --perm-text-dim: #8a8a8a;
+  --perm-green: #3d6e24;
+  --perm-amber: #a06d0a;
+  --perm-input-bg: #f0efea;
+  --perm-role-full: #8a6c12;
+  --perm-role-scoped: #7a7e88;
+  --perm-role-vendor: #8a6c12;
+  --perm-role-hq: #6d5510;
+  --perm-slash: #c0bfba;
+  --perm-pending: #b0b0a0;
+  --perm-pending-bg: #e6e5e0;
+  --perm-alert-bg: #f5e5e5;
+  --perm-alert-border: #c87070;
+  --perm-warn-bg: #f5ece0;
+  --perm-warn-border: #c49555;
+  --perm-paused-bg: #f5f0e0;
+  --perm-detail-bg: #ffffff;
+  --perm-selected-row: rgba(160, 125, 21, 0.06);
+  --perm-row-alt: rgba(0, 0, 0, 0.015);
+  --perm-hover-row: rgba(0, 0, 0, 0.03);
+  --perm-drop-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --perm-on-gold: #ffffff;
+}
+
+.perms-scope *,
+.perms-scope *::before,
+.perms-scope *::after {
+  box-sizing: border-box;
+}
+
+.perms-scope input,
+.perms-scope textarea,
+.perms-scope select {
+  font-family: inherit;
+}
