@@ -69,6 +69,7 @@ import HQCoupons from "@/pages/hq/HQCoupons";
 import HQUsage from "@/pages/hq/HQUsage";
 import HQAlerts from "@/pages/hq/HQAlerts";
 import HQPermissions from "@/pages/hq/HQPermissions";
+import PermissionsPage from "@/pages/permissions/PermissionsPage";
 
 import NotFound from "./pages/NotFound";
 
@@ -141,7 +142,7 @@ function AppLayout() {
           <Route path="/client/:id/mgmt-revenue" element={<ComingSoonPlaceholder title="Revenue" subtitle="Agency Billing + ARR" />} />
           <Route path="/client/:id/mgmt-usage" element={<ComingSoonPlaceholder title="Usage" subtitle="Platform Activity" />} />
           <Route path="/client/:id/mgmt-invoicing" element={<ComingSoonPlaceholder title="Invoicing" subtitle="Billing + Billable Hours" />} />
-          <Route path="/client/:id/mgmt-permissions" element={<ComingSoonPlaceholder title="Permissions" subtitle="Client Access Controls" />} />
+          <Route path="/client/:id/mgmt-permissions" element={<PermissionsPage />} />
           <Route path="/client/:id/mgmt-announcements" element={<ComingSoonPlaceholder title="Announcements" subtitle="Platform-Wide Broadcasts" />} />
           <Route path="/client/:id/profile" element={<ClientProfile />} />
           <Route path="/client/:id/my-score" element={<ComingSoonPlaceholder title="My Score" subtitle="H.I.V.E. Dashboard" />} />
@@ -169,7 +170,7 @@ function AppLayout() {
           <Route path="/agency/research" element={<ComingSoonPlaceholder title="Research" subtitle="Knowledge Engine" />} />
           <Route path="/agency/mgmt-usage" element={<ComingSoonPlaceholder title="Usage" subtitle="Client Platform Activity" />} />
           <Route path="/agency/mgmt-invoicing" element={<ComingSoonPlaceholder title="Invoicing" subtitle="Billing + Billable Hours" />} />
-          <Route path="/agency/mgmt-permissions" element={<ComingSoonPlaceholder title="Permissions" subtitle="Client Access Controls" />} />
+          <Route path="/agency/mgmt-permissions" element={<PermissionsPage />} />
           <Route path="/agency/mgmt-announcements" element={<ComingSoonPlaceholder title="Announcements" subtitle="Platform-Wide Broadcasts" />} />
           <Route path="/agency/my-tasks" element={<ComingSoonPlaceholder title="My Tasks" subtitle="Assigned From Projects" />} />
 
@@ -219,6 +220,7 @@ function AppLayout() {
           <Route path="/investor" element={<Navigate to="/investor/1" replace />} />
           <Route path="/investor/:id" element={<ComingSoonPlaceholder title="Investor / Owner" subtitle="Multi-business portfolio" />} />
           <Route path="/investor/:id/formula" element={<ClientFormula />} />
+          <Route path="/investor/:id/mgmt-permissions" element={<PermissionsPage />} />
           <Route path="/investor/:id/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />
 
           {/* Per-role coming-soon wildcards (override NotFound for known prefixes) */}
