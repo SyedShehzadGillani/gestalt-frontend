@@ -100,7 +100,7 @@ function getQuadrantColor(q: typeof QUADRANTS[0], dark: boolean): string {
   return specColorAt(q.score, dark);
 }
 
-export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMode, onSegmentClick }: LeftPanelProps) {
+export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMode, onSegmentClick, onOuterSegmentClick }: LeftPanelProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const hasSelection = !!activeId && QUADRANTS.some(q => q.id === activeId);
