@@ -267,6 +267,7 @@ function IntelligenceMapTab({ isDark, theme }: { isDark: boolean; theme: Record<
         activeId={panelActiveId}
         viewMode={viewMode}
         onSegmentClick={(id) => { setActiveId(id); setOuterActive(null); }}
+        onOuterSegmentClick={handleOuterClick}
       />
 
       {/* Center: 360° Wheel */}
