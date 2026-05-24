@@ -102,106 +102,34 @@ function getQuadrantColor(q: typeof QUADRANTS[0], dark: boolean): string {
 export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMode, onSegmentClick }: LeftPanelProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const selected = activeId ? QUADRANTS.find(q => q.id === activeId) : null;
+  const hasSelection = !!activeId && QUADRANTS.some(q => q.id === activeId);
 
-  if (selected) {
-    const qColor = getQuadrantColor(selected, dark);
-    return (
-      <div style={{ width: 260, flexShrink: 0, fontFamily: font, display: "flex", flexDirection: "column", gap: 14 }}>
-        {/* Back button */}
-        <button
-          onClick={() => onSegmentClick(null)}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = theme.gold; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = theme.text4; }}
-          style={{
-            fontFamily: font, fontSize: 8, fontWeight: 700, color: theme.text4,
-            background: "none", border: "none", cursor: "pointer", padding: 0,
-            letterSpacing: 1.5, textTransform: "uppercase", textAlign: "left",
-            display: "flex", alignItems: "center", gap: 4,
-          }}
-        >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-          ALL QUADRANTS
-        </button>
-
-        {/* Segment tag + score */}
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-            <span style={{ fontSize: 9, fontWeight: 800, color: qColor, letterSpacing: 1.5, textTransform: "uppercase" }}>
-              {selected.label}
-            </span>
-            <span style={{ fontSize: 22, fontWeight: 900, color: specColorAt(selected.score, dark) }}>
-              {formatScore(selected.score)}
-            </span>
-          </div>
-
-          {/* Segment tags */}
-          <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
-            {selected.segments.map(seg => (
-              <span key={seg.id} style={{
-                fontSize: 7, fontWeight: 700, color: theme.text4,
-                letterSpacing: 1, padding: "2px 6px",
-                border: `1px solid ${theme.border}`, borderRadius: 2,
-                textTransform: "uppercase",
-              }}>
-                {seg.tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Headline with gold left border */}
-        <div style={{ borderLeft: `2px solid ${theme.gold}`, paddingLeft: 14 }}>
-          <span style={{ fontSize: 11, fontWeight: 800, color: theme.text1, lineHeight: 1.5, display: "block" }}>
-            {selected.selectedHeadline}
-          </span>
-        </div>
-
-        {/* Body summary */}
-        <p style={{ fontSize: 9, color: theme.text3, lineHeight: 1.8, margin: 0 }}>
-          {selected.selectedBody}
-        </p>
-
-        {/* EXIT IMPACT box */}
-        <div style={{
-          borderLeft: `2px solid ${theme.gold}`,
-          padding: "10px 14px",
-          backgroundColor: dark ? "rgba(201,162,39,0.06)" : "rgba(201,162,39,0.08)",
-          borderRadius: 2,
-        }}>
-          <span style={{ fontSize: 8, fontWeight: 800, color: theme.gold, letterSpacing: 1.5, display: "block", marginBottom: 6 }}>
-            EXIT IMPACT
-          </span>
-          <p style={{ fontSize: 9, color: theme.text2, lineHeight: 1.7, margin: 0 }}>
-            {selected.exitImpact}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  // DEFAULT STATE: Four quadrant cards
   return (
     <div style={{ width: 260, flexShrink: 0, fontFamily: font, display: "flex", flexDirection: "column", gap: 14 }}>
       {QUADRANTS.map(q => {
         const qColor = getQuadrantColor(q, dark);
         const isHovered = hoveredId === q.id;
+        const isSelected = activeId === q.id;
+        const isDimmed = hasSelection && !isSelected;
+
+        let opacity = 1;
+        if (isDimmed) opacity = isHovered ? 0.75 : 0.25;
+
         return (
           <div
             key={q.id}
-            onClick={() => onSegmentClick(q.id)}
+            onClick={() => onSegmentClick(isSelected ? null : q.id)}
             onMouseEnter={() => setHoveredId(q.id)}
             onMouseLeave={() => setHoveredId(null)}
             style={{
-              backgroundColor: isHovered ? theme.bg3 : theme.bg2,
+              backgroundColor: isHovered || isSelected ? theme.bg3 : theme.bg2,
               border: `1px solid ${theme.border}`,
               borderLeft: `2px solid ${qColor}`,
               borderRadius: 2,
               padding: "12px 14px",
               cursor: "pointer",
-              transition: "background-color 150ms",
+              opacity,
+              transition: "opacity 200ms, background-color 150ms",
             }}
           >
             {/* Top row: name + score */}
@@ -224,8 +152,8 @@ export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMo
               <div style={{ width: `${q.score}%`, height: "100%", backgroundColor: qColor, borderRadius: 1, transition: "width 300ms" }} />
             </div>
 
-            {/* Hover: EXIT IMPACT text */}
-            {isHovered && (
+            {/* Hover hint (only when not selected) */}
+            {isHovered && !isSelected && (
               <span style={{
                 display: "block", marginTop: 6,
                 fontSize: 7, fontWeight: 700, color: theme.gold,
@@ -234,9 +162,77 @@ export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMo
                 VIEW EXIT IMPACT →
               </span>
             )}
+
+            {/* Expanded supporting content */}
+            {isSelected && (
+              <div
+                style={{
+                  marginTop: 12,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                  animation: "imlp-expand 220ms ease-out",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Segment tags */}
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  {q.segments.map(seg => (
+                    <span key={seg.id} style={{
+                      fontSize: 7, fontWeight: 700, color: theme.text4,
+                      letterSpacing: 1, padding: "2px 6px",
+                      border: `1px solid ${theme.border}`, borderRadius: 2,
+                      textTransform: "uppercase",
+                    }}>
+                      {seg.tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Headline */}
+                <div style={{ borderLeft: `2px solid ${theme.gold}`, paddingLeft: 12 }}>
+                  <span style={{ fontSize: 11, fontWeight: 800, color: theme.text1, lineHeight: 1.5, display: "block" }}>
+                    {q.selectedHeadline}
+                  </span>
+                </div>
+
+                {/* Body */}
+                <p style={{ fontSize: 9, color: theme.text3, lineHeight: 1.8, margin: 0 }}>
+                  {q.selectedBody}
+                </p>
+
+                {/* EXIT IMPACT */}
+                <div style={{
+                  borderLeft: `2px solid ${theme.gold}`,
+                  padding: "10px 12px",
+                  backgroundColor: dark ? "rgba(201,162,39,0.06)" : "rgba(201,162,39,0.08)",
+                  borderRadius: 2,
+                }}>
+                  <span style={{ fontSize: 8, fontWeight: 800, color: theme.gold, letterSpacing: 1.5, display: "block", marginBottom: 6 }}>
+                    EXIT IMPACT
+                  </span>
+                  <p style={{ fontSize: 9, color: theme.text2, lineHeight: 1.7, margin: 0 }}>
+                    {q.exitImpact}
+                  </p>
+                </div>
+
+                {/* Collapse button */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); onSegmentClick(null); }}
+                  style={{
+                    fontFamily: font, fontSize: 7, fontWeight: 700, color: theme.text4,
+                    background: "none", border: "none", cursor: "pointer", padding: 0,
+                    letterSpacing: 1, textTransform: "uppercase", textAlign: "left",
+                  }}
+                >
+                  ← COLLAPSE
+                </button>
+              </div>
+            )}
           </div>
         );
       })}
+      <style>{`@keyframes imlp-expand { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }`}</style>
     </div>
   );
 }
