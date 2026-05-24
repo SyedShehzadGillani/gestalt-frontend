@@ -184,7 +184,7 @@ export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMo
                       border: `1px solid ${theme.border}`, borderRadius: 2,
                       textTransform: "uppercase",
                     }}>
-                      {seg.tag}
+                      {seg.label}
                     </span>
                   ))}
                 </div>
