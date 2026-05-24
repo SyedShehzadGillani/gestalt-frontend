@@ -25,6 +25,7 @@ interface LeftPanelProps {
   activeId: string | null;
   viewMode: "education" | "score";
   onSegmentClick: (id: string | null) => void;
+  onOuterSegmentClick?: (id: string | null) => void;
 }
 
 const QUADRANTS = [
