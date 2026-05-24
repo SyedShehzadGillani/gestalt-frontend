@@ -178,16 +178,32 @@ export default function IntelligenceMapLeftPanel({ dark, theme, activeId, viewMo
               >
                 {/* Segment tags */}
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {q.segments.map(seg => (
-                    <span key={seg.id} style={{
-                      fontSize: 7, fontWeight: 700, color: theme.text4,
-                      letterSpacing: 1, padding: "2px 6px",
-                      border: `1px solid ${theme.border}`, borderRadius: 2,
-                      textTransform: "uppercase",
-                    }}>
-                      {seg.label}
-                    </span>
-                  ))}
+                  {q.segments.map(seg => {
+                    const isActiveSeg = activeId === seg.id;
+                    return (
+                      <button
+                        key={seg.id}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOuterSegmentClick?.(isActiveSeg ? null : seg.id);
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = theme.gold; (e.currentTarget as HTMLElement).style.color = theme.gold; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = isActiveSeg ? theme.gold : theme.border; (e.currentTarget as HTMLElement).style.color = isActiveSeg ? theme.gold : theme.text4; }}
+                        style={{
+                          fontFamily: font,
+                          fontSize: 7, fontWeight: 700,
+                          color: isActiveSeg ? theme.gold : theme.text4,
+                          letterSpacing: 1, padding: "2px 6px",
+                          border: `1px solid ${isActiveSeg ? theme.gold : theme.border}`, borderRadius: 2,
+                          textTransform: "uppercase",
+                          background: "none", cursor: "pointer",
+                          transition: "color 150ms, border-color 150ms",
+                        }}
+                      >
+                        {seg.label}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Headline */}
