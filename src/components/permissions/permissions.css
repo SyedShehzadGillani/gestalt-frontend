@@ -40,7 +40,10 @@
   --perm-drop-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
   --perm-on-gold: #0a0a0a;
 
-  height: 100%;
+  /* Break out of the global <main> 20px padding so the page sits flush to the
+     sidebar/top-nav 1px borders instead of floating inside a content-bg frame. */
+  margin: -20px;
+  height: calc(100% + 40px);
   display: flex;
   flex-direction: column;
   color: var(--perm-text);
