@@ -37,8 +37,8 @@ export function MessagingTicker({ messages }: { messages: string[]; intervalMs?:
     <div
       className="ob-ticker"
       style={{
-        left: `${pos.x}px`,
-        top: `${pos.y}px`,
+        left: `calc(33.333% + ${pos.dx}px)`,
+        top: `calc(50% + ${pos.dy}px)`,
         opacity: visible ? 0.45 : 0,
       }}
     >
@@ -47,12 +47,10 @@ export function MessagingTicker({ messages }: { messages: string[]; intervalMs?:
   );
 }
 
-// Constellation is drawn centered at (400, 450) in canvas pixels with a
-// target radius ≈ 175px. Keep the ticker strictly within that disc so it
-// always lands on top of the cluster, never floating around the page.
+// Drop ticker copy within the constellation cluster, which is centered at
+// (33% width, 50% height) of the viewport. Random offset 60–170px from center.
 function randomPos() {
-  const cx = 400, cy = 450;
-  const r = 60 + Math.random() * 110; // 60–170px from center
+  const r = 60 + Math.random() * 110;
   const a = Math.random() * Math.PI * 2;
-  return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r };
+  return { dx: Math.cos(a) * r, dy: Math.sin(a) * r };
 }

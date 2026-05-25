@@ -60,15 +60,17 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 44%;
-  min-width: 460px;
-  max-width: 720px;
+  width: 33.333%;
   height: 100%;
   border: none;
   background: transparent;
   overflow-y: auto;
-  padding: 220px 72px 120px 48px;
+  padding: 48px 72px 48px 48px;
   z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 /* ── HUD (top-left rail, no card) ───────────────────────────────────── */
@@ -247,8 +249,8 @@
   font-size: 9px;
   letter-spacing: 3px;
   font-weight: 700;
-  margin-bottom: 38px;
-  text-align: right;
+  margin-bottom: 280px;
+  text-align: left;
 }
 .ob-q-breadcrumb .active { color: #e2b53f; }
 .ob-q-breadcrumb .muted { color: #444; }
