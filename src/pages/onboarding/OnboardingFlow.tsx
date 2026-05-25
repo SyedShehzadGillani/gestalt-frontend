@@ -229,6 +229,14 @@ export default function OnboardingFlow() {
           )}
         </div>
       </div>
+
+      {showKbdHints && (
+        <div className="ob-kbd-bar">
+          <span className="ob-q-kbd">Y</span> Yes ·
+          <span className="ob-q-kbd">N</span> No ·
+          <span className="ob-q-kbd">Enter</span> Submit ·
+        </div>
+      )}
     </div>
   );
 }
