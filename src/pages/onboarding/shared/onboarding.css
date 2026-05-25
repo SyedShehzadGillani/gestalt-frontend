@@ -256,11 +256,13 @@
   margin-bottom: 280px;
   text-align: left;
   white-space: nowrap;
-  opacity: 0.5;
 }
-.ob-q-breadcrumb .active { color: #e2b53f; }
-.ob-q-breadcrumb .muted { color: #c9a227; }
-.ob-q-breadcrumb .slash { color: rgba(201,162,39,.5); margin: 0 2px; }
+.ob-q-breadcrumb .active { color: #e2b53f; opacity: 1; }
+.ob-q-breadcrumb .done { color: #c9a227; opacity: 0.5; }
+.ob-q-breadcrumb .pending { color: #888; opacity: 0.5; }
+.ob-q-breadcrumb .slash { margin: 0 2px; }
+.ob-q-breadcrumb .slash-done { color: #c9a227; opacity: 0.5; }
+.ob-q-breadcrumb .slash-pending { color: #888; opacity: 0.5; }
 
 .ob-q-num { color: #888; }
 
