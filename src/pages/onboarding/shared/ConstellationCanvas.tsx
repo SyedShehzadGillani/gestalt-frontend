@@ -143,5 +143,7 @@ export function useConstellation(canvasRef: React.RefObject<HTMLCanvasElement>):
       }
     },
     nodeCount: () => nodesRef.current.length,
+    getNodes: () => nodesRef.current,
+    logicalSize: { w: 800, h: 900 },
   };
 }
