@@ -152,8 +152,8 @@
 /* ── Messaging ticker ──────────────────────────────────── */
 .ob-ticker {
   position: absolute;
-  bottom: 32px;
-  left: 50%;
+  bottom: 38%;
+  left: 28%;
   transform: translateX(-50%);
   font-size: 11px;
   color: #666;
@@ -163,7 +163,7 @@
   pointer-events: none;
   z-index: 5;
   text-align: center;
-  max-width: 80%;
+  max-width: 40%;
 }
 
 /* ── Demographic picker ────────────────────────────────── */
