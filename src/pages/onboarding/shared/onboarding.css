@@ -230,7 +230,7 @@
  /* NO = neutral gold solid; red identity on hover + selected */
  .ob-q-choice--no { border-color: #c9a227; color: #e2b53f; }
  .ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; color: #d06464; }
- .ob-q-choice--no.picked { background: #a01818; border-color: #a01818; color: #f3dada; }
+ .ob-q-choice--no.picked { background: #a01818; border-color: #a01818; color: #0d0d0d; }
 
 .ob-q-submit {
   width: 100%;
