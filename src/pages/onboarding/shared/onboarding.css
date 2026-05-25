@@ -156,7 +156,7 @@
   color: #666;
   font-weight: 300;
   letter-spacing: 1px;
-  transition: opacity .4s ease;
+  transition: opacity 3s ease;
   pointer-events: none;
   z-index: 5;
   text-align: center;

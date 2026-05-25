@@ -12,7 +12,7 @@ export function MessagingTicker({ messages, intervalMs = 5000 }: { messages: str
         setI((p) => (p + 1) % messages.length);
         setPos(randomPos());
         setFade(true);
-      }, 400);
+      }, 3000);
     }, intervalMs);
     return () => clearInterval(t);
   }, [messages.length, intervalMs]);
