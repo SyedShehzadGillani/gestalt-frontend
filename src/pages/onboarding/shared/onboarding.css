@@ -223,14 +223,14 @@
   cursor: pointer;
   transition: background .15s, color .15s, border-color .15s;
 }
-/* YES = gold */
-.ob-q-choice--yes { border-color: #c9a227; color: #e2b53f; }
-.ob-q-choice--yes:hover { background: rgba(201,162,39,.21); border-color: #e2b53f; }
-.ob-q-choice--yes.picked { background: #c9a227; border-color: #c9a227; color: #0d0d0d; }
-/* NO = red */
-.ob-q-choice--no { border-color: #b83030; color: #d06464; }
-.ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; }
-.ob-q-choice--no.picked { background: #8b2020; border-color: #8b2020; color: #f3dada; }
+/* YES = gold (solid: gold border + gold text; selected: solid gold + dark text; hover: 21% gold bg) */
+ .ob-q-choice--yes { border-color: #c9a227; color: #e2b53f; }
+ .ob-q-choice--yes:hover { background: rgba(201,162,39,.21); border-color: #c9a227; color: #e2b53f; }
+ .ob-q-choice--yes.picked { background: #c9a227; border-color: #c9a227; color: #0d0d0d; }
+ /* NO = neutral gold solid; red identity on hover + selected */
+ .ob-q-choice--no { border-color: #c9a227; color: #e2b53f; }
+ .ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; color: #d06464; }
+ .ob-q-choice--no.picked { background: #a01818; border-color: #a01818; color: #f3dada; }
 
 .ob-q-submit {
   width: 100%;
