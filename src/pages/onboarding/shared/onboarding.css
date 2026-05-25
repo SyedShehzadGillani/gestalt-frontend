@@ -327,8 +327,8 @@
 .ob-q-gi-logo { display: flex; justify-content: center; margin: 22px 0 14px; opacity: .35; }
 
 .ob-q-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 14px; border-top: 1px solid #141414; }
-.ob-q-prev { background: none; border: none; color: #666; font-family: inherit; font-size: 11px; cursor: pointer; padding: 4px 0; }
-.ob-q-prev:hover { color: #c9a227; }
+.ob-q-prev { background: none; border: none; color: #c9a227; font-family: inherit; font-size: 11px; cursor: pointer; padding: 4px 0; }
+.ob-q-prev:hover { color: rgba(201,162,39,0.5); }
 .ob-q-kbd-hint { font-size: 9px; color: #444; letter-spacing: 1px; }
 
 /* ── Blindspot panel (red) ─────────────────────────────── */
