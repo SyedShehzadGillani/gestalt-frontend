@@ -14,6 +14,10 @@ export type ConstellationNode = {
 export type ConstellationHandle = {
   addNodes: (count: number, type: "gold" | "red") => void;
   nodeCount: () => number;
+  // Returns current nodes in canvas (800x900) coordinate space.
+  getNodes: () => ConstellationNode[];
+  // Logical canvas dimensions nodes are authored against.
+  logicalSize: { w: number; h: number };
 };
 
 export function useConstellation(canvasRef: React.RefObject<HTMLCanvasElement>): ConstellationHandle {
@@ -139,5 +143,7 @@ export function useConstellation(canvasRef: React.RefObject<HTMLCanvasElement>):
       }
     },
     nodeCount: () => nodesRef.current.length,
+    getNodes: () => nodesRef.current,
+    logicalSize: { w: 800, h: 900 },
   };
 }
