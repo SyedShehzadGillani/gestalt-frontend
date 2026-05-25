@@ -254,13 +254,13 @@
   letter-spacing: 3px;
   font-weight: 700;
   line-height: 1;
-  margin-bottom: 280px;
+  margin: 0;
   text-align: left;
   white-space: nowrap;
 }
-/* Neutralize header's top spacing so the 280px gap is measured exactly
-   from the breadcrumb baseline to the "NN / PILLAR" header. */
-.ob-q-breadcrumb + .ob-q-header { margin-top: 0; line-height: 1; }
+/* Exact 280px gap between breadcrumb box and "NN / PILLAR" header box. */
+.ob-q-breadcrumb-gap { height: 280px; flex-shrink: 0; }
+.ob-q-header { margin-top: 0; line-height: 1; }
 .ob-q-breadcrumb .active { color: #e2b53f; opacity: 1; }
 .ob-q-breadcrumb .done { color: #c9a227; opacity: 0.5; }
 .ob-q-breadcrumb .pending { color: #888; opacity: 0.5; }
