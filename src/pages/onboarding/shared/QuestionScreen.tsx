@@ -61,7 +61,7 @@ export function QuestionScreen({ question, questionNumber, total, module, demogr
 
       {/* Question number + pillar header */}
       <div className="ob-q-header">
-        {String(questionNumber).padStart(2, "0")} / {question.pillar}
+        <span className="ob-q-num">{String(questionNumber).padStart(2, "0")} / </span>{question.pillar}
       </div>
       <div className="ob-q-rule" />
 
