@@ -102,14 +102,11 @@ export function QuestionScreen({ question, questionNumber, total, module, demogr
         <GILogo />
       </div>
 
-      {/* Footer: prev + keyboard hint */}
+      {/* Footer: prev only — keyboard hints now live in global bottom bar */}
       <div className="ob-q-footer">
         {onPrev && questionNumber > 1 ? (
-          <button className="ob-q-prev" onClick={onPrev}>← Previous Question</button>
+          <button className="ob-q-prev" onClick={onPrev}>&lt; PREVIOUS QUESTION</button>
         ) : <span />}
-        <span className="ob-q-kbd-hint">
-          {module} · {questionNumber} / {total} · <span className="ob-q-kbd">Y</span> Yes · <span className="ob-q-kbd">N</span> No · <span className="ob-q-kbd">Enter</span> Submit · <span className="ob-q-kbd">←</span> Back
-        </span>
       </div>
     </div>
   );

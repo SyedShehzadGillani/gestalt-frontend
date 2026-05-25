@@ -72,21 +72,28 @@ export default function OnboardingFlow() {
 
   const startOver = () => { clearSession(); setS(emptySession()); };
 
+  const moduleLabel =
+    s.scene === "framework" ? `FRAMEWORK  ${fwIdx + 1}/${FRAMEWORK_QUESTIONS.length}` :
+    s.scene === "focus" ? `FOCUS  ${focusIdx + 1}/${FOCUS_QUESTIONS.length}` :
+    undefined;
+
+  const showKbdHints = s.scene === "framework" || s.scene === "focus";
+
   return (
     <div className="onboarding-scope">
-      <button className="ob-exit" onClick={() => nav("/")}>✕ EXIT</button>
-      {s.scene !== "demographic" && <button className="ob-startover" onClick={startOver}>↺ Start over</button>}
+      <button className="ob-exit" onClick={() => nav("/")}>EXIT  -  X</button>
 
       <div className="ob-stage">
-        {/* Left: constellation canvas */}
+        {/* Full-bleed constellation canvas behind everything */}
         <div className="ob-canvas-wrap">
           <canvas ref={canvasRef} />
-          <HUD intelligence={intelligence} confidence={confidence} />
-          {blindspotCount > 0 && (
-            <div className="ob-blindspot-counter">
-              <span className="red">●</span> {blindspotCount} BLINDSPOT{blindspotCount === 1 ? "" : "S"} EXPOSED
-            </div>
-          )}
+          <HUD
+            intelligence={intelligence}
+            confidence={confidence}
+            moduleLabel={moduleLabel}
+            blindspotCount={blindspotCount}
+            onReset={s.scene !== "demographic" ? startOver : undefined}
+          />
           <MessagingTicker messages={TICKER_MESSAGES} />
         </div>
 
@@ -222,6 +229,14 @@ export default function OnboardingFlow() {
           )}
         </div>
       </div>
+
+      {showKbdHints && (
+        <div className="ob-kbd-bar">
+          <span className="ob-q-kbd">Y</span> Yes ·
+          <span className="ob-q-kbd">N</span> No ·
+          <span className="ob-q-kbd">Enter</span> Submit ·
+        </div>
+      )}
     </div>
   );
 }
