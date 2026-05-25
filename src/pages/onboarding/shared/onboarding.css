@@ -236,7 +236,8 @@
   width: 100%;
   padding: 13px 28px;
   background: transparent;
-  border: 1px solid #c9a227;
+  border: 1px solid;
+  border-color: #c9a227;
   color: #e2b53f;
   font-family: inherit;
   font-size: 12px;
