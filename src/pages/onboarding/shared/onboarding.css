@@ -234,13 +234,13 @@
 
 .ob-q-submit {
   width: 100%;
-  padding: 14px;
+  padding: 13px 28px;
   background: transparent;
   border: 1px solid #c9a227;
   color: #e2b53f;
   font-family: inherit;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
   transition: background .15s, color .15s, border-color .15s;
