@@ -74,14 +74,21 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
           )}
 
           {current.fmts && (
-            <div className="vb-flb-fmts">
+            <div className="vb-flb-fmts" role="radiogroup" aria-label="Download format">
               {current.fmts.map((f) => (
-                <span key={f} className="vb-flb-fmt">
+                <button
+                  type="button"
+                  key={f}
+                  className={`vb-flb-fmt${selectedFmt === f ? " is-selected" : ""}`}
+                  aria-pressed={selectedFmt === f}
+                  onClick={() => setSelectedFmt(f)}
+                >
                   {f}
-                </span>
+                </button>
               ))}
             </div>
           )}
+
         </div>
 
         <div className="vb-flb-detail">
