@@ -71,6 +71,11 @@ export function QuestionScreen({ question, questionNumber, total, module, demogr
         })()}
       </div>
 
+      {/* Exact 280px gap to header */}
+      <div className="ob-q-breadcrumb-gap" aria-hidden />
+
+
+
       {/* Question number + pillar header */}
       <div className="ob-q-header">
         <span className="ob-q-num">{String(questionNumber).padStart(2, "0")} / </span>{question.pillar}
