@@ -59,8 +59,9 @@
 .ob-panel {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 33.333%;
+  left: 66.6667%;
+  transform: translateX(-50%);
+  width: 580px;
   height: 100%;
   border: none;
   background: transparent;
@@ -70,11 +71,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 .ob-panel > * {
   width: 100%;
-  max-width: 580px;
 }
 
 /* ── HUD (top-left rail, no card) ───────────────────────────────────── */
