@@ -66,11 +66,11 @@
   border: none;
   background: transparent;
   overflow-y: auto;
-  padding: 48px 0;
+  padding: 205px 0 48px;
   z-index: 5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
 }
 .ob-panel > * {
