@@ -78,7 +78,7 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
 
           {current.fmts && (
             <div className="vb-flb-fmts" role="radiogroup" aria-label="Download format">
-              {current.fmts.map((f) => (
+              {[...current.fmts, "ALL"].map((f) => (
                 <button
                   type="button"
                   key={f}
