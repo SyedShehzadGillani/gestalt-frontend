@@ -54,7 +54,7 @@
 
 /* ── Stage layout: full-bleed canvas with overlaid rails ─────────────── */
 .ob-stage { position: relative; width: 100%; height: 100%; }
-.ob-canvas-wrap { position: absolute; top: 0; bottom: 0; left: 0; right: 44%; overflow: hidden; }
+.ob-canvas-wrap { position: absolute; inset: 0; overflow: hidden; }
 .ob-canvas-wrap canvas { position: absolute; inset: 0; }
 .ob-panel {
   position: absolute;
