@@ -14,6 +14,7 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
   const current = items[idx];
   const [name, setName] = useState(current?.name ?? "");
   const [renaming, setRenaming] = useState(false);
+  const [selectedFmt, setSelectedFmt] = useState<string | null>(current?.fmts?.[0] ?? null);
 
   if (!current) return null;
 
@@ -25,9 +26,13 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
     onNav(next);
     setName(items[next]?.name ?? "");
     setRenaming(false);
+    setSelectedFmt(items[next]?.fmts?.[0] ?? null);
   };
 
-  const downloadLabel = isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
+  const downloadLabel = selectedFmt
+    ? `DOWNLOAD ${selectedFmt}`
+    : isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
+
 
   return (
     <div className="vb-flb" onClick={onClose} role="dialog">
@@ -69,14 +74,21 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
           )}
 
           {current.fmts && (
-            <div className="vb-flb-fmts">
+            <div className="vb-flb-fmts" role="radiogroup" aria-label="Download format">
               {current.fmts.map((f) => (
-                <span key={f} className="vb-flb-fmt">
+                <button
+                  type="button"
+                  key={f}
+                  className={`vb-flb-fmt${selectedFmt === f ? " is-selected" : ""}`}
+                  aria-pressed={selectedFmt === f}
+                  onClick={() => setSelectedFmt(f)}
+                >
                   {f}
-                </span>
+                </button>
               ))}
             </div>
           )}
+
         </div>
 
         <div className="vb-flb-detail">

@@ -1354,7 +1354,21 @@
   font-size: 8px;
   font-weight: 700;
   letter-spacing: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
+
+.vault-brand-scope .vb-flb-fmt:hover {
+  color: var(--vb-gold-dim);
+}
+
+.vault-brand-scope .vb-flb-fmt.is-selected {
+  color: var(--vb-gold);
+  border-color: var(--vb-gold);
+  background: var(--vb-gold-tint);
+}
+
 
 .vault-brand-scope .vb-flb-detail {
   padding: 16px 20px;
