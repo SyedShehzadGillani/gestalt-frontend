@@ -44,7 +44,9 @@ export function useConstellation(canvasRef: React.RefObject<HTMLCanvasElement>):
       const nodes = nodesRef.current;
       const edges = edgesRef.current;
       const now = Date.now();
-      const sx = w / 800, sy = h / 900;
+      // Constellation visual center sits at the 1/3 mark of the page:
+      // node x=400 → draw_x = w/3 (sx = w/1200), node y=450 → draw_y = h/2.
+      const sx = w / 1200, sy = h / 900;
       const intensity = Math.min(nodes.length / 200, 1);
 
       const bg = ctx.createRadialGradient(w * 0.5, h * 0.45, 0, w * 0.5, h * 0.45, w * 0.6);
