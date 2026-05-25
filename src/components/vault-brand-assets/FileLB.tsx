@@ -14,6 +14,7 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
   const current = items[idx];
   const [name, setName] = useState(current?.name ?? "");
   const [renaming, setRenaming] = useState(false);
+  const [selectedFmt, setSelectedFmt] = useState<string | null>(current?.fmts?.[0] ?? null);
 
   if (!current) return null;
 
@@ -25,9 +26,13 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
     onNav(next);
     setName(items[next]?.name ?? "");
     setRenaming(false);
+    setSelectedFmt(items[next]?.fmts?.[0] ?? null);
   };
 
-  const downloadLabel = isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
+  const downloadLabel = selectedFmt
+    ? `DOWNLOAD ${selectedFmt}`
+    : isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
+
 
   return (
     <div className="vb-flb" onClick={onClose} role="dialog">
