@@ -51,12 +51,24 @@ export function QuestionScreen({ question, questionNumber, total, module, demogr
     <div className="ob-q">
       {/* Top pillar breadcrumb */}
       <div className="ob-q-breadcrumb">
-        <span className="muted">WELCOME</span>
-        {breadcrumbPillars.map((p) => (
-          <span key={p} className={p === question.pillar ? "active" : "muted"}>
-            <span className="slash"> / </span>{p}
-          </span>
-        ))}
+        {(() => {
+          const currentIdx = breadcrumbPillars.indexOf(question.pillar);
+          // WELCOME is always "done" (already passed)
+          return (
+            <>
+              <span className="done">WELCOME</span>
+              {breadcrumbPillars.map((p, i) => {
+                const cls = i < currentIdx ? "done" : i === currentIdx ? "active" : "pending";
+                const slashCls = i - 1 < currentIdx ? "slash-done" : "slash-pending";
+                return (
+                  <span key={p} className={cls}>
+                    <span className={`slash ${slashCls}`}> / </span>{p}
+                  </span>
+                );
+              })}
+            </>
+          );
+        })()}
       </div>
 
       {/* Question number + pillar header */}
