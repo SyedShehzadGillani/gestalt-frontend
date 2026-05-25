@@ -19,7 +19,7 @@
   background: transparent;
   border: 1px solid #1e1e1e;
   color: #555;
-  padding: 8px 14px;
+  padding: 7px 14px;
   font-size: 10px;
   letter-spacing: 2px;
   font-weight: 600;
@@ -156,7 +156,7 @@
 .ob-lead-form input:focus { border-color: rgba(201,162,39,.5); }
 .ob-lead-submit, .ob-paywall-cta {
   margin-top: 16px;
-  padding: 14px 24px;
+  padding: 13px 24px;
   background: #c9a227;
   color: #0a0a0a;
   border: none;
@@ -177,7 +177,7 @@
 
 .onboarding-scope .ob-btn {
   margin-top: 22px;
-  padding: 14px 36px;
+  padding: 13px 36px;
   background: #c9a227;
   border: none;
   color: #0a0a0a;
@@ -213,7 +213,7 @@
    Rollover (hover): 21% bg opacity, 1px 100%-opacity border, full-color text. */
 .ob-q-choices { display: flex; flex-direction: column; gap: 10px; max-width: 220px; margin-bottom: 6px; }
 .ob-q-choice {
-  padding: 14px 28px;
+  padding: 13px 28px;
   background: transparent;
   border: 1px solid;
   font-family: inherit;
@@ -234,7 +234,7 @@
 
 .ob-q-submit {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   background: transparent;
   border: 1px solid #c9a227;
   color: #e2b53f;
@@ -293,7 +293,7 @@
 .ob-blindspot-meta strong { color: #ddd; font-weight: 600; margin-left: 4px; }
 .ob-blindspot-continue {
   margin-top: 6px;
-  padding: 12px 24px;
+  padding: 11px 24px;
   background: transparent;
   border: 1px solid #c9a227;
   color: #c9a227;
@@ -344,7 +344,7 @@
 .ob-finale h2 { font-size: 28px; font-weight: 200; color: #ccc; margin: 8px 0 4px; max-width: 600px; }
 .ob-finale p { font-size: 13px; color: #666; max-width: 560px; line-height: 1.8; font-weight: 300; }
 .ob-finale .choice { display: flex; gap: 12px; margin-top: 24px; }
-.ob-finale .choice button { padding: 16px 36px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 2px; cursor: pointer; border: none; }
+.ob-finale .choice button { padding: 14px 36px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 2px; cursor: pointer; border: none; }
 .ob-finale .choice .primary { background: #c9a227; color: #0a0a0a; }
 .ob-finale .choice .ghost { background: transparent; color: #aaa; border: 1px solid #2a2a2a; }
 
@@ -354,7 +354,7 @@
 .ob-confidence-sub { color: #9aa0a6; margin-bottom: 22px; }
 .ob-confidence-scale { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .ob-confidence-dot {
-  width: 42px; height: 42px; border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   background: transparent; border: 1px solid #c9a227; color: #e2b53f;
   font-family: inherit; font-weight: 700; cursor: pointer; transition: background .15s, color .15s;
 }
