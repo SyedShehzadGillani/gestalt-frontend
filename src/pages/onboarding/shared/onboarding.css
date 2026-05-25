@@ -229,18 +229,18 @@
  .ob-q-choice--yes.picked { background: #c9a227; border-color: #c9a227; color: #0d0d0d; }
  /* NO = neutral gold solid; red identity on hover + selected */
  .ob-q-choice--no { border-color: #c9a227; color: #e2b53f; }
- .ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; color: #d06464; }
+ .ob-q-choice--no:hover { background: rgba(184,48,48,.21); border-color: #b83030; color: #fc041d; }
  .ob-q-choice--no.picked { background: #710c16; border-color: #fc041d; color: #0d0d0d; }
 
 .ob-q-submit {
   width: 100%;
-  padding: 14px;
+  padding: 13px 28px;
   background: transparent;
   border: 1px solid #c9a227;
   color: #e2b53f;
   font-family: inherit;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 3px;
   cursor: pointer;
   transition: background .15s, color .15s, border-color .15s;
