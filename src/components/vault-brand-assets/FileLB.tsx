@@ -29,9 +29,12 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
     setSelectedFmt(items[next]?.fmts?.[0] ?? null);
   };
 
-  const downloadLabel = selectedFmt
-    ? `DOWNLOAD ${selectedFmt}`
-    : isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
+  const downloadLabel =
+    selectedFmt === "ALL"
+      ? "DOWNLOAD ALL"
+      : selectedFmt
+      ? `DOWNLOAD ${selectedFmt}`
+      : isVideo ? "DOWNLOAD VIDEO" : isPhoto ? "DOWNLOAD PHOTO" : "DOWNLOAD";
 
 
   return (
@@ -75,7 +78,7 @@ export function FileLB({ items, idx, onClose, onNav }: Props) {
 
           {current.fmts && (
             <div className="vb-flb-fmts" role="radiogroup" aria-label="Download format">
-              {current.fmts.map((f) => (
+              {[...current.fmts, "ALL"].map((f) => (
                 <button
                   type="button"
                   key={f}
