@@ -94,7 +94,7 @@ export default function OnboardingFlow() {
             blindspotCount={blindspotCount}
             onReset={s.scene !== "demographic" ? startOver : undefined}
           />
-          <MessagingTicker messages={TICKER_MESSAGES} getNodes={constellation.getNodes} logicalSize={constellation.logicalSize} />
+          <MessagingTicker messages={TICKER_MESSAGES} />
         </div>
 
         {/* Right: scene panel */}
