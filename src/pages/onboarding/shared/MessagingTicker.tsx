@@ -1,26 +1,28 @@
 import { useEffect, useRef, useState } from "react";
+import type { ConstellationNode } from "./ConstellationCanvas";
 
 const FADE_MS = 3000;
 const HOLD_MS = 2000;
 
-// Rough text size for collision checks (height x width estimate around the
-// center point). The actual element is one short line of 11px text.
 const TICKER_W = 320;
 const TICKER_H = 28;
-const PAD = 24;
+const PAD = 20;
 
-// Zones that already have text on the stage — the ticker must never land on
-// top of them. Coordinates are viewport pixels relative to .ob-canvas-wrap
-// (which is full-bleed inset:0).
+type Props = {
+  messages: string[];
+  getNodes: () => ConstellationNode[];
+  logicalSize: { w: number; h: number };
+};
+
 function exclusionZones(vw: number, vh: number) {
   return [
-    // HUD rail (top-left): module label + intelligence + confidence + blindspots + reset
+    // HUD rail (top-left)
     { x: 0, y: 0, w: 420, h: 360 },
     // EXIT button (top-right)
     { x: vw - 160, y: 0, w: 160, h: 60 },
-    // Right scene panel (44% width, min 460px, max 720px)
+    // Right scene panel
     { x: vw - Math.min(720, Math.max(460, vw * 0.44)), y: 0, w: vw, h: vh },
-    // Bottom keyboard hint bar (centered)
+    // Bottom keyboard hint bar
     { x: vw / 2 - 240, y: vh - 60, w: 480, h: 60 },
   ];
 }
@@ -35,25 +37,7 @@ function overlaps(cx: number, cy: number, zones: ReturnType<typeof exclusionZone
   );
 }
 
-function pickPosition(vw: number, vh: number) {
-  const zones = exclusionZones(vw, vh);
-  // Constrain to the constellation half (left of the right panel) with a
-  // safe inset from the page edges.
-  const minX = TICKER_W / 2 + 16;
-  const maxX = Math.max(minX + 1, vw - Math.min(720, Math.max(460, vw * 0.44)) - TICKER_W / 2 - 16);
-  const minY = TICKER_H / 2 + 16;
-  const maxY = vh - TICKER_H / 2 - 16;
-
-  for (let i = 0; i < 80; i++) {
-    const x = minX + Math.random() * (maxX - minX);
-    const y = minY + Math.random() * (maxY - minY);
-    if (!overlaps(x, y, zones)) return { x, y };
-  }
-  // Fallback: middle of the constellation area
-  return { x: (minX + maxX) / 2, y: vh / 2 };
-}
-
-export function MessagingTicker({ messages }: { messages: string[]; intervalMs?: number }) {
+export function MessagingTicker({ messages, getNodes, logicalSize }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -73,9 +57,44 @@ export function MessagingTicker({ messages }: { messages: string[]; intervalMs?:
       return { vw: r?.width ?? window.innerWidth, vh: r?.height ?? window.innerHeight };
     };
 
-    const cycle = () => {
+    const pickPosition = () => {
       const { vw, vh } = measure();
-      setPos(pickPosition(vw, vh));
+      const zones = exclusionZones(vw, vh);
+      const sx = vw / logicalSize.w;
+      const sy = vh / logicalSize.h;
+      const nodes = getNodes();
+
+      const minX = TICKER_W / 2 + 16;
+      const maxX = Math.max(minX + 1, vw - Math.min(720, Math.max(460, vw * 0.44)) - TICKER_W / 2 - 16);
+      const minY = TICKER_H / 2 + 16;
+      const maxY = vh - TICKER_H / 2 - 16;
+      const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+      // Try anchoring near a real constellation node. Pick a random node and
+      // offset by 50–140px in a random direction so the text sits *near* the
+      // data points rather than on top of them.
+      if (nodes.length > 0) {
+        for (let attempt = 0; attempt < 60; attempt++) {
+          const n = nodes[Math.floor(Math.random() * nodes.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const offset = 50 + Math.random() * 90;
+          const x = clamp(n.x * sx + Math.cos(angle) * offset, minX, maxX);
+          const y = clamp(n.y * sy + Math.sin(angle) * offset, minY, maxY);
+          if (!overlaps(x, y, zones)) return { x, y };
+        }
+      }
+
+      // Fallback: random anywhere in the constellation area.
+      for (let i = 0; i < 40; i++) {
+        const x = minX + Math.random() * (maxX - minX);
+        const y = minY + Math.random() * (maxY - minY);
+        if (!overlaps(x, y, zones)) return { x, y };
+      }
+      return { x: (minX + maxX) / 2, y: vh / 2 };
+    };
+
+    const cycle = () => {
+      setPos(pickPosition());
       setVisible(true);
       schedule(() => setVisible(false), FADE_MS + HOLD_MS);
       schedule(() => {
@@ -89,7 +108,7 @@ export function MessagingTicker({ messages }: { messages: string[]; intervalMs?:
       cancelled = true;
       timeouts.forEach(clearTimeout);
     };
-  }, [messages.length]);
+  }, [messages.length, getNodes, logicalSize.w, logicalSize.h]);
 
   return (
     <div
