@@ -74,7 +74,7 @@
 }
 .ob-panel > * {
   width: 100%;
-  max-width: 440px;
+  max-width: 580px;
 }
 
 /* ── HUD (top-left rail, no card) ───────────────────────────────────── */
@@ -255,6 +255,7 @@
   font-weight: 700;
   margin-bottom: 280px;
   text-align: left;
+  white-space: nowrap;
 }
 .ob-q-breadcrumb .active { color: #e2b53f; }
 .ob-q-breadcrumb .muted { color: #444; }
