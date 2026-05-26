@@ -1,18 +1,19 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useTheme } from "@/hooks/use-theme";
 
 
 const SP=["#4f0200","#6e231f","#873025","#a44f24","#ba702a","#c0933b","#e2e200","#cff200","#8ccc00","#5fcc00"];
 const GR=`linear-gradient(to right,${SP.join(",")})`;
 const fmt=n=>n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1e3?`$${(n/1e3).toFixed(0)}K`:`$${n}`;
-const G="#5fcc00",R="#ef4444",W="#f59e0b",Au="#e2b53f";
+const G="#5fcc00",R="#ef4444",W="#f59e0b",Au="var(--gold)";
 function sC(s){return s<=10?SP[0]:s<=20?SP[1]:s<=30?SP[2]:s<=40?SP[3]:s<=50?SP[4]:s<=60?SP[5]:s<=70?SP[6]:s<=80?SP[7]:s<=90?SP[8]:SP[9]}
 function sB(s,d){const k=Math.min(9,Math.floor(s/11));const D=["#1a0800","#1f0a08","#221008","#2a1808","#2d2008","#2d280d","#2d2d08","#283008","#1d2d08","#182d08"];const L=["#fde8e8","#fde8e8","#fdeae0","#fff0e0","#fff3e0","#fdf6e3","#fdfde3","#f5fde3","#eafde3","#e3fde3"];return d?D[k]:L[k]}
 function sH(s,d){const k=Math.min(9,Math.floor(s/11));const D=["#250c00","#2a1010","#2d1510","#351d10","#382810","#383012","#38380c","#30380c","#25380c","#20380c"];const L=["#f5d0d0","#f5d0d0","#f5d8c8","#ffe8c0","#ffecc0","#f5ecd0","#f5f5c8","#eaf5c8","#ddf5c8","#d0f5c8"];return d?D[k]:L[k]}
 function tL(s){return s<=20?"LIQUIDATION":s<=40?"EXIT UNLIKELY":s<=60?"DISRUPTION IMMINENT":s<=75?"MARKET VULNERABLE":s<=90?"EXIT POSSIBLE":"EXIT READY"}
 function dL(s){return s<=20?"FEAR DOMINANT":s<=40?"FRICTION LOCKED":s<=60?"COMPLACENCY ZONE":s<=75?"AWAKENING":s<=90?"DESIRE BUILDING":"CULT ECONOMICS"}
 
-const TH={dark:{bg:"#0a0a0a",ba:"#0f0f0f",bc:"#111",bd:"#1a1a1a",bl:"#222",tx:"#fff",md:"#ccc",dm:"#888",ft:"#666",gh:"#444"},
-  light:{bg:"#f5f3ef",ba:"#eae7e0",bc:"#f0ede6",bd:"#d6d0c4",bl:"#e0dbd0",tx:"#1a1a1a",md:"#333",dm:"#666",ft:"#888",gh:"#aaa"}};
+// Surfaces follow the app's global theme via --content-* tokens (auto-switch with .light).
+const T_TOKENS={bg:"var(--content-bg)",ba:"var(--content-elevated-bg)",bc:"var(--content-card-bg)",bd:"var(--content-border)",bl:"var(--content-hover-bg)",tx:"var(--content-text1)",md:"var(--content-text2)",dm:"var(--content-text3)",ft:"var(--content-text3)",gh:"var(--content-border)"};
 
 const D=[
   {id:"d1",q:"Critical decisions documented as SOPs",v:"4 of 23",s:22,sr:"FOCUS Q83+ANALYTICS",e:"m",f:1,ci:0,si:0},
@@ -130,8 +131,8 @@ function EB_({type}){
   return <span style={{fontSize:"8px",fontWeight:700,padding:"2px 6px",background:c+"18",color:c,border:`1px solid ${c}33`,letterSpacing:"0.5px"}}>{l}</span>;
 }
 
-function Bar({data,labels,color=Au,theme}){
-  const t=TH[theme],mx=Math.max(...data),w=540,h=120,bw=Math.floor((w-36)/data.length)-3;
+function Bar({data,labels,color=Au}){
+  const t=T_TOKENS,mx=Math.max(...data),w=540,h=120,bw=Math.floor((w-36)/data.length)-3;
   return <svg viewBox={`0 0 ${w} ${h+20}`} style={{width:"100%",height:"auto"}}>
     {[0,.5,1].map((p,i)=><g key={i}><line x1={36} y1={h*(1-p)} x2={w} y2={h*(1-p)} stroke={t.bd}/><text x={32} y={h*(1-p)+4} textAnchor="end" fill={t.gh} fontSize="8" fontFamily="Montserrat">{Math.round(mx*p)}</text></g>)}
     {data.map((v,i)=><g key={i}><rect x={36+i*(bw+3)} y={h-(v/mx)*h} width={bw} height={(v/mx)*h} fill={color} opacity={.8}/><text x={36+i*(bw+3)+bw/2} y={h+14} textAnchor="middle" fill={t.dm} fontSize="8" fontFamily="Montserrat">{labels[i]}</text></g>)}
@@ -282,7 +283,7 @@ function SpectrumPanel({type, score, insight, dk, t, onClose}){
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export function AnalyticsContent(){
-  const[th,setTh]=useState("dark");
+  const{theme}=useTheme();
   const[vw,setVw]=useState("cmd");
   const[ft,setFt]=useState("rev");
   const[sc,setSc]=useState(0);
@@ -303,7 +304,7 @@ export function AnalyticsContent(){
   const[desireOpen,setDesireOpen]=useState(false);
   const tmRef=useRef(null);
   const[sz,setSz]=useState({w:680,h:420});
-  const t=TH[th],dk=th==="dark";
+  const t=T_TOKENS,dk=theme==="dark";
   const F="'Montserrat',sans-serif";
 
   useEffect(()=>{
@@ -343,11 +344,11 @@ export function AnalyticsContent(){
   const scrollCSS=`
     .analytics-scope, .analytics-scope *{box-sizing:border-box}
     .analytics-scope *::-webkit-scrollbar{width:5px;height:5px}
-    .analytics-scope *::-webkit-scrollbar-track{background:${dk?"#0d0d0d":"#ece8e0"}}
-    .analytics-scope *::-webkit-scrollbar-thumb{background:${dk?"#252525":"#c0b8aa"};border:1px solid ${dk?"#0d0d0d":"#ece8e0"}}
-    .analytics-scope *::-webkit-scrollbar-thumb:hover{background:${Au}90}
-    .analytics-scope *::-webkit-scrollbar-thumb:active{background:${Au}}
-    .analytics-scope{scrollbar-width:thin;scrollbar-color:${dk?"#252525":"#c0b8aa"} ${dk?"#0d0d0d":"#ece8e0"}}
+    .analytics-scope *::-webkit-scrollbar-track{background:var(--content-bar-track)}
+    .analytics-scope *::-webkit-scrollbar-thumb{background:var(--content-border);border:1px solid var(--content-bar-track)}
+    .analytics-scope *::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+    .analytics-scope *::-webkit-scrollbar-thumb:active{background:var(--gold)}
+    .analytics-scope{scrollbar-width:thin;scrollbar-color:var(--content-border) var(--content-bar-track)}
     .analytics-scope input[type="text"]{font-family:${F}}
   `;
 
@@ -404,29 +405,20 @@ export function AnalyticsContent(){
     </div>;
   }
 
-  return <div className="analytics-scope" style={{fontFamily:F,background:t.bg,color:t.tx,height:"calc(100% - 53px)",display:"flex",flexDirection:"column",overflow:"hidden",fontSize:"13px",lineHeight:1.6}}>
+  return <div className="analytics-scope" style={{fontFamily:F,background:t.bg,color:t.tx,height:"100%",display:"flex",flexDirection:"column",overflow:"hidden",fontSize:"13px",lineHeight:1.6}}>
     <style>{scrollCSS}</style>
 
     {/* ══ HEADER ══ */}
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 28px",borderBottom:`1px solid ${t.bd}`,flexShrink:0}}>
-      <div style={{display:"flex",alignItems:"center",gap:14}}>
-        <span style={{fontSize:"16px",fontWeight:700,letterSpacing:"3px",color:Au}}>GESTALT</span>
-        <span style={{fontSize:"16px",fontWeight:500,letterSpacing:"2px",color:"#ba702a"}}>ANALYTICS</span>
-        <span style={{fontSize:"9px",fontWeight:700,color:t.gh,letterSpacing:"1px"}}>V10f</span>
+      <div style={{display:"flex"}}>
+        {[{k:"cmd",l:"COMMAND CENTER"},{k:"fin",l:"FINANCIAL FORENSICS"},{k:"data",l:"DATA ENTRY"}].map(v=>
+          <button key={v.k} onClick={()=>setVw(v.k)} style={tbtn(vw===v.k)}>{v.l}</button>
+        )}
       </div>
-      <div style={{display:"flex",alignItems:"center",gap:16}}>
-        <div style={{display:"flex"}}>
-          {[{k:"cmd",l:"COMMAND CENTER"},{k:"fin",l:"FINANCIAL FORENSICS"},{k:"data",l:"DATA ENTRY"}].map(v=>
-            <button key={v.k} onClick={()=>setVw(v.k)} style={tbtn(vw===v.k)}>{v.l}</button>
-          )}
-        </div>
-        <div onClick={()=>setTh(dk?"light":"dark")} style={{padding:"6px 12px",cursor:"pointer",border:`1px solid ${t.bd}`,background:t.ba,fontSize:"9px",fontWeight:700,color:t.dm,letterSpacing:"1px"}}>{dk?"LIGHT":"DARK"}</div>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <span style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm}}>EXIT READINESS</span>
-          <span style={{fontSize:"22px",fontWeight:900,color:sC(EX)}}>{EX}</span>
-          <span style={{fontSize:"11px",color:G}}>+6</span>
-        </div>
-        <span style={{fontSize:"12px",color:t.dm,letterSpacing:"1px"}}>NORTHGATE SOLUTIONS</span>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <span style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm}}>EXIT READINESS</span>
+        <span style={{fontSize:"22px",fontWeight:900,color:sC(EX)}}>{EX}</span>
+        <span style={{fontSize:"11px",color:G}}>+6</span>
       </div>
     </div>
 
@@ -838,8 +830,8 @@ export function AnalyticsContent(){
           )}
         </div>
         {ft==="rev"&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24}}>
-          <div><div style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm,marginBottom:12}}>MONTHLY REVENUE (12MO)</div><Bar data={RV} labels={MO} color={Au} theme={th}/></div>
-          <div><div style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm,marginBottom:12}}>MONTHLY EARNINGS</div><Bar data={EB} labels={MO} color="#8ccc00" theme={th}/></div>
+          <div><div style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm,marginBottom:12}}>MONTHLY REVENUE (12MO)</div><Bar data={RV} labels={MO} color={Au}/></div>
+          <div><div style={{fontSize:"11px",fontWeight:700,letterSpacing:"1.5px",color:t.dm,marginBottom:12}}>MONTHLY EARNINGS</div><Bar data={EB} labels={MO} color="#8ccc00"/></div>
         </div>}
         {ft==="adj"&&<div>
           <div style={{padding:"16px 20px",background:t.ba,border:`1px solid ${t.bd}`,borderLeft:`4px solid ${Au}`,marginBottom:16}}>
