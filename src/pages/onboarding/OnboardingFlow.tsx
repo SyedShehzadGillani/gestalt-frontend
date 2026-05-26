@@ -78,37 +78,40 @@ export default function OnboardingFlow() {
     undefined;
 
   const showKbdHints = s.scene === "framework" || s.scene === "focus";
+  const isOpening = s.scene === "demographic";
 
   return (
     <div className="onboarding-scope">
       <button className="ob-exit" onClick={() => nav("/")}>EXIT  -  X</button>
 
-      {s.scene === "demographic" ? (
-        /* Opening scene: full-width hero, no canvas/HUD/ticker */
-        <div className="ob-hero-stage">
-          <DemographicPicker
-            onPick={(d: Demographic) => {
-              constellation.addNodes(4, "gold");
-              patch({ demographic: d, scene: "lead" });
-            }}
-          />
-        </div>
-      ) : (
       <div className="ob-stage">
-        {/* Full-bleed constellation canvas behind everything */}
+        {/* Full-bleed constellation canvas — always mounted so its draw loop
+            keeps running; HUD/ticker hide on the opening hero. */}
         <div className="ob-canvas-wrap">
           <canvas ref={canvasRef} />
-          <HUD
-            intelligence={intelligence}
-            confidence={confidence}
-            moduleLabel={moduleLabel}
-            blindspotCount={blindspotCount}
-            onReset={startOver}
-          />
-          <MessagingTicker messages={TICKER_MESSAGES} />
+          {!isOpening && (
+            <HUD
+              intelligence={intelligence}
+              confidence={confidence}
+              moduleLabel={moduleLabel}
+              blindspotCount={blindspotCount}
+              onReset={startOver}
+            />
+          )}
+          {!isOpening && <MessagingTicker messages={TICKER_MESSAGES} />}
         </div>
 
-        {/* Right: scene panel */}
+        {isOpening ? (
+          /* Opening scene: full-width hero, opaque over the canvas */
+          <div className="ob-hero-stage">
+            <DemographicPicker
+              onPick={(d: Demographic) => {
+                constellation.addNodes(4, "gold");
+                patch({ demographic: d, scene: "lead" });
+              }}
+            />
+          </div>
+        ) : (
         <div className="ob-panel">
           {s.scene === "lead" && (
             <LeadCapture
@@ -230,8 +233,8 @@ export default function OnboardingFlow() {
             />
           )}
         </div>
+        )}
       </div>
-      )}
 
       {showKbdHints && (
         <div className="ob-kbd-bar">

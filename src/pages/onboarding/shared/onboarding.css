@@ -76,6 +76,9 @@
 .ob-panel > * {
   width: 100%;
 }
+/* Scroll without the bright default scrollbar */
+.ob-panel, .ob-hero-stage { scrollbar-width: none; -ms-overflow-style: none; }
+.ob-panel::-webkit-scrollbar, .ob-hero-stage::-webkit-scrollbar { width: 0; height: 0; display: none; }
 
 /* ── HUD (top-left rail, no card) ───────────────────────────────────── */
 .ob-hud {
@@ -179,7 +182,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 5;
+  background: #0a0a0a;
+  z-index: 6;
 }
 .ob-hero {
   width: 100%;
