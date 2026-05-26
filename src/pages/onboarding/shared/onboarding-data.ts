@@ -28,11 +28,13 @@ export const FOCUS_PILLARS: FocusPillar[] = ["PERCEPTION", "CLARITY", "IDENTITY"
 
 export type Demographic = "BB" | "BO" | "IA" | "AC";
 
-export const DEMOGRAPHICS: { id: Demographic; tag: string; title: string; desc: string }[] = [
-  { id: "BB", tag: "BUSINESS BUILDERS", title: "Build Right From Day One", desc: "Solopreneurs and first-time founders building for maximum exit value." },
-  { id: "BO", tag: "BUSINESS OWNERS", title: "Eliminate Complacency", desc: "$1M–$50M operators preparing to exit, scale, or raise capital." },
-  { id: "IA", tag: "INVESTORS + ACQUIRERS", title: "Maximize Your Acquisition", desc: "PE firms and acquirers assessing a portfolio company's readiness." },
-  { id: "AC", tag: "AGENCIES + CONSULTANTS", title: "Escape RFP Hell Forever", desc: "Marketing agencies and fractional execs assessing their firm or a client." },
+export type DemographicColor = "blue" | "gold" | "green" | "red";
+
+export const DEMOGRAPHICS: { id: Demographic; tag: string; title: string; desc: string; color: DemographicColor }[] = [
+  { id: "BB", tag: "BUSINESS BUILDERS", title: "Build Right From Day One", desc: "Startups building for maximum exit value.", color: "blue" },
+  { id: "BO", tag: "BUSINESS OWNERS", title: "Eliminate Complacency", desc: "Owners preparing to exit at premium multiples.", color: "gold" },
+  { id: "IA", tag: "INVESTORS + ACQUIRERS", title: "Maximize Your Acquisition", desc: "PE firms building value post-acquisition.", color: "green" },
+  { id: "AC", tag: "AGENCIES + CONSULTANTS", title: "Escape RFP Hell Forever", desc: "Walk in already knowing the problem.", color: "red" },
 ];
 
 export type Stat = { highlight: string; text: string; source: string };

@@ -171,11 +171,70 @@
   white-space: nowrap;
 }
 
-/* ── Demographic picker ────────────────────────────────── */
-.ob-demo { padding-top: 12px; }
-.ob-demo-h1 { font-size: 30px; font-weight: 200; color: #ddd; margin: 0 0 8px; line-height: 1.3; }
-.ob-demo-sub { font-size: 12px; color: #666; margin: 0 0 28px; font-weight: 300; }
-.ob-demo-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* ── Opening hero (full-width centered) ────────────────── */
+.ob-hero-stage {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+.ob-hero {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 96px 24px 64px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ob-hero .ob-label { margin-bottom: 22px; }
+.ob-hero-headline {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.45;
+  margin: 0 0 36px;
+}
+.ob-hero-headline .w { color: #e8e8e8; }
+.ob-hero-headline .g { color: #c9a227; }
+.ob-hero-headline .gr { color: #888; }
+.ob-hero-img { width: 100%; margin: 0 0 40px; }
+.ob-hero-img img { display: block; width: 100%; height: auto; }
+.ob-hero-q {
+  font-size: 42px;
+  font-weight: 200;
+  color: #ddd;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+.ob-hero-offer {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0 0 56px;
+}
+.ob-hero-offer .w { color: #e8e8e8; }
+.ob-hero-offer .g { color: #c9a227; }
+.ob-hero-choose {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0 0 20px;
+}
+.ob-hero-choose .gr { color: #777; }
+.ob-hero-choose .w { color: #e8e8e8; }
+
+/* ── Demographic cards ─────────────────────────────────── */
+.ob-demo-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
 .ob-demo-card {
   background: #0e0e0e;
   border: 1px solid #1a1a1a;
@@ -188,10 +247,23 @@
   flex-direction: column;
   gap: 8px;
 }
-.ob-demo-card:hover { border-color: rgba(201,162,39,.5); background: #111; }
-.ob-demo-tag { font-size: 7px; letter-spacing: 3px; color: #c9a227; font-weight: 800; }
-.ob-demo-title { font-size: 15px; font-weight: 500; color: #ddd; }
-.ob-demo-desc { font-size: 11px; color: #666; margin: 0; line-height: 1.6; font-weight: 300; }
+.ob-demo-tag { font-size: 8px; letter-spacing: 2.5px; color: #c9a227; font-weight: 800; }
+.ob-demo-title { font-size: 16px; font-weight: 700; color: #e8e8e8; }
+.ob-demo-desc { font-size: 11px; color: #777; margin: 0; line-height: 1.6; font-weight: 300; }
+
+/* Per-role accents */
+.ob-demo-card[data-color="blue"]  { border-color: rgba(72,130,255,.28); }
+.ob-demo-card[data-color="gold"]  { border-color: rgba(226,181,63,.28); }
+.ob-demo-card[data-color="green"] { border-color: rgba(59,165,93,.28); }
+.ob-demo-card[data-color="red"]   { border-color: rgba(184,48,48,.28); }
+.ob-demo-card[data-color="blue"]  .ob-demo-tag { color: #4882ff; }
+.ob-demo-card[data-color="gold"]  .ob-demo-tag { color: #e2b53f; }
+.ob-demo-card[data-color="green"] .ob-demo-tag { color: #3ba55d; }
+.ob-demo-card[data-color="red"]   .ob-demo-tag { color: #b83030; }
+.ob-demo-card[data-color="blue"]:hover  { border-color: rgba(72,130,255,.7);  background: #101216; }
+.ob-demo-card[data-color="gold"]:hover  { border-color: rgba(226,181,63,.7);  background: #14110a; }
+.ob-demo-card[data-color="green"]:hover { border-color: rgba(59,165,93,.7);   background: #0c130e; }
+.ob-demo-card[data-color="red"]:hover   { border-color: rgba(184,48,48,.7);   background: #140c0c; }
 
 /* ── Lead capture ──────────────────────────────────────── */
 .ob-lead { padding-top: 12px; }

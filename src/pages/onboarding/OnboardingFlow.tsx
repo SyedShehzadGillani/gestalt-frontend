@@ -83,6 +83,17 @@ export default function OnboardingFlow() {
     <div className="onboarding-scope">
       <button className="ob-exit" onClick={() => nav("/")}>EXIT  -  X</button>
 
+      {s.scene === "demographic" ? (
+        /* Opening scene: full-width hero, no canvas/HUD/ticker */
+        <div className="ob-hero-stage">
+          <DemographicPicker
+            onPick={(d: Demographic) => {
+              constellation.addNodes(4, "gold");
+              patch({ demographic: d, scene: "lead" });
+            }}
+          />
+        </div>
+      ) : (
       <div className="ob-stage">
         {/* Full-bleed constellation canvas behind everything */}
         <div className="ob-canvas-wrap">
@@ -92,22 +103,13 @@ export default function OnboardingFlow() {
             confidence={confidence}
             moduleLabel={moduleLabel}
             blindspotCount={blindspotCount}
-            onReset={s.scene !== "demographic" ? startOver : undefined}
+            onReset={startOver}
           />
           <MessagingTicker messages={TICKER_MESSAGES} />
         </div>
 
         {/* Right: scene panel */}
         <div className="ob-panel">
-          {s.scene === "demographic" && (
-            <DemographicPicker
-              onPick={(d: Demographic) => {
-                constellation.addNodes(4, "gold");
-                patch({ demographic: d, scene: "lead" });
-              }}
-            />
-          )}
-
           {s.scene === "lead" && (
             <LeadCapture
               onSubmit={(l) => {
@@ -229,6 +231,7 @@ export default function OnboardingFlow() {
           )}
         </div>
       </div>
+      )}
 
       {showKbdHints && (
         <div className="ob-kbd-bar">
