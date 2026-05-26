@@ -1,0 +1,88 @@
+/* STATUS page — scoped to .status-scope. Theme-aware via --content-* tokens. */
+.status-scope {
+  --status-gold: #c9a227;
+  font-family: 'Gotham', 'Montserrat', system-ui, sans-serif;
+  color: var(--content-text1);
+  max-width: 1200px;
+}
+
+.status-scope *,
+.status-scope *::before,
+.status-scope *::after { box-sizing: border-box; }
+
+.status-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--content-text3);
+}
+
+.status-scoreRow { display: flex; align-items: baseline; gap: 14px; margin-top: 6px; flex-wrap: wrap; }
+.status-score { font-size: 52px; font-weight: 900; line-height: 1; color: var(--status-gold); }
+.status-scoreLabel { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--status-gold); }
+.status-delta { font-size: 11px; font-weight: 700; color: #5fcc00; }
+.status-intro { font-size: 12px; color: var(--content-text2); line-height: 1.7; margin-top: 10px; max-width: 720px; }
+
+/* 90-day review banner */
+.status-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 18px; padding: 12px 16px;
+  border: 1px solid var(--status-gold); border-radius: 3px;
+  background: color-mix(in srgb, var(--status-gold) 8%, transparent);
+}
+.status-banner-text { display: flex; flex-direction: column; gap: 2px; }
+.status-banner-title { font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--status-gold); }
+.status-banner-sub { font-size: 10px; color: var(--content-text2); }
+.status-banner-cta {
+  font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--status-gold); background: transparent; border: 1px solid var(--status-gold);
+  border-radius: 2px; padding: 6px 14px; cursor: pointer; white-space: nowrap;
+}
+
+/* Section grid */
+.status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+@media (max-width: 1024px) { .status-grid { grid-template-columns: 1fr; } }
+
+.status-card {
+  background: var(--content-card-bg);
+  border: 1px solid var(--content-border);
+  border-radius: 3px; padding: 16px; display: flex; flex-direction: column;
+}
+.status-card-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+.status-card-title { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--content-text1); }
+.status-card-count { font-size: 10px; font-weight: 700; color: var(--content-text3); letter-spacing: 0.5px; }
+
+.status-sub { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--content-text3); margin: 12px 0 8px; }
+.status-sub:first-child { margin-top: 0; }
+
+/* Blind spots / accomplished rows */
+.status-row {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
+  border-top: 1px solid var(--content-border);
+}
+.status-row:first-of-type { border-top: none; }
+.status-row-main { flex: 1; min-width: 0; }
+.status-row-title { font-size: 11px; font-weight: 700; color: var(--content-text1); line-height: 1.4; }
+.status-row-desc { font-size: 9px; color: var(--content-text3); line-height: 1.5; margin-top: 2px; }
+.status-stake { font-size: 11px; font-weight: 800; color: #ba702a; white-space: nowrap; }
+
+.status-dot { width: 8px; height: 8px; border-radius: 9999px; flex-shrink: 0; margin-top: 4px; }
+.status-dot.done { background: #5fcc00; }
+.status-dot.active { background: var(--status-gold); }
+.status-dot.pending { background: var(--content-text3); }
+
+.status-check { font-size: 12px; line-height: 1.2; flex-shrink: 0; width: 14px; }
+
+/* signal score badge */
+.status-signal { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; }
+.status-signal-name { font-size: 10px; font-weight: 700; color: var(--content-text2); text-transform: uppercase; letter-spacing: 0.5px; }
+.status-signal-score { font-size: 11px; font-weight: 800; }
+
+/* Value at stake */
+.status-bigstat { font-size: 40px; font-weight: 900; color: #873025; line-height: 1; }
+.status-bigstat-unit { font-size: 14px; font-weight: 700; color: #873025; }
+.status-bigstat-cap { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--content-text3); }
+.status-stat { display: flex; align-items: baseline; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--content-border); }
+.status-stat-label { font-size: 10px; color: var(--content-text2); text-transform: uppercase; letter-spacing: 0.5px; }
+.status-stat-value { font-size: 14px; font-weight: 800; color: var(--content-text1); }
