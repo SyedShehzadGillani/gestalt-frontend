@@ -52,6 +52,7 @@ import Login from "@/pages/auth/Login";
 import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholder";
 import ClientCreative from "@/pages/client/ClientCreative";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
+import StatusPage from "@/pages/StatusPage";
 
 // HQ Pages
 import HQLogin from "@/pages/hq/HQLogin";
@@ -99,6 +100,7 @@ function AppLayout() {
           {/* Default redirect */}
           <Route path="/" element={<Navigate to="/client/1" replace />} />
           <Route path="/platform" element={<CommandCenterPage />} />
+          <Route path="/status" element={<StatusPage />} />
           
           {/* Agency Routes */}
           <Route path="/agency" element={<Navigate to="/agency/dashboard" replace />} />

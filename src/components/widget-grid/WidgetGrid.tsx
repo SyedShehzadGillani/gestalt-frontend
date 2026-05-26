@@ -1,8 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Minus } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { WidgetContainer } from "./WidgetContainer";
 import { DailyRoutineWidget } from "./DailyRoutineWidget";
+import { AnalyticsWidget } from "./AnalyticsWidget";
 import { AIWidgetBuilder } from "./AIWidgetBuilder";
 import { specColorAt } from "@/lib/specColorAt";
 import { formatScore } from "@/lib/formatScore";
@@ -36,6 +37,7 @@ const WIDGET_LIBRARY = [
   { type: "core-confidence", label: "C.O.R.E. CONFIDENCE", desc: "Readiness level", size: "small" },
   { type: "story-engine", label: "STORY ENGINE", desc: "Submitted ideas", size: "small" },
   { type: "formula-status", label: "FORMULA STATUS", desc: "Step completion", size: "small" },
+  { type: "analytics", label: "ANALYTICS", desc: "Data + Trends", size: "full" },
 ];
 
 const sizeToColSpan: Record<string, number> = {
@@ -193,9 +195,10 @@ function ValuationDrainAnchor() {
 
 // ── Widget Library Drawer ─────────────────────────
 function WidgetLibraryDrawer({
-  open, onClose, onAdd, isDark, onOpenBuilder,
+  open, minimized, onClose, onMinimize, onRestore, onAdd, isDark, onOpenBuilder,
 }: {
-  open: boolean; onClose: () => void; onAdd: (type: string) => void; isDark: boolean; onOpenBuilder?: () => void;
+  open: boolean; minimized: boolean; onClose: () => void; onMinimize: () => void; onRestore: () => void;
+  onAdd: (type: string) => void; isDark: boolean; onOpenBuilder?: () => void;
 }) {
   const bg2 = isDark ? "hsl(0 0% 8%)" : "hsl(210 20% 98%)";
   const bg3 = isDark ? "hsl(0 0% 10%)" : "hsl(210 12% 93%)";
@@ -203,6 +206,26 @@ function WidgetLibraryDrawer({
   const text2 = isDark ? "hsl(0 0% 63%)" : "hsl(215 10% 40%)";
   const text4 = isDark ? "hsl(0 0% 40%)" : "hsl(215 8% 55%)";
   const gold = "#c9a227";
+
+  // Collapsed edge tab
+  if (open && minimized) {
+    return (
+      <button
+        onClick={onRestore}
+        title="Open Widget Library"
+        style={{
+          position: "fixed", top: "50%", right: 0, transform: "translateY(-50%)", zIndex: 200,
+          backgroundColor: bg3, border: `1px solid ${border}`, borderRight: "none",
+          borderRadius: "3px 0 0 3px", cursor: "pointer", padding: "14px 6px",
+          boxShadow: "-4px 0 20px rgba(0,0,0,0.25)", fontFamily: font,
+          fontSize: 10, fontWeight: 800, letterSpacing: 2, textTransform: "uppercase",
+          color: gold, writingMode: "vertical-rl",
+        }}
+      >
+        ◂ Widget Library
+      </button>
+    );
+  }
 
   return (
     <div style={{
@@ -215,9 +238,14 @@ function WidgetLibraryDrawer({
     }}>
       <div style={{ height: 30, padding: "0 14px", backgroundColor: bg3, borderBottom: `1px solid ${border}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: 2, textTransform: "uppercase", color: gold }}>WIDGET LIBRARY</span>
-        <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", padding: 0 }}>
-          <X style={{ width: 12, height: 12, color: text4 }} strokeWidth={1.5} />
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <button onClick={onMinimize} title="Minimize" style={{ background: "none", border: "none", cursor: "pointer", display: "flex", padding: 0 }}>
+            <Minus style={{ width: 13, height: 13, color: text4 }} strokeWidth={1.5} />
+          </button>
+          <button onClick={onClose} title="Close" style={{ background: "none", border: "none", cursor: "pointer", display: "flex", padding: 0 }}>
+            <X style={{ width: 12, height: 12, color: text4 }} strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: 12, display: "flex", flexDirection: "column", gap: 8 }}>
         {WIDGET_LIBRARY.map((w) => (
@@ -254,7 +282,8 @@ export function WidgetGrid() {
   const defaultLayout = (DEFAULT_WIDGET_LAYOUTS as any)[segment] || [];
 
   const [widgets, setWidgets] = useState<any[]>(defaultLayout);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [drawerMinimized, setDrawerMinimized] = useState(false);
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [builderOpen, setBuilderOpen] = useState(false);
 
@@ -304,7 +333,7 @@ export function WidgetGrid() {
       </div>
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 12 }}>
-        <button onClick={() => setDrawerOpen(true)} style={{
+        <button onClick={() => { setDrawerOpen(true); setDrawerMinimized(false); }} style={{
           fontFamily: font, fontSize: 11, fontWeight: 700, color: gold,
           backgroundColor: "transparent", border: `1px solid ${gold}`, borderRadius: 2,
           padding: "5px 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: 4, letterSpacing: 1,
@@ -331,6 +360,8 @@ export function WidgetGrid() {
           >
             {w.type === "daily-routine" ? (
               <DailyRoutineWidget />
+            ) : w.type === "analytics" ? (
+              <AnalyticsWidget isDark={isDark} onRemove={() => removeWidget(w.id)} />
             ) : (
               <WidgetContainer
                 title={w.type === "custom" && w.spec ? w.spec.title : w.type.replace(/-/g, " ")}
@@ -354,8 +385,11 @@ export function WidgetGrid() {
 
       <WidgetLibraryDrawer
         open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        onAdd={(type) => { addWidget(type); setDrawerOpen(false); }}
+        minimized={drawerMinimized}
+        onClose={() => { setDrawerOpen(false); setDrawerMinimized(false); }}
+        onMinimize={() => setDrawerMinimized(true)}
+        onRestore={() => setDrawerMinimized(false)}
+        onAdd={(type) => { addWidget(type); setDrawerMinimized(true); }}
         isDark={isDark}
         onOpenBuilder={() => setBuilderOpen(true)}
       />
