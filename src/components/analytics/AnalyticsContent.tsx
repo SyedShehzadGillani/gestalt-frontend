@@ -478,13 +478,13 @@ export function AnalyticsContent(){
                 onMouseLeave={()=>setHc(null)}
                  style={{position:"absolute",left:r.x+1,top:r.y+1,width:r.w2-2,height:r.h2-2,
                    background:hexA(sC(r.s),hov||sel?0.5:0.15),
-                   border:sel?`2px solid ${sC(r.s)}`:isTop?`2px solid ${Au}50`:`1px solid ${hexA(sC(r.s),hov?1:0.5)}`,
+                   border:isTop&&!sel&&!hov?`2px solid ${Au}50`:`1px solid ${hexA(sC(r.s),hov||sel?1:0.5)}`,
                    cursor:"pointer",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"space-between",transition:"background .15s, border-color .15s, color .15s",overflow:"hidden"}}>
 
                 {/* P1 badge for highest priority */}
                 {isTop && <div style={{position:"absolute",top:8,right:8,fontSize:"8px",fontWeight:900,padding:"2px 6px",background:R+"20",color:R,border:`1px solid ${R}40`,letterSpacing:"1px"}}>P1</div>}
                 <div>
-                  <div style={{fontSize:`${ts}px`,fontWeight:800,letterSpacing:"1.5px",color:hov?"rgba(0,0,0,0.85)":t.dm,lineHeight:1.2,textTransform:"uppercase",marginBottom:4,transition:"color .15s"}}>
+                  <div style={{fontSize:`${ts}px`,fontWeight:800,letterSpacing:"1.5px",color:hov||sel?"rgba(0,0,0,0.85)":t.dm,lineHeight:1.2,textTransform:"uppercase",marginBottom:4,transition:"color .15s"}}>
                     {ln.map((l,j)=><div key={j}>{l}</div>)}
                   </div>
                   <div style={{fontSize:Math.max(22,ar*180)+"px",fontWeight:900,color:sC(r.s),lineHeight:1}}>
