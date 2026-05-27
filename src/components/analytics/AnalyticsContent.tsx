@@ -474,10 +474,11 @@ export function AnalyticsContent(){
                 onClick={()=>{setSc(idx);setDt("pts")}}
                 onMouseEnter={()=>setHc(idx)}
                 onMouseLeave={()=>setHc(null)}
-                style={{position:"absolute",left:r.x+1,top:r.y+1,width:r.w2-2,height:r.h2-2,
-                  background:sel||hov?sH(r.s,dk):sB(r.s,dk),
-                  border:sel?`2px solid ${sC(r.s)}`:isTop?`2px solid ${Au}50`:`1px solid ${dk?"rgba(255,255,255,.06)":"rgba(0,0,0,.08)"}`,
-                  cursor:"pointer",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"space-between",transition:"background .15s",overflow:"hidden"}}>
+                 style={{position:"absolute",left:r.x+1,top:r.y+1,width:r.w2-2,height:r.h2-2,
+                   background:hexA(sC(r.s),hov||sel?0.5:0.2),
+                   border:sel?`2px solid ${sC(r.s)}`:isTop?`2px solid ${Au}50`:`1px solid ${hexA(sC(r.s),hov?1:0.5)}`,
+                   cursor:"pointer",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"space-between",transition:"background .15s, border-color .15s",overflow:"hidden"}}>
+
                 {/* P1 badge for highest priority */}
                 {isTop && <div style={{position:"absolute",top:8,right:8,fontSize:"8px",fontWeight:900,padding:"2px 6px",background:R+"20",color:R,border:`1px solid ${R}40`,letterSpacing:"1px"}}>P1</div>}
                 <div>
