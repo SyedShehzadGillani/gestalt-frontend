@@ -7,6 +7,7 @@ const GR=`linear-gradient(to right,${SP.join(",")})`;
 const fmt=n=>n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1e3?`$${(n/1e3).toFixed(0)}K`:`$${n}`;
 const G="#5fcc00",R="#ef4444",W="#f59e0b",Au="var(--gold)";
 function sC(s){return s<=10?SP[0]:s<=20?SP[1]:s<=30?SP[2]:s<=40?SP[3]:s<=50?SP[4]:s<=60?SP[5]:s<=70?SP[6]:s<=80?SP[7]:s<=90?SP[8]:SP[9]}
+function hexA(h,a){const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);if(!m)return h;return `rgba(${parseInt(m[1],16)},${parseInt(m[2],16)},${parseInt(m[3],16)},${a})`}
 function sB(s,d){const k=Math.min(9,Math.floor(s/11));const D=["#1a0800","#1f0a08","#221008","#2a1808","#2d2008","#2d280d","#2d2d08","#283008","#1d2d08","#182d08"];const L=["#fde8e8","#fde8e8","#fdeae0","#fff0e0","#fff3e0","#fdf6e3","#fdfde3","#f5fde3","#eafde3","#e3fde3"];return d?D[k]:L[k]}
 function sH(s,d){const k=Math.min(9,Math.floor(s/11));const D=["#250c00","#2a1010","#2d1510","#351d10","#382810","#383012","#38380c","#30380c","#25380c","#20380c"];const L=["#f5d0d0","#f5d0d0","#f5d8c8","#ffe8c0","#ffecc0","#f5ecd0","#f5f5c8","#eaf5c8","#ddf5c8","#d0f5c8"];return d?D[k]:L[k]}
 function tL(s){return s<=20?"LIQUIDATION":s<=40?"EXIT UNLIKELY":s<=60?"DISRUPTION IMMINENT":s<=75?"MARKET VULNERABLE":s<=90?"EXIT POSSIBLE":"EXIT READY"}
@@ -474,10 +475,11 @@ export function AnalyticsContent(){
                 onClick={()=>{setSc(idx);setDt("pts")}}
                 onMouseEnter={()=>setHc(idx)}
                 onMouseLeave={()=>setHc(null)}
-                style={{position:"absolute",left:r.x+1,top:r.y+1,width:r.w2-2,height:r.h2-2,
-                  background:sel||hov?sH(r.s,dk):sB(r.s,dk),
-                  border:sel?`2px solid ${sC(r.s)}`:isTop?`2px solid ${Au}50`:`1px solid ${dk?"rgba(255,255,255,.06)":"rgba(0,0,0,.08)"}`,
-                  cursor:"pointer",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"space-between",transition:"background .15s",overflow:"hidden"}}>
+                 style={{position:"absolute",left:r.x+1,top:r.y+1,width:r.w2-2,height:r.h2-2,
+                   background:hexA(sC(r.s),hov||sel?0.5:0.2),
+                   border:sel?`2px solid ${sC(r.s)}`:isTop?`2px solid ${Au}50`:`1px solid ${hexA(sC(r.s),hov?1:0.5)}`,
+                   cursor:"pointer",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"space-between",transition:"background .15s, border-color .15s",overflow:"hidden"}}>
+
                 {/* P1 badge for highest priority */}
                 {isTop && <div style={{position:"absolute",top:8,right:8,fontSize:"8px",fontWeight:900,padding:"2px 6px",background:R+"20",color:R,border:`1px solid ${R}40`,letterSpacing:"1px"}}>P1</div>}
                 <div>
