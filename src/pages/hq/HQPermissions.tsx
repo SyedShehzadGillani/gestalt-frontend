@@ -622,11 +622,23 @@ export default function HQPermissions() {
                       {typeof flag[tier] === "string" ? (
                         <span className="text-sm text-muted-foreground">{flag[tier]}</span>
                       ) : (
-                        <Switch
-                          checked={flag[tier] as boolean}
-                          onCheckedChange={() => handleToggleFeatureFlag(flag.id, tier)}
-                          className="data-[state=checked]:bg-[hsl(var(--status-green))]"
-                        />
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={flag[tier] as boolean}
+                          onClick={() => handleToggleFeatureFlag(flag.id, tier)}
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full border transition-colors mx-auto ${
+                            flag[tier]
+                              ? "bg-[hsl(var(--status-green))] border-[hsl(var(--status-green))]"
+                              : "bg-muted border-border"
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${
+                              flag[tier] ? "translate-x-[18px]" : "translate-x-[2px]"
+                            }`}
+                          />
+                        </button>
                       )}
                     </TableCell>
                   ))}
