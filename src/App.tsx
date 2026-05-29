@@ -53,6 +53,8 @@ import { ComingSoonPlaceholder } from "@/pages/placeholders/ComingSoonPlaceholde
 import ClientCreative from "@/pages/client/ClientCreative";
 import CommandCenterPage from "@/pages/platform/CommandCenterPage";
 import StatusPage from "@/pages/StatusPage";
+import StatusBusiness from "@/pages/StatusBusiness";
+import StatusPersonal from "@/pages/StatusPersonal";
 
 // HQ Pages
 import HQLogin from "@/pages/hq/HQLogin";
@@ -105,6 +107,8 @@ function AppLayout() {
           {/* Agency Routes */}
           <Route path="/agency" element={<Navigate to="/agency/dashboard" replace />} />
           <Route path="/agency/dashboard" element={<AgencyDashboard />} />
+          <Route path="/agency/status-business" element={<StatusBusiness />} />
+          <Route path="/agency/status-personal" element={<StatusPersonal />} />
           <Route path="/agency/clients" element={<AgencyClients />} />
           <Route path="/agency/analytics" element={<AgencyAnalytics />} />
           <Route path="/agency/billing" element={<AgencyBilling />} />
@@ -112,6 +116,8 @@ function AppLayout() {
           {/* Client Routes */}
           <Route path="/client/:id" element={<ClientOverview />} />
           <Route path="/client/:id/overview" element={<ClientOverview />} />
+          <Route path="/client/:id/status-business" element={<StatusBusiness />} />
+          <Route path="/client/:id/status-personal" element={<StatusPersonal />} />
           <Route path="/client/:id/framework" element={<ClientFramework />} />
           <Route path="/client/:id/focus" element={<ClientFocus />} />
           <Route path="/client/:id/formula" element={<ClientFormula />} />
@@ -179,6 +185,8 @@ function AppLayout() {
           {/* HQ routes (inline, no separate layout needed since sidebar handles it) */}
           <Route path="/hq" element={<Navigate to="/hq/dashboard" replace />} />
           <Route path="/hq/dashboard" element={<HQDashboard />} />
+          <Route path="/hq/status-business" element={<StatusBusiness />} />
+          <Route path="/hq/status-personal" element={<StatusPersonal />} />
           <Route path="/hq/alerts" element={<HQAlerts />} />
           <Route path="/hq/agencies" element={<HQAgencies />} />
           <Route path="/hq/clients" element={<HQClients />} />
@@ -221,6 +229,8 @@ function AppLayout() {
           {/* Investor (Phase A scaffolding) */}
           <Route path="/investor" element={<Navigate to="/investor/1" replace />} />
           <Route path="/investor/:id" element={<ComingSoonPlaceholder title="Investor / Owner" subtitle="Multi-business portfolio" />} />
+          <Route path="/investor/:id/status-business" element={<StatusBusiness />} />
+          <Route path="/investor/:id/status-personal" element={<StatusPersonal />} />
           <Route path="/investor/:id/formula" element={<ClientFormula />} />
           <Route path="/investor/:id/mgmt-permissions" element={<PermissionsPage />} />
           <Route path="/investor/:id/*" element={<ComingSoonPlaceholder title="Coming Soon" subtitle="This page is in development" />} />

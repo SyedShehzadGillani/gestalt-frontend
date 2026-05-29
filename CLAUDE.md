@@ -1,5 +1,9 @@
 # gestalt-react — React Code Rules
 
+## Before Starting
+
+**Always `git pull` latest before any change** — start from the newest code, never stale local state.
+
 ## Vault (Project Knowledge Base)
 
 `vault/` is symlinked at `gestalt-react/vault/` → never committed to git.

@@ -102,6 +102,7 @@ export const NAV_ICONS: Record<string, string> = {
   "hq-analytics": "M12 20V10M18 20V4M6 20v-4",
   "hq-my-tasks": "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
   "hq-status-personal": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
+  "hq-status-business": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm10 3a3 3 0 100-6 3 3 0 000 6z",
   "hq-status-creative": "M12 19l7-7 3 3-7 7-3-3zm-7.5.25L2 21l1.75-2.5 5-5 1.5 1.5-5 5z",
   "hq-creative-brief": "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6",
   "hq-brand-foundation": "M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zm-3-4V7a4 4 0 00-8 0v4",
@@ -161,7 +162,7 @@ const baseSectionClient = (financialsLabel = "FINANCIALS", financialsSub = "21-P
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "overview", label: "STATUS", subLabel: "Progress + Blind Spots" },
+    { id: "status-business", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
     { id: "framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "focus", label: "FOCUS", subLabel: "Company Deep Dive" },
     { id: "financials", label: financialsLabel, subLabel: financialsSub },
@@ -187,7 +188,7 @@ const baseSectionHQ: NavSection = {
   fullName: "Brand and Strategy Engine",
   helpId: "overview",
   items: [
-    { id: "hq-overview", label: "STATUS", subLabel: "Progress + Blind Spots" },
+    { id: "hq-status-business", label: "STATUS - BUSINESS", subLabel: "Company Dashboard" },
     { id: "hq-framework", label: "FRAMEWORK", subLabel: "21-PT Assessment" },
     { id: "hq-focus", label: "FOCUS", subLabel: "Company Deep Dive" },
     { id: "hq-financials", label: "FINANCIALS", subLabel: "21-PT Assessment" },
@@ -597,6 +598,7 @@ export function getRouteForItem(itemId: string, role: RoleType, clientId?: strin
     "hq-settings": "/hq/settings",
     "hq-team": "/hq/team",
     "hq-overview": "/status",
+    "hq-status-business": "/hq/status-business",
     "hq-onboarding": "/hq/onboarding",
     "hq-framework": "/hq/base-framework",
     "hq-focus": "/hq/base-focus",
