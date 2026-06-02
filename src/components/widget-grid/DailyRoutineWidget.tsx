@@ -311,7 +311,7 @@ export function DailyRoutineWidget() {
   ) : null;
 
   return (
-    <WidgetContainer title="DAILY ROUTINE" size="medium" helpId="widget-daily-routine" belowContent={shotClockElement}>
+    <WidgetContainer title="DAILY ROUTINES" size="medium" helpId="widget-daily-routine" belowContent={shotClockElement}>
       <div style={{ fontFamily: font, display: "flex", flexDirection: "column", gap: 8 }}>
         {/* Top row */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
